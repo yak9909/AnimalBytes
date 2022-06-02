@@ -1,6 +1,7 @@
 #include <CTRPluginFramework.hpp>
 #include <thread>
 #include "Address.h"
+#include "Chat.h"
 #include "ChatCommands.h"
 
 namespace CTRPluginFramework::ACNL {
@@ -9,6 +10,13 @@ namespace CTRPluginFramework::ACNL {
 
   ChatCommands::ChatCommands() {
 
+  }
+
+  ChatCommands::~ChatCommands() {
+    is_running = false;
+
+    thread->join();
+    delete thread;
   }
 
   ChatCommands* ChatCommands::get_instance() {
@@ -29,23 +37,30 @@ namespace CTRPluginFramework::ACNL {
   }
 
   void ChatCommands::catch_command_execute() {
-
+    
   }
 
   void ChatCommands::main_routine() {
 
+    while( instance->is_running ) {
+      if( !Chat::is_open() ) {
+        continue;
+      }
+
+      catch_command_execute();
+    }
+
   }
 
   void ChatCommands::run() {
-    std::thread thread{ main_routine };
+    get_instance();
 
-    while( instance->is_running ) {
-      
-    }
+    instance->thread = new std::thread(ChatCommands::main_routine);
+
   }
 
-  void ChatCommands::join() {
-
+  void ChatCommands::dispose() {
+    delete instance;
   }
 
 }

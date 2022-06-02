@@ -9,10 +9,11 @@ namespace CTRPluginFramework::ACNL {
     using CommandFuncPointer = void(*)(std::string const&, Arguments const&);
 
     bool is_running;
-    std::thread thread;
+    std::thread* thread;
     std::map<std::string, CommandFuncPointer> func_map;
 
     ChatCommands();
+    ~ChatCommands();
 
   public:
 
@@ -26,6 +27,6 @@ namespace CTRPluginFramework::ACNL {
 
     static void run();
 
-    static void join();
+    static void dispose();
   };
 }
