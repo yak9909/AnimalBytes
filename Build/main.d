@@ -1,4 +1,10 @@
 main.o: C:/Users/mrzkr/AnimalBytes/Sources/main.cpp \
+ C:/Users/mrzkr/AnimalBytes/Includes/cheats.h \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics/Color.hpp \
+ C:/Users/mrzkr/AnimalBytes/Includes/types.h \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics/OSD.hpp \
  C:/devkitPro/libctru/include/3ds.h \
  C:/devkitPro/libctru/include/3ds/types.h \
  C:/devkitPro/libctru/include/3ds/result.h \
@@ -82,50 +88,61 @@ main.o: C:/Users/mrzkr/AnimalBytes/Sources/main.cpp \
  C:/devkitPro/libctru/include/3ds/font.h \
  C:/devkitPro/libctru/include/3ds/gdbhio_dev.h \
  C:/devkitPro/libctru/include/3ds/3dslink.h \
- C:/Users/mrzkr/AnimalBytes/Includes/csvc.h \
- C:/Users/mrzkr/AnimalBytes/Includes/types.h \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Graphics.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Graphics/Color.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Graphics/OSD.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Graphics/Render.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Menu.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Menu/Keyboard.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Graphics/CustomIcon.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Controller.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Vector.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Sound.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Sound/Sound.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Sound/SoundEngine.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Menu/MenuEntry.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Menu/MenuEntryHotkeys.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Menu/MenuEntryHotkeys.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Menu/MenuFolder.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Menu/PluginMenu.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Time.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Menu/MessageBox.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Sound.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Clock.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Directory.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/File.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Mutex.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/FwkSettings.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Rect.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Vector.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Hook.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Lock.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Process.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/System.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Task.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Thread.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Touch.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Sleep.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Utils.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Utils/LineReader.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Utils/LineWriter.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Utils/StringExtensions.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Utils/Utils.hpp
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics/Render.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Menu.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Menu/Keyboard.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics/CustomIcon.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Controller.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Vector.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Sound.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Sound/Sound.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Sound/SoundEngine.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Menu/MenuEntry.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Menu/MenuEntryHotkeys.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Menu/MenuEntryHotkeys.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Menu/MenuFolder.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Menu/PluginMenu.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Time.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Menu/MessageBox.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Sound.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/System.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Clock.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Directory.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/System/File.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Mutex.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/System/FwkSettings.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Rect.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Vector.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Hook.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Lock.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Process.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/System/System.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Task.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Thread.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Touch.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Sleep.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Utils.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Utils/LineReader.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Utils/LineWriter.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Utils/StringExtensions.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Utils/Utils.hpp \
+ C:/Users/mrzkr/AnimalBytes/Includes/Helpers.hpp \
+ C:/Users/mrzkr/AnimalBytes/Includes/Helpers/AutoRegion.hpp \
+ C:/Users/mrzkr/AnimalBytes/Includes/Helpers/HoldKey.hpp \
+ C:/Users/mrzkr/AnimalBytes/Includes/Helpers/KeySequence.hpp \
+ C:/Users/mrzkr/AnimalBytes/Includes/Helpers/MenuEntryHelpers.hpp \
+ C:/Users/mrzkr/AnimalBytes/Includes/Helpers/OSDManager.hpp \
+ C:/Users/mrzkr/AnimalBytes/Includes/Helpers/QuickMenu.hpp \
+ C:/Users/mrzkr/AnimalBytes/Includes/Helpers/HoldKey.hpp \
+ C:/Users/mrzkr/AnimalBytes/Includes/Helpers/Strings.hpp \
+ C:/Users/mrzkr/AnimalBytes/Includes/Helpers/Wrappers.hpp \
+ C:/Users/mrzkr/AnimalBytes/Includes/Unicode.h
+C:/Users/mrzkr/AnimalBytes/Includes/cheats.h:
+C:/devkitPro/libctrpf/include/CTRPluginFramework.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics/Color.hpp:
+C:/Users/mrzkr/AnimalBytes/Includes/types.h:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics/OSD.hpp:
 C:/devkitPro/libctru/include/3ds.h:
 C:/devkitPro/libctru/include/3ds/types.h:
 C:/devkitPro/libctru/include/3ds/result.h:
@@ -209,47 +226,52 @@ C:/devkitPro/libctru/include/3ds/romfs.h:
 C:/devkitPro/libctru/include/3ds/font.h:
 C:/devkitPro/libctru/include/3ds/gdbhio_dev.h:
 C:/devkitPro/libctru/include/3ds/3dslink.h:
-C:/Users/mrzkr/AnimalBytes/Includes/csvc.h:
-C:/Users/mrzkr/AnimalBytes/Includes/types.h:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Graphics.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Graphics/Color.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Graphics/OSD.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Graphics/Render.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Menu.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Menu/Keyboard.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Graphics/CustomIcon.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Controller.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Vector.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Sound.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Sound/Sound.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Sound/SoundEngine.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Menu/MenuEntry.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Menu/MenuEntryHotkeys.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Menu/MenuEntryHotkeys.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Menu/MenuFolder.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Menu/PluginMenu.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Time.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Menu/MessageBox.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Sound.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Clock.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Directory.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/File.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Mutex.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/FwkSettings.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Rect.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Vector.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Hook.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Lock.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Process.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/System.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Task.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Thread.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Touch.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/System/Sleep.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Utils.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Utils/LineReader.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Utils/LineWriter.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Utils/StringExtensions.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/CTRPluginFramework/Utils/Utils.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics/Render.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Menu.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Menu/Keyboard.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics/CustomIcon.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Controller.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Vector.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Sound.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Sound/Sound.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Sound/SoundEngine.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Menu/MenuEntry.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Menu/MenuEntryHotkeys.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Menu/MenuEntryHotkeys.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Menu/MenuFolder.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Menu/PluginMenu.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Time.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Menu/MessageBox.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Sound.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/System.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Clock.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Directory.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/System/File.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Mutex.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/System/FwkSettings.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Rect.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Vector.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Hook.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Lock.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Process.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/System/System.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Task.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Thread.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Touch.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/System/Sleep.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Utils.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Utils/LineReader.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Utils/LineWriter.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Utils/StringExtensions.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Utils/Utils.hpp:
+C:/Users/mrzkr/AnimalBytes/Includes/Helpers.hpp:
+C:/Users/mrzkr/AnimalBytes/Includes/Helpers/AutoRegion.hpp:
+C:/Users/mrzkr/AnimalBytes/Includes/Helpers/HoldKey.hpp:
+C:/Users/mrzkr/AnimalBytes/Includes/Helpers/KeySequence.hpp:
+C:/Users/mrzkr/AnimalBytes/Includes/Helpers/MenuEntryHelpers.hpp:
+C:/Users/mrzkr/AnimalBytes/Includes/Helpers/OSDManager.hpp:
+C:/Users/mrzkr/AnimalBytes/Includes/Helpers/QuickMenu.hpp:
+C:/Users/mrzkr/AnimalBytes/Includes/Helpers/HoldKey.hpp:
+C:/Users/mrzkr/AnimalBytes/Includes/Helpers/Strings.hpp:
+C:/Users/mrzkr/AnimalBytes/Includes/Helpers/Wrappers.hpp:
+C:/Users/mrzkr/AnimalBytes/Includes/Unicode.h:

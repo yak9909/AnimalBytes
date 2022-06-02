@@ -1,4 +1,4 @@
-#include "cheats.hpp"
+#include "cheats.h"
 
 namespace CTRPluginFramework
 {

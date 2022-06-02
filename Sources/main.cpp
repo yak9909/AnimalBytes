@@ -1,7 +1,5 @@
-#include "csvc.h"
-#include "CTRPluginFramework.hpp"
-
 #include <vector>
+#include "cheats.h"
 
 namespace CTRPluginFramework {
   static void ToggleTouchscreenForceOn(void) {
