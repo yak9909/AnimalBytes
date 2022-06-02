@@ -1,100 +1,75 @@
 #include <3ds.h>
 #include "csvc.h"
-#include "CTRPluginFramework.hpp"
-
+#include <CTRPluginFramework.hpp>
 #include <vector>
 
-namespace CTRPluginFramework
-{
-    static void    ToggleTouchscreenForceOn(void)
-    {
-        static u32 original = 0;
-        static u32 *patchAddress = nullptr;
+#include "Cheats/Movement.h"
 
-        if (patchAddress && original)
-        {
-            *patchAddress = original;
-            return;
-        }
+namespace CTRPluginFramework {
+  static void ToggleTouchscreenForceOn() {
+    static u32 original = 0;
+    static u32 *patchAddress = nullptr;
 
-        static const std::vector<u32> pattern =
-        {
-            0xE59F10C0, 0xE5840004, 0xE5841000, 0xE5DD0000,
-            0xE5C40008, 0xE28DD03C, 0xE8BD80F0, 0xE5D51001,
-            0xE1D400D4, 0xE3510003, 0x159F0034, 0x1A000003
-        };
+    if( patchAddress && original ) {
+      *patchAddress = original;
+      return;
+    }
 
-        Result  res;
-        Handle  processHandle;
-        s64     textTotalSize = 0;
-        s64     startAddress = 0;
-        u32 *   found;
+    static const std::vector<u32> pattern ={
+      0xE59F10C0, 0xE5840004, 0xE5841000, 0xE5DD0000,
+      0xE5C40008, 0xE28DD03C, 0xE8BD80F0, 0xE5D51001,
+      0xE1D400D4, 0xE3510003, 0x159F0034, 0x1A000003
+    };
 
-        if (R_FAILED(svcOpenProcess(&processHandle, 16)))
-            return;
+    Result  res;
+    Handle  processHandle;
+    s64     textTotalSize = 0;
+    s64     startAddress = 0;
+    u32 *   found;
 
-        svcGetProcessInfo(&textTotalSize, processHandle, 0x10002);
-        svcGetProcessInfo(&startAddress, processHandle, 0x10005);
-        if(R_FAILED(svcMapProcessMemoryEx(CUR_PROCESS_HANDLE, 0x14000000, processHandle, (u32)startAddress, textTotalSize)))
-            goto exit;
+    if( R_FAILED(svcOpenProcess(&processHandle, 16)) )
+      return;
 
-        found = (u32 *)Utils::Search<u32>(0x14000000, (u32)textTotalSize, pattern);
+    svcGetProcessInfo(&textTotalSize, processHandle, 0x10002);
+    svcGetProcessInfo(&startAddress, processHandle, 0x10005);
+    if( R_FAILED(svcMapProcessMemoryEx(CUR_PROCESS_HANDLE, 0x14000000, processHandle, (u32)startAddress, textTotalSize)) )
+      goto exit;
 
-        if (found != nullptr)
-        {
-            original = found[13];
-            patchAddress = (u32 *)PA_FROM_VA((found + 13));
-            found[13] = 0xE1A00000;
-        }
+    found = (u32 *)Utils::Search<u32>(0x14000000, (u32)textTotalSize, pattern);
 
-        svcUnmapProcessMemoryEx(CUR_PROCESS_HANDLE, 0x14000000, textTotalSize);
+    if( found != nullptr ) {
+      original = found[13];
+      patchAddress = (u32 *)PA_FROM_VA((found + 13));
+      found[13] = 0xE1A00000;
+    }
+
+    svcUnmapProcessMemoryEx(CUR_PROCESS_HANDLE, 0x14000000, textTotalSize);
 exit:
-        svcCloseHandle(processHandle);
-    }
+    svcCloseHandle(processHandle);
+  }
 
-    void    PatchProcess(FwkSettings &settings)
-    {
-        ToggleTouchscreenForceOn();
-    }
+  void PatchProcess(FwkSettings &settings) {
+    ToggleTouchscreenForceOn();
+  }
 
-    void    OnProcessExit(void)
-    {
-        ToggleTouchscreenForceOn();
-    }
+  void OnProcessExit(void) {
+    ToggleTouchscreenForceOn();
+  }
 
-    void    InitMenu(PluginMenu &menu)
-    {
-        // Create your entries here, or elsewhere
-        // You can create your entries whenever/wherever you feel like it
-        
-        // Example entry
-        /*menu += new MenuEntry("Test", nullptr, [](MenuEntry *entry)
-        {
-            std::string body("What's the answer ?\n");
+  void InitMenu(PluginMenu& menu) {
+    menu += Cheats::Movements::make_folder();
+  }
 
-            body += std::to_string(42);
+  int main() {
+    PluginMenu menu{ "AnimalBytes", 1, 0, 0, "ACNL Plugin by Yakuruto and bomkei" };
 
-            MessageBox("UA", body)();
-        });*/
-    }
+    menu.SynchronizeWithFrame(true);
+    menu.ShowWelcomeMessage(false);
 
-    int     main(void)
-    {
-        PluginMenu *menu = new PluginMenu("AnimalBytes", 1, 0, 0,
-                                            "ACNL Plugin by Yakuruto and bomkei");
+    OSD::Notify("AnimalBytes Ready!!");
 
-        menu->SynchronizeWithFrame(true);
-        menu->ShowWelcomeMessage(false);
+    InitMenu(menu);
 
-        OSD::Notify("AnimalBytes Ready!!");
-
-        InitMenu(*menu);
-
-        menu->Run();
-
-        delete menu;
-
-        // Exit plugin
-        return (0);
-    }
+    return menu.Run();
+  }
 }
