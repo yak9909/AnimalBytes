@@ -136,7 +136,9 @@ cheats.o: C:/Users/mrzkr/AnimalBytes/Sources/cheats.cpp \
  C:/Users/mrzkr/AnimalBytes/Includes/Helpers/HoldKey.hpp \
  C:/Users/mrzkr/AnimalBytes/Includes/Helpers/Strings.hpp \
  C:/Users/mrzkr/AnimalBytes/Includes/Helpers/Wrappers.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/Unicode.h
+ C:/Users/mrzkr/AnimalBytes/Includes/Unicode.h \
+ C:/Users/mrzkr/AnimalBytes/Includes/Cheats/FolderBase.h \
+ C:/Users/mrzkr/AnimalBytes/Includes/Cheats/Movement.h
 C:/Users/mrzkr/AnimalBytes/Includes/cheats.h:
 C:/devkitPro/libctrpf/include/CTRPluginFramework.hpp:
 C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics.hpp:
@@ -275,3 +277,5 @@ C:/Users/mrzkr/AnimalBytes/Includes/Helpers/HoldKey.hpp:
 C:/Users/mrzkr/AnimalBytes/Includes/Helpers/Strings.hpp:
 C:/Users/mrzkr/AnimalBytes/Includes/Helpers/Wrappers.hpp:
 C:/Users/mrzkr/AnimalBytes/Includes/Unicode.h:
+C:/Users/mrzkr/AnimalBytes/Includes/Cheats/FolderBase.h:
+C:/Users/mrzkr/AnimalBytes/Includes/Cheats/Movement.h:

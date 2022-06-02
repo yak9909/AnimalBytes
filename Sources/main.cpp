@@ -1,8 +1,10 @@
+#include <3ds.h>
+#include "csvc.h"
+#include <CTRPluginFramework.hpp>
 #include <vector>
-#include "cheats.h"
 
 namespace CTRPluginFramework {
-  static void ToggleTouchscreenForceOn(void) {
+  static void ToggleTouchscreenForceOn() {
     static u32 original = 0;
     static u32 *patchAddress = nullptr;
 
@@ -11,7 +13,7 @@ namespace CTRPluginFramework {
       return;
     }
 
-    static const std::vector<u32> pattern = {
+    static const std::vector<u32> pattern ={
       0xE59F10C0, 0xE5840004, 0xE5841000, 0xE5DD0000,
       0xE5C40008, 0xE28DD03C, 0xE8BD80F0, 0xE5D51001,
       0xE1D400D4, 0xE3510003, 0x159F0034, 0x1A000003
@@ -19,8 +21,8 @@ namespace CTRPluginFramework {
 
     Result  res;
     Handle  processHandle;
-    s64   textTotalSize = 0;
-    s64   startAddress = 0;
+    s64     textTotalSize = 0;
+    s64     startAddress = 0;
     u32 *   found;
 
     if( R_FAILED(svcOpenProcess(&processHandle, 16)) )
@@ -28,7 +30,6 @@ namespace CTRPluginFramework {
 
     svcGetProcessInfo(&textTotalSize, processHandle, 0x10002);
     svcGetProcessInfo(&startAddress, processHandle, 0x10005);
-
     if( R_FAILED(svcMapProcessMemoryEx(CUR_PROCESS_HANDLE, 0x14000000, processHandle, (u32)startAddress, textTotalSize)) )
       goto exit;
 

@@ -1,10 +1,4 @@
 main.o: C:/Users/mrzkr/AnimalBytes/Sources/main.cpp \
- C:/Users/mrzkr/AnimalBytes/Includes/cheats.h \
- C:/devkitPro/libctrpf/include/CTRPluginFramework.hpp \
- C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics.hpp \
- C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics/Color.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/types.h \
- C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics/OSD.hpp \
  C:/devkitPro/libctru/include/3ds.h \
  C:/devkitPro/libctru/include/3ds/types.h \
  C:/devkitPro/libctru/include/3ds/result.h \
@@ -88,6 +82,12 @@ main.o: C:/Users/mrzkr/AnimalBytes/Sources/main.cpp \
  C:/devkitPro/libctru/include/3ds/font.h \
  C:/devkitPro/libctru/include/3ds/gdbhio_dev.h \
  C:/devkitPro/libctru/include/3ds/3dslink.h \
+ C:/Users/mrzkr/AnimalBytes/Includes/csvc.h \
+ C:/Users/mrzkr/AnimalBytes/Includes/types.h \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics/Color.hpp \
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics/OSD.hpp \
  C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics/Render.hpp \
  C:/devkitPro/libctrpf/include/CTRPluginFramework/Menu.hpp \
  C:/devkitPro/libctrpf/include/CTRPluginFramework/Menu/Keyboard.hpp \
@@ -125,24 +125,7 @@ main.o: C:/Users/mrzkr/AnimalBytes/Sources/main.cpp \
  C:/devkitPro/libctrpf/include/CTRPluginFramework/Utils/LineReader.hpp \
  C:/devkitPro/libctrpf/include/CTRPluginFramework/Utils/LineWriter.hpp \
  C:/devkitPro/libctrpf/include/CTRPluginFramework/Utils/StringExtensions.hpp \
- C:/devkitPro/libctrpf/include/CTRPluginFramework/Utils/Utils.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/Helpers.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/Helpers/AutoRegion.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/Helpers/HoldKey.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/Helpers/KeySequence.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/Helpers/MenuEntryHelpers.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/Helpers/OSDManager.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/Helpers/QuickMenu.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/Helpers/HoldKey.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/Helpers/Strings.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/Helpers/Wrappers.hpp \
- C:/Users/mrzkr/AnimalBytes/Includes/Unicode.h
-C:/Users/mrzkr/AnimalBytes/Includes/cheats.h:
-C:/devkitPro/libctrpf/include/CTRPluginFramework.hpp:
-C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics.hpp:
-C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics/Color.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/types.h:
-C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics/OSD.hpp:
+ C:/devkitPro/libctrpf/include/CTRPluginFramework/Utils/Utils.hpp
 C:/devkitPro/libctru/include/3ds.h:
 C:/devkitPro/libctru/include/3ds/types.h:
 C:/devkitPro/libctru/include/3ds/result.h:
@@ -226,6 +209,12 @@ C:/devkitPro/libctru/include/3ds/romfs.h:
 C:/devkitPro/libctru/include/3ds/font.h:
 C:/devkitPro/libctru/include/3ds/gdbhio_dev.h:
 C:/devkitPro/libctru/include/3ds/3dslink.h:
+C:/Users/mrzkr/AnimalBytes/Includes/csvc.h:
+C:/Users/mrzkr/AnimalBytes/Includes/types.h:
+C:/devkitPro/libctrpf/include/CTRPluginFramework.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics/Color.hpp:
+C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics/OSD.hpp:
 C:/devkitPro/libctrpf/include/CTRPluginFramework/Graphics/Render.hpp:
 C:/devkitPro/libctrpf/include/CTRPluginFramework/Menu.hpp:
 C:/devkitPro/libctrpf/include/CTRPluginFramework/Menu/Keyboard.hpp:
@@ -264,14 +253,3 @@ C:/devkitPro/libctrpf/include/CTRPluginFramework/Utils/LineReader.hpp:
 C:/devkitPro/libctrpf/include/CTRPluginFramework/Utils/LineWriter.hpp:
 C:/devkitPro/libctrpf/include/CTRPluginFramework/Utils/StringExtensions.hpp:
 C:/devkitPro/libctrpf/include/CTRPluginFramework/Utils/Utils.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/Helpers.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/Helpers/AutoRegion.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/Helpers/HoldKey.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/Helpers/KeySequence.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/Helpers/MenuEntryHelpers.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/Helpers/OSDManager.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/Helpers/QuickMenu.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/Helpers/HoldKey.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/Helpers/Strings.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/Helpers/Wrappers.hpp:
-C:/Users/mrzkr/AnimalBytes/Includes/Unicode.h:
