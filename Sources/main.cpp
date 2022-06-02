@@ -1,12 +1,11 @@
 #include <3ds.h>
 #include "csvc.h"
-#include <CTRPluginFramework.hpp>
+#include "CTRPluginFramework.hpp"
 
 #include <vector>
 
 namespace CTRPluginFramework
 {
-    // This patch the NFC disabling the touchscreen when scanning an amiibo, which prevents ctrpf to be used
     static void    ToggleTouchscreenForceOn(void)
     {
         static u32 original = 0;
@@ -53,15 +52,11 @@ exit:
         svcCloseHandle(processHandle);
     }
 
-    // This function is called before main and before the game starts
-    // Useful to do code edits safely
     void    PatchProcess(FwkSettings &settings)
     {
         ToggleTouchscreenForceOn();
     }
 
-    // This function is called when the process exits
-    // Useful to save settings, undo patchs or clean up things
     void    OnProcessExit(void)
     {
         ToggleTouchscreenForceOn();
@@ -85,16 +80,16 @@ exit:
 
     int     main(void)
     {
-        PluginMenu *menu = new PluginMenu("Action Replay", 0, 7, 1,
-                                            "A blank template plugin.\nGives you access to the ActionReplay and others tools.");
+        PluginMenu *menu = new PluginMenu("AnimalBytes", 1, 0, 0,
+                                            "ACNL Plugin by Yakuruto and bomkei");
 
-        // Synnchronize the menu with frame event
         menu->SynchronizeWithFrame(true);
+        menu->ShowWelcomeMessage(false);
 
-        // Init our menu entries & folders
+        OSD::Notify("AnimalBytes Ready!!");
+
         InitMenu(*menu);
 
-        // Launch menu and mainloop
         menu->Run();
 
         delete menu;
