@@ -3,9 +3,10 @@
 
 namespace CTRPluginFramework::Cheats::Movements {
   void walk_everywhere(MenuEntry* entry) {
-    u32 keys = Controller::GetKeysPressed();
     static int flag = 1;
 
+    //
+    // Address, Enable-value, Disable-value
     u32 table[] = {
       0x0064EEF4, 0xEA000094, 0x0A000094,
       0x0064EF0C, 0xEA000052, 0x0A000052,
@@ -17,7 +18,7 @@ namespace CTRPluginFramework::Cheats::Movements {
       0x0064F1E4, 0xEA000065, 0x0A000065
     };
 
-    if( keys & Key::L && keys & Key::DPadUp ) {
+    if( Controller::IsKeysPressed(Key::L | Key::DPadUp) ) {
       flag ^= 1;
 
       for( int i = 0; i < (sizeof(table) / sizeof(u32)) * 3; i++ ) {
