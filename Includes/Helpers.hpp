@@ -3,6 +3,7 @@
 
 #include "Helpers/AutoRegion.hpp"
 #include "Helpers/HoldKey.hpp"
+#include "Helpers/InstantMenu.h"
 #include "Helpers/KeySequence.hpp"
 #include "Helpers/MenuEntryHelpers.hpp"
 #include "Helpers/OSDManager.hpp"
