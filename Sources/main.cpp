@@ -3,7 +3,7 @@
 #include <CTRPluginFramework.hpp>
 #include <vector>
 
-#include "Cheats/Movement.h"
+#include "Cheats.h"
 
 namespace CTRPluginFramework {
   static void ToggleTouchscreenForceOn() {
