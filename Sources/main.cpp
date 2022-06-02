@@ -3,6 +3,8 @@
 #include <CTRPluginFramework.hpp>
 #include <vector>
 
+#include "Cheats/Movement.h"
+
 namespace CTRPluginFramework {
   static void ToggleTouchscreenForceOn() {
     static u32 original = 0;
@@ -55,7 +57,7 @@ exit:
   }
 
   void InitMenu(PluginMenu& menu) {
-
+    menu += Cheats::Movements::make_folder();
   }
 
   int main() {

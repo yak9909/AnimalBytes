@@ -14,7 +14,9 @@ PLGINFO 	:= 	AnimalBytes.plgInfo
 
 BUILD		:= 	Build
 INCLUDES	:= 	Includes
-SOURCES 	:= 	Sources
+SOURCES 	:= 	Sources	\
+	Sources/Cheats \
+	Sources/Cheats/Movements
 
 #---------------------------------------------------------------------------------
 # options for code generation
