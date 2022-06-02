@@ -26,7 +26,7 @@ namespace CTRPluginFramework {
     static constexpr int menu_height = 240 - edge * 2;
 
     static constexpr int item_height = 14;
-    static constexpr int item_draw_count = menu_height / item_height - 1;
+    static constexpr int item_draw_count = menu_height / item_height;
 
     void draw(Screen const& screen) {
       auto const& background_color = Color::Black;
@@ -40,7 +40,7 @@ namespace CTRPluginFramework {
 
       // draw items
       {
-        long begin = std::max<long>(0, index - (item_draw_count - 2));
+        long begin = std::max<long>(0, index - (item_draw_count - 4));
         long end = std::min<long>(items.size(), begin + item_draw_count);
         long dy = menu_draw_y + item_height + 2;
 
@@ -69,14 +69,17 @@ namespace CTRPluginFramework {
       static int tick = -1;
       static constexpr int tickmax = 60;
 
-      u32 keys = Controller::GetKeysDown();
+      u32 keys = hidKeysHeld();
 
       if( keys ) {
         tick++;
 
         if( tick == 0 || tick == tickmax ) {
-          if( keys & Key::DPadUp ) index = std::max<long>(0, index - 1);
-          if( keys & Key::DPadDown ) index = std::min<long>(items.size() - 1, index + 1);
+          if( keys & Key::DPadUp ) index--;
+          if( keys & Key::DPadDown ) index++;
+
+          if( index < 0 ) index = items.size() - 1;
+          else if( index >= items.size() ) index = 0;
         }
 
         if( tick >= tickmax ) tick = 0;
@@ -116,7 +119,15 @@ namespace CTRPluginFramework {
       items.emplace_back(item);
     }
 
+    void set_title(std::string const& title) {
+      this->title = title;
+    }
+
     long open() {
+      if( items.empty() ) {
+        return -1;
+      }
+
       is_open = true;
 
       Process::Pause();
@@ -136,9 +147,6 @@ namespace CTRPluginFramework {
 
       return ret;
     }
-
-
-
   };
 
   using InstantMenu = InstantMenuImpl<std::string>;

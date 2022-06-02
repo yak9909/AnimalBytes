@@ -5,7 +5,8 @@
     "vector": "cpp",
     "xstring": "cpp",
     "algorithm": "cpp",
-    "utility": "cpp"
+    "utility": "cpp",
+    "string": "cpp"
   },
   "[cpp]": {
     "editor.wordBasedSuggestions": true,

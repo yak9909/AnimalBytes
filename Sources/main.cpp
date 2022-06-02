@@ -60,15 +60,13 @@ exit:
   void InitMenu(PluginMenu& menu) {
     menu += new MenuEntry("test", [] (MenuEntry* e) {
       if( Controller::IsKeyPressed(Key::L) ) {
-        InstantMenu menu{
-          "menu",
-          {
-            "a",
-            "b",
-            "c",
-            "d",
-          }
-        };
+        InstantMenu_Int menu;
+
+        menu.set_title("numbers");
+
+        for(int i=0;i<100;i++){
+          menu.append(i);
+        }
 
         menu.open();
       }
