@@ -53,6 +53,23 @@ namespace CTRPluginFramework
   }
   
   std::vector<std::string> trim_string(std::string const& str, char c) {
-    
+    std::vector<std::string> vec;
+    std::string s;
+
+    for( char ch : str ) {
+      if( ch == c ) {
+        vec.emplace_back(s);
+        s.clear();
+      }
+      else {
+        s += ch;
+      }
+    }
+
+    if( !s.empty() ) {
+      vec.emplace_back(s);
+    }
+
+    return vec;
   }
 }
