@@ -1,8 +1,8 @@
 #include <CTRPluginFramework.hpp>
 #include "Cheats/Movement.h"
 
-namespace CTRPluginFramework::Cheats {
-  void Movements::coord_mod(MenuEntry* entry) {
+namespace CTRPluginFramework::Cheats::Movements {
+  void coord_mod(MenuEntry* entry) {
     u32 keys = Controller::GetKeysDown();
 
     float* coord = (float*)(0x33099E50);

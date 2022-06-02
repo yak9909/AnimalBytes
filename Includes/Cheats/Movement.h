@@ -1,10 +1,7 @@
 #pragma once
 
-namespace CTRPluginFramework::Cheats {
-  class Movements {
-  public:
-    static void coord_mod(MenuEntry* entry);
+namespace CTRPluginFramework::Cheats::Movements {
+  MenuFolder* make_folder();
 
-    static MenuFolder* make_folder();
-  };
+  void coord_mod(MenuEntry* entry);
 }
