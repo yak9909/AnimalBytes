@@ -4,7 +4,8 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:/devkitPro/libctrpf/include"
+                "C:/devkitPro/libctrpf/include",
+                "C:/devkitPro/libctru/include"
             ],
             "defines": [
                 "_DEBUG",
