@@ -1,1 +1,8 @@
-.vs/*
+/Build
+
+*.3gx
+*.elf
+
+*.o
+*.a
+*.out
