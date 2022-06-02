@@ -15,6 +15,7 @@ PLGINFO 	:= 	AnimalBytes.plgInfo
 BUILD		:= 	Build
 INCLUDES	:= 	Includes ACNL_Wrapper/include
 SOURCES 	:= 	Sources	\
+	Sources/ACNL \
 	Sources/DevUtils \
 	Sources/Helpers \
 	Sources/Cheats \

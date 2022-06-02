@@ -1,10 +1,12 @@
 #include <CTRPluginFramework.hpp>
 #include <thread>
-#include "Address.h"
-#include "Chat.h"
-#include "ChatCommands.h"
+#include "ACNL/Address.h"
+#include "ACNL/Chat.h"
+#include "ACNL/ChatCommands.h"
 
 namespace CTRPluginFramework::ACNL {
+
+  static constexpr auto cmd_run_hotkey = Key::B | Key::R;
 
   static ChatCommands* instance;
 
@@ -15,7 +17,7 @@ namespace CTRPluginFramework::ACNL {
   ChatCommands::~ChatCommands() {
     is_running = false;
 
-    thread->join();
+    thread->Join(1);
     delete thread;
   }
 
@@ -37,10 +39,14 @@ namespace CTRPluginFramework::ACNL {
   }
 
   void ChatCommands::catch_command_execute() {
-    
+    u32 keys = Controller::GetKeysDown();
+
+    if( keys & cmd_run_hotkey ) {
+      
+    }
   }
 
-  void ChatCommands::main_routine() {
+  void ChatCommands::main_routine(void*) {
 
     while( instance->is_running ) {
       if( !Chat::is_open() ) {
@@ -55,7 +61,10 @@ namespace CTRPluginFramework::ACNL {
   void ChatCommands::run() {
     get_instance();
 
-    instance->thread = new std::thread(ChatCommands::main_routine);
+    s32 prio;
+    svcGetThreadPriority(&prio, CUR_THREAD_HANDLE);
+
+    instance->thread = new ThreadEx(ChatCommands::main_routine, 0x1000, prio, 0);
 
   }
 

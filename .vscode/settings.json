@@ -6,7 +6,10 @@
     "xstring": "cpp",
     "algorithm": "cpp",
     "utility": "cpp",
-    "string": "cpp"
+    "string": "cpp",
+    "thread": "cpp",
+    "xlocale": "cpp",
+    "string_view": "cpp"
   },
   "[cpp]": {
     "editor.wordBasedSuggestions": true,
