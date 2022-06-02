@@ -13,7 +13,7 @@ TARGET		:= 	$(notdir $(CURDIR))
 PLGINFO 	:= 	AnimalBytes.plgInfo
 
 BUILD		:= 	Build
-INCLUDES	:= 	Includes
+INCLUDES	:= 	Includes ACNL_Wrapper/include
 SOURCES 	:= 	Sources	\
 	Sources/Cheats \
 	Sources/Cheats/Movements
@@ -28,7 +28,7 @@ CFLAGS		:=	$(ARCH) -Os -mword-relocations \
 
 CFLAGS		+=	$(INCLUDE) -D__3DS__
 
-CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++11
+CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=c++20
 
 ASFLAGS		:=	$(ARCH)
 LDFLAGS		:= -T $(TOPDIR)/3gx.ld $(ARCH) -Os -Wl,--gc-sections,--strip-discarded,--strip-debug

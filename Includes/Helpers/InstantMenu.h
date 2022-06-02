@@ -7,19 +7,11 @@
 #include <functional>
 #include <CTRPluginFramework.hpp>
 
-/*
-
-InstantMenu menu{ "", { "a", "b", "c" } };
-
-
-
-*/
-
 namespace CTRPluginFramework {
   template <class T, std::string(*conv_fn)(T) = nullptr>
   class InstantMenuImpl {
     std::string title;
-    std::vector<T> const& items;
+    std::vector<T> items;
 
     bool is_open;
     long index;
@@ -36,22 +28,6 @@ namespace CTRPluginFramework {
     static constexpr int item_height = 14;
     static constexpr int item_draw_count = menu_height / item_height - 1;
 
-  public:
-    InstantMenuImpl(std::string const& title = "")
-      : title(title),
-        is_open(false),
-        index(0)
-    {
-    }
-
-    InstantMenuImpl(std::string const& title, std::vector<T> const& items)
-      : title(title),
-        items(items),
-        is_open(false),
-        index(0)
-    {
-    }
-
     void draw(Screen const& screen) {
       auto const& background_color = Color::Black;
 
@@ -59,8 +35,8 @@ namespace CTRPluginFramework {
       screen.DrawRect(menu_draw_x, menu_draw_y, menu_width, menu_height, background_color);
 
       // draw title
-      screen.Draw(title, menu_draw_x + 2, menu_draw_y + 2);
-      screen.DrawRect(menu_draw_x + 2, menu_draw_y + 2, (title.length() + 2) * 9, 1, Color::White);
+      screen.Draw(this->title, menu_draw_x + 2, menu_draw_y + 1);
+      screen.DrawRect(menu_draw_x + 2, menu_draw_y + item_height + 1, (this->title.length() + 2) * 9, 1, Color::White);
 
       // draw items
       {
@@ -117,6 +93,27 @@ namespace CTRPluginFramework {
         is_open = false;
         ret = -1;
       }
+    }
+
+  public:
+    InstantMenuImpl(std::string const& title = "")
+      : title(title),
+        items({}),
+        is_open(false),
+        index(0)
+    {
+    }
+
+    InstantMenuImpl(std::string const& title, std::vector<T> const& items)
+      : title(title),
+        items(items),
+        is_open(false),
+        index(0)
+    {
+    }
+
+    void append(T const& item) {
+      items.emplace_back(item);
     }
 
     long open() {
