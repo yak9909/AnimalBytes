@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "Cheats.h"
-#include "Helpers.hpp"
+#include "Helpers.h"
 
 namespace CTRPluginFramework {
   static void ToggleTouchscreenForceOn() {

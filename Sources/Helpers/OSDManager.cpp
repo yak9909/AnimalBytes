@@ -1,4 +1,4 @@
-#include "Helpers/OSDManager.hpp"
+#include "Helpers/OSDManager.h"
 
 namespace CTRPluginFramework
 {
