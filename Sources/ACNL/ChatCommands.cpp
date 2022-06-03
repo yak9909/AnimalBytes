@@ -19,6 +19,10 @@ namespace CTRPluginFramework::ACNL {
     return instance;
   }
 
+  void ChatCommands::init() {
+    get_instance();
+  }
+
   bool ChatCommands::append_func(std::string const& name, CommandFuncPointer fp) {
     if( instance->func_map.contains(name) ) {
       return false;
@@ -64,12 +68,12 @@ namespace CTRPluginFramework::ACNL {
   }
 
   void ChatCommands::run() {
-    get_instance();
-
     s32 prio;
     svcGetThreadPriority(&prio, CUR_THREAD_HANDLE);
 
     instance->thread = new ThreadEx(ChatCommands::main_routine, 0x1000, prio, 0);
+
+    instance->thread->Start(nullptr);
 
   }
 
