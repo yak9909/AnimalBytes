@@ -77,8 +77,8 @@ namespace CTRPluginFramework {
         if( tick == 0 || tick == tickmax ) {
           if( keys & Key::DPadUp ) index--;
           if( keys & Key::DPadDown ) index++;
-          if( keys & Key::DPadLeft ) std::max<long>(0, index - 4);
-          if( keys & Key::DPadDown ) std::min<long>(items.size() - 1, index + 4);
+          if( keys & Key::DPadLeft ) index = std::max<long>(0, index - 4);
+          if( keys & Key::DPadDown ) index = std::min<long>(items.size() - 1, index + 4);
 
           if( index < 0 ) index = items.size() - 1;
           else if( index >= items.size() ) index = 0;
@@ -90,11 +90,11 @@ namespace CTRPluginFramework {
         tick = -1;
       }
 
-      if( keys & Key::A ) {
+      if( Controller::IsKeyPressed(Key::A) ) {
         is_open = false;
         ret = index;
       }
-      else if( keys & Key::B ) {
+      else if( Controller::IsKeyPressed(Key::B) ) {
         is_open = false;
         ret = -1;
       }

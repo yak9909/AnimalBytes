@@ -3,8 +3,6 @@
 #include "Helpers/InstantMenu.h"
 #include "Helpers/Strings.h"
 #include <map>
-#include <sstream>
-#include <istream>
 
 namespace CTRPluginFramework::Cheats::SpeedHacks {
   struct Cheat {
@@ -17,7 +15,7 @@ namespace CTRPluginFramework::Cheats::SpeedHacks {
 
   void initialize() {
     speedhack_menu.set_title("SpeedHack Menu");
-    speedhack_menu.set_menu_draw_pos(150, 30);
+    speedhack_menu.set_menu_draw_pos(120, 30);
 
     speedhack_map["Shovel"] = {1, {0x672740, 0x66ED64, 0x669308}};
     speedhack_map["Axe"] = {1, {0x671880, 0x671944, 0x65F624}};
@@ -32,10 +30,10 @@ namespace CTRPluginFramework::Cheats::SpeedHacks {
   void speedhackmenu(MenuEntry* entry) {
     u32 keys = Controller::GetKeysDown();
 
-    if( keys & Key::ZR ) {
+    if( Controller::IsKeysPressed(Key::B + Key::DPadDown) ) {
       long index = speedhack_menu.open();
 
-      while( index >= 0 ) {
+      if( index >= 0 ) {
         std::string speed_name = trim_string(speedhack_menu.get_items()[index], ' ')[0];
         for( int i = 0; i < (sizeof(speedhack_map[speed_name].Adresses) / sizeof(u32) / 3); i++ ) {
           *(u32*)(speedhack_map[speed_name].Adresses[i*3]) = (u32)(1.0 + (speedhack_map[speed_name].flag * 30));
@@ -51,7 +49,6 @@ namespace CTRPluginFramework::Cheats::SpeedHacks {
         }
 
         speedhack_map[speed_name].flag ^= 1;
-        index = speedhack_menu.open();
       }
     }
   }

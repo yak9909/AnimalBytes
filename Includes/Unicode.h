@@ -10,6 +10,7 @@
 #define FONT_R      "\uE053" // System Font R button
 #define FONT_ZL     "\uE054" // System Font ZL button
 #define FONT_ZR     "\uE055" // System Font ZR button
+#define FONT_D     "\uE006" // System Font D-Pad button
 #define FONT_DU     "\uE079" // System Font D-Pad Up button
 #define FONT_DD     "\uE07A" // System Font D-Pad Down button
 #define FONT_DL     "\uE07B" // System Font D-Pad Left button

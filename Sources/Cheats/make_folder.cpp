@@ -1,15 +1,17 @@
 #include <CTRPluginFramework.hpp>
 #include "Cheats/Movement.h"
 #include "Cheats/SpeedHack.h"
+#include "Cheats/Item.h"
+#include "Unicode.h"
 
 namespace CTRPluginFramework::Cheats {
   namespace Movements {
     MenuFolder* make_folder() {
       MenuFolder* folder = new MenuFolder("Movements", "", {
-        new MenuEntry("座標移動", coord_mod, "Aぼたんとじゅうじ"),
-        new MenuEntry("座標移動(グリッド)", coord_grid, "Aぼたんとじゅうじ"),
+        new MenuEntry("座標移動 " FONT_A " + " FONT_D, coord_mod),
+        new MenuEntry("座標移動(グリッド) " FONT_A " + " FONT_D, coord_grid),
         new MenuEntry("座標移動 スピード変更", nullptr, change_speed),
-        new MenuEntry("壁抜け", walk_everywhere, "Lぼたんとうえ")
+        new MenuEntry("壁抜け " FONT_L " + " FONT_DU, walk_everywhere)
       });
 
       return folder;
@@ -19,8 +21,18 @@ namespace CTRPluginFramework::Cheats {
   namespace SpeedHacks {
     MenuFolder* make_folder() {
       MenuFolder* folder = new MenuFolder("SpeedHacks", "", {
-        new MenuEntry("スピードハックメニュー", speedhackmenu, "ZR"),
-        new MenuEntry("ゲームスピード上昇", gamespeed_boost, "Bぼたんとうえ")
+        new MenuEntry("スピードハックメニュー " FONT_B " + " FONT_DD, speedhackmenu),
+        new MenuEntry("ゲームスピード上昇 " FONT_B " + " FONT_DU, gamespeed_boost)
+      });
+
+      return folder;
+    }
+  }
+
+  namespace Items {
+    MenuFolder* make_folder() {
+      MenuFolder* folder = new MenuFolder("Items", "", {
+        new MenuEntry("ポケットアイテム " FONT_L " + " FONT_B, pocket_item)
       });
 
       return folder;
