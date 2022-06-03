@@ -18,7 +18,7 @@ namespace CTRPluginFramework::Cheats::SpeedHacks {
 
   void Initialize() {
     speedhack_menu.set_title("SpeedHack Menu");
-    speedhack_menu.set_menu_draw_pos(50, 30);
+    speedhack_menu.set_menu_draw_pos(150, 30);
 
     speedhack_map["Shovel"] = {1, {0x672740, 0x66ED64, 0x669308}};
     speedhack_map["Axe"] = {1, {0x671880, 0x671944, 0x65F624}};
@@ -41,7 +41,7 @@ namespace CTRPluginFramework::Cheats::SpeedHacks {
     if( keys & Key::ZR ) {
       long index = speedhack_menu.open();
 
-      if( index >= 0 ) {
+      while( index >= 0 ) {
         std::string speed_name = trim_string(speedhack_menu.get_items()[index], ' ')[0];
         for( int i = 0; i < (sizeof(speedhack_map[speed_name].Adresses) / sizeof(u32) / 3); i++ ) {
           *(u32*)(speedhack_map[speed_name].Adresses[i*3]) = (u32)(1.0 + (speedhack_map[speed_name].flag * 30));
@@ -57,6 +57,7 @@ namespace CTRPluginFramework::Cheats::SpeedHacks {
         }
 
         speedhack_map[speed_name].flag ^= 1;
+        index = speedhack_menu.open();
       }
     }
   }
