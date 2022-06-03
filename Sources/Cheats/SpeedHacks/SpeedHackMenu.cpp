@@ -49,8 +49,6 @@ namespace CTRPluginFramework::Cheats::SpeedHacks {
         }
 
         speedhack_map[speed_name].flag ^= 1;
-
-        index = speedhack_menu.open();
       }
     }
   }
