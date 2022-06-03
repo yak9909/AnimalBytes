@@ -69,7 +69,13 @@ exit:
           menu.append(i);
         }
 
-        menu.open();
+        long index = menu.open();
+
+        OSD::SwapBuffers();
+
+        if( index >= 0 ) {
+          (MessageBox("", std::to_string(menu.get_items()[index])))();
+        }
       }
     });
 

@@ -135,6 +135,10 @@ namespace CTRPluginFramework {
       item_draw_count = menu_height / item_height;
     }
 
+    std::vector<T> const& get_items() const {
+      return this->items:
+    }
+
     long open() {
       if( items.empty() ) {
         return -1;
