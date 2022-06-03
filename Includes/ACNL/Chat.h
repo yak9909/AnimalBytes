@@ -9,9 +9,12 @@ namespace CTRPluginFramework::ACNL {
   public:
     std::string text;
 
-    static Chat get_object();
+    static Chat clone_object();
 
     static bool is_open();
+
+    static void read_text();
+    static void write_text();
 
   };
 }

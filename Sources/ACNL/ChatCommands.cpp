@@ -3,6 +3,7 @@
 #include "ACNL/Address.h"
 #include "ACNL/Chat.h"
 #include "ACNL/ChatCommands.h"
+#include "Helpers/Strings.hpp"
 
 namespace CTRPluginFramework::ACNL {
 
@@ -42,7 +43,22 @@ namespace CTRPluginFramework::ACNL {
     u32 keys = Controller::GetKeysDown();
 
     if( keys & cmd_run_hotkey ) {
-      
+      Chat chat = Chat::clone_object();
+
+      std::string name;
+      auto args = trim_string(chat.text, ' ');
+
+      name = args[0];
+      args.erase(args.begin());
+
+      auto fp = instance->func_map[name];
+
+      if( fp == nullptr ) {
+
+      }
+      else {
+        fp(args);
+      }
     }
   }
 

@@ -6,7 +6,7 @@
 namespace CTRPluginFramework::ACNL {
   class ChatCommands {
     using Arguments = std::vector<std::string>;
-    using CommandFuncPointer = void(*)(std::string const&, Arguments const&);
+    using CommandFuncPointer = void(*)(Arguments const&);
 
     bool is_running;
     ThreadEx* thread;

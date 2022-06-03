@@ -10,3 +10,4 @@ sendpost.txt
 *.a
 *.out
 *.log
+*.lst

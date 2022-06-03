@@ -5,7 +5,7 @@
 
 namespace CTRPluginFramework::ACNL {
 
-  Chat Chat::get_object() {
+  Chat Chat::clone_object() {
     Chat obj;
 
     u32 buffer_addr = *(u32*)Addresses::Chat::BufferPointer;

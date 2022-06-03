@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <string>
+#include <vector>
 #include <types.h>
 
 namespace CTRPluginFramework
