@@ -1,6 +1,6 @@
 /Build
 /test
-.vs/settings.json
+.vscode/settings.json
 
 sendpost.txt
 

@@ -7,7 +7,7 @@
 #include "ACNL/Game.h"
 
 namespace CTRPluginFramework::ACNL::Game {
-  std::vector<ItemInfo> const AllItems {
+  ItemInfo const AllItems[] {
     { "枯れた竹", "かれたたけ" },
     { "枯れた木", "かれたき" },
     { "木の切り株(成長1)", "きのきりかぶ1" },

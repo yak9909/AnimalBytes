@@ -10,6 +10,7 @@ namespace CTRPluginFramework::Cheats::SpeedHacks {
     std::vector<u32> Adresses;
   };
   
+  
   static InstantMenu speedhack_menu;
   static std::map<std::string, Cheat> speedhack_map;
 
