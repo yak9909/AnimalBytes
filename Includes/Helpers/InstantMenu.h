@@ -90,11 +90,11 @@ namespace CTRPluginFramework {
         tick = -1;
       }
 
-      if( keys & Key::A ) {
+      if( Controller::IsKeyPressed(Key::A) ) {
         is_open = false;
         ret = index;
       }
-      else if( keys & Key::B ) {
+      else if( Controller::IsKeyPressed(Key::B) ) {
         is_open = false;
         ret = -1;
       }
