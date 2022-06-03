@@ -77,6 +77,8 @@ namespace CTRPluginFramework {
         if( tick == 0 || tick == tickmax ) {
           if( keys & Key::DPadUp ) index--;
           if( keys & Key::DPadDown ) index++;
+          if( keys & Key::DPadLeft ) std::max(0, index - 4);
+          if( keys & Key::DPadDown ) std::min(items.size() - 1, index + 4);
 
           if( index < 0 ) index = items.size() - 1;
           else if( index >= items.size() ) index = 0;

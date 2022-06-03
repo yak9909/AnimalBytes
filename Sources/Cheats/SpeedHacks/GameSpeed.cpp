@@ -14,6 +14,8 @@ namespace CTRPluginFramework::Cheats::SpeedHacks {
         *(u32*)(0x0054C6E8) = 0xE59400A0;
         OSD::Notify("Game Speed Reset!");
       }
+
+      flag ^= 1;
     }
   }
 }
