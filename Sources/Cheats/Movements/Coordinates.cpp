@@ -36,12 +36,6 @@ static float speed = 6;
       return;
     }
 
-    /*
-    if( *(u32*)(0x95133A) != 0xA500 ) {
-      return;
-    }
-    */
-
     if( keys & Key::A ) {
       if( (keys & Key::A) && (keys & (Key::DPadUp | Key::DPadDown | Key::DPadLeft | Key::DPadRight)) ) {
         tick--;
