@@ -6,6 +6,7 @@ namespace CTRPluginFramework::Cheats::Movements {
     u32 keys = Controller::GetKeysPressed();
     static int flag = 1;
 
+    // ADDR, ENABLE, DISABLE
     u32 table[] = {
       0x0064EEF4, 0xEA000094, 0x0A000094,
       0x0064EF0C, 0xEA000052, 0x0A000052,
