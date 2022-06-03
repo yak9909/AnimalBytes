@@ -11,17 +11,6 @@ namespace CTRPluginFramework::ACNL {
 
   static ChatCommands* instance;
 
-  ChatCommands::ChatCommands() {
-
-  }
-
-  ChatCommands::~ChatCommands() {
-    is_running = false;
-
-    thread->Join(1);
-    delete thread;
-  }
-
   ChatCommands* ChatCommands::get_instance() {
     if( !instance ) {
       instance = new ChatCommands();

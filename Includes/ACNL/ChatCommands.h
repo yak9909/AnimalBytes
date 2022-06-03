@@ -12,8 +12,19 @@ namespace CTRPluginFramework::ACNL {
     ThreadEx* thread;
     std::map<std::string, CommandFuncPointer> func_map;
 
-    ChatCommands();
-    ~ChatCommands();
+    ChatCommands()
+      : is_running(false),
+        thread(nullptr),
+        func_map({ })
+    {
+    }
+
+    ~ChatCommands() {
+      is_running = false;
+
+      thread->Join(1);
+      delete thread;
+    }
 
   public:
 
