@@ -4,12 +4,12 @@
 #include "Cheats/TextToCheats.h"
 
 namespace CTRPluginFramework::Cheats::TextToCheats {
-  void initialize() {
+  void initialize(PluginMenu const& menu) {
     ACNL::ChatCommands::init();
 
     ACNL::ChatCommands::append_func("toggle", toggle_cheat);
 
-    ACNL::ChatCommands::run();
+    menu += ACNL::ChatCommands::call_back;
   }
 
 

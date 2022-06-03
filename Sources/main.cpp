@@ -82,7 +82,7 @@ exit:
     menu.SynchronizeWithFrame(true);
     menu.ShowWelcomeMessage(false);
 
-    //Cheats::TextToCheats::initialize();
+    Cheats::TextToCheats::initialize(menu);
     InitMenu(menu);
 
     OSD::Notify("AnimalBytes Ready!!");

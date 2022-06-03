@@ -6,7 +6,7 @@
 namespace CTRPluginFramework::Cheats::TextToCheats {
   using Args = std::vector<std::string>;
 
-  void initialize();
+  void initialize(PluginMenu const& menu);
 
   // toggle name [true / false]
   void toggle_cheat(Args const& args);

@@ -2,6 +2,7 @@
 
 #include <map>
 #include <string>
+#include <vector>
 
 namespace CTRPluginFramework::ACNL {
   class ChatCommands {
@@ -9,22 +10,7 @@ namespace CTRPluginFramework::ACNL {
     using CommandFuncPointer = void(*)(Arguments const&);
 
     bool is_running;
-    ThreadEx* thread;
     std::map<std::string, CommandFuncPointer> func_map;
-
-    ChatCommands()
-      : is_running(false),
-        thread(nullptr),
-        func_map({ })
-    {
-    }
-
-    ~ChatCommands() {
-      is_running = false;
-
-      thread->Join(1);
-      delete thread;
-    }
 
   public:
 
@@ -36,9 +22,7 @@ namespace CTRPluginFramework::ACNL {
 
     static void catch_command_execute();
 
-    static void main_routine(void *);
-
-    static void run();
+    static void call_back();
 
     static void dispose();
   };

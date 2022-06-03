@@ -4,7 +4,7 @@
 
 namespace CTRPluginFramework::ACNL {
   class Chat {
-    Chat() { }
+    Chat() :text("") { }
 
   public:
     std::string text;
