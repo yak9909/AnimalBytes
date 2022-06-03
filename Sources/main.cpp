@@ -71,15 +71,17 @@ exit:
 
         long index = menu.open();
 
-        Sleep(Milliseconds(500));
-
         if( index >= 0 ) {
-          (MessageBox("", std::to_string(menu.get_items()[index])))();
+          OSD::Notify(std::to_string(menu.get_items()[index]));
+        }
+        else {
+          OSD::Notify("Canceled!");
         }
       }
     });
 
     menu += Cheats::Movements::make_folder();
+    menu += Cheats::SpeedHacks::make_folder();
   }
 
   int main() {
@@ -91,7 +93,7 @@ exit:
     Cheats::TextToCheats::initialize(menu);
     InitMenu(menu);
 
-    OSD::Notify("AnimalBytes Ready!!");
+    OSD::Notify(Color::DodgerBlue << "AnimalBytes Ready!!");
 
     return menu.Run();
   }

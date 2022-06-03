@@ -21,7 +21,7 @@ namespace CTRPluginFramework::Cheats::Movements {
       flag ^= 1;
 
       for( int i = 0; i < (sizeof(table) / sizeof(u32) / 3); i++ ) {
-        *(u32*)(table[i*3]) = table[(i*3) + (flag + 1)];
+        *(u32*)(table[i*3]) = table[i*3 + (flag + 1)];
       }
 
       if( !flag ) {
