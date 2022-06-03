@@ -83,10 +83,5 @@ namespace CTRPluginFramework::ACNL {
 
   }
 
-  void ChatCommands::dispose() {
-    if( instance ) {
-      delete instance;
-    }
-  }
 
 }

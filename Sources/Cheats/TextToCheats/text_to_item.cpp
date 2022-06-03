@@ -4,16 +4,17 @@
 #include "ACNL/Chat.h"
 #include "ACNL/ChatCommands.h"
 #include "Cheats/TextToCheats.h"
+#include "Helpers.h"
 
 namespace CTRPluginFramework::Cheats::TextToCheats {
   static u16 str_to_hex(std::string const& s) {
-    #define ctox(c) ((u8)((c > '9') ? (c <= 'F' ? c - 'A' : c - 'a') : (c - '0')))
+    #define ctox(c) ((u8)((c > '9') ? 0xA + (c <= 'F' ? c - 'A' : c - 'a') : (c - '0')))
 
-    u16 v = 0, i = 1;
+    u16 ret = 0, v = 1;
 
     for( int i = 3; i >= 0; i-- ) {
-      v += ctox(s[i]) * i;
-      i *= 0x10;
+      ret += ctox(s[i]) * v;
+      v *= 0x10;
     }
 
     return v;
@@ -38,7 +39,7 @@ namespace CTRPluginFramework::Cheats::TextToCheats {
       return false;
     }
 
-
+    
 
     ACNL::Chat::write_text("ポケット 0 =" + item.first);
     return true;

@@ -5,6 +5,11 @@
 
 #define Alert Logger::alert(__FILE__,__LINE__)
 
+#define OSDAlert { \
+  OSD::Notify(Utils::Format("%s:%d",__FILE__,__LINE__)); \
+  Sleep(Milliseconds(100)); \
+}
+
 namespace CTRPluginFramework {
   class Logger {
     static inline Logger* instance;

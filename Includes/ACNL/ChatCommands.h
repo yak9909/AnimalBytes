@@ -32,7 +32,5 @@ namespace CTRPluginFramework::ACNL {
     static void catch_command_execute();
 
     static void call_back();
-
-    static void dispose();
   };
 }

@@ -58,10 +58,7 @@ exit:
   }
 
   void InitMenu(PluginMenu& menu) {
-    Alert;
     Cheats::TextToCheats::initialize(menu);
-
-    Alert;
     Cheats::SpeedHacks::initialize();
 
     menu += new MenuEntry("test", [] (MenuEntry* e) {
@@ -86,13 +83,8 @@ exit:
       }
     });
 
-    Alert;
     menu += Cheats::Movements::make_folder();
-
-    Alert;
     menu += Cheats::SpeedHacks::make_folder();
-    
-    Alert;
     menu += Cheats::Items::make_folder();
   }
 
