@@ -1,4 +1,4 @@
-# Animal Bytes: A Plugin for ACNL by CTRPluginFramework
+# Animal Bytes: A CTRPF Plugin for ACNL
 It's good
 
 # Build

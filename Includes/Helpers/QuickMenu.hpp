@@ -1,13 +1,12 @@
-#ifndef HELPERS_QUICKMENU_HPP
-#define HELPERS_QUICKMENU_HPP
+#pragma once
+
 #include "types.h"
 #include <string>
 #include <vector>
 #include <stack>
 #include "HoldKey.hpp"
 
-namespace CTRPluginFramework
-{
+namespace CTRPluginFramework {
     using VoidMethod = void(*)(void);
     using ArgMethod = void(*)(void *);
     using StringVector = std::vector<std::string>;
@@ -78,5 +77,3 @@ namespace CTRPluginFramework
         static QuickMenu                _instance;
     };
 }
-
-#endif

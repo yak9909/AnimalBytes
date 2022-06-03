@@ -1,5 +1,6 @@
 /Build
 /test
+.vs/settings.json
 
 sendpost.txt
 
@@ -10,3 +11,4 @@ sendpost.txt
 *.a
 *.out
 *.log
+*.lst

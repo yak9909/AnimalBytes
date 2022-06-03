@@ -81,9 +81,10 @@ exit:
     menu.SynchronizeWithFrame(true);
     menu.ShowWelcomeMessage(false);
 
-    OSD::Notify(Color::DodgerBlue << "AnimalBytes Ready!!");
-
+    Cheats::TextToCheats::initialize();
     InitMenu(menu);
+
+    OSD::Notify("AnimalBytes Ready!!");
 
     return menu.Run();
   }

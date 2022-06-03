@@ -15,10 +15,12 @@ PLGINFO 	:= 	AnimalBytes.plgInfo
 BUILD		:= 	Build
 INCLUDES	:= 	Includes ACNL_Wrapper/include
 SOURCES 	:= 	Sources	\
+	Sources/ACNL \
 	Sources/DevUtils \
 	Sources/Helpers \
 	Sources/Cheats \
-	Sources/Cheats/Movements
+	Sources/Cheats/Movements \
+	Sources/Cheats/TextToCheats
 
 #---------------------------------------------------------------------------------
 # options for code generation
