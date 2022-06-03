@@ -60,8 +60,12 @@ exit:
     menu += Cheats::Movements::make_folder();
   }
 
+  void test();
+
   int main() {
     PluginMenu menu{ "AnimalBytes", 1, 0, 0, "ACNL Plugin by Yakuruto and bomkei" };
+
+    menu.Callback(test);
 
     menu.SynchronizeWithFrame(true);
     menu.ShowWelcomeMessage(false);

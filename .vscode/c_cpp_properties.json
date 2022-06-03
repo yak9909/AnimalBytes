@@ -4,9 +4,9 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:/devkitpro/libctru/include",
-                "C:/devkitpro/libctrpf/include",
-                "C:/devkitpro/devkitARM/arm-none-eabi/include"
+                "${DEVKITPRO}/libctru/include",
+                "${DEVKITPRO}/libctrpf/include",
+                "${DEVKITARM}/arm-none-eabi/include"
             ],
             "cStandard": "c17",
             "cppStandard": "c++20",
