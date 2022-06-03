@@ -15,7 +15,7 @@ namespace CTRPluginFramework::Cheats::SpeedHacks {
 
   void initialize() {
     speedhack_menu.set_title("SpeedHack Menu");
-    speedhack_menu.set_menu_draw_pos(150, 30);
+    speedhack_menu.set_menu_draw_pos(120, 30);
 
     speedhack_map["Shovel"] = {1, {0x672740, 0x66ED64, 0x669308}};
     speedhack_map["Axe"] = {1, {0x671880, 0x671944, 0x65F624}};
@@ -28,6 +28,8 @@ namespace CTRPluginFramework::Cheats::SpeedHacks {
   }
 
   void speedhackmenu(MenuEntry* entry) {
+    u32 keys = Controller::GetKeysDown();
+
     if( Controller::IsKeysPressed(Key::B + Key::DPadDown) ) {
       long index = speedhack_menu.open();
 
@@ -47,6 +49,8 @@ namespace CTRPluginFramework::Cheats::SpeedHacks {
         }
 
         speedhack_map[speed_name].flag ^= 1;
+
+        Sleep(Milliseconds(16));
         index = speedhack_menu.open();
       }
     }
