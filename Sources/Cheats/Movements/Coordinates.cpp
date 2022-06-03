@@ -12,7 +12,7 @@ static float speed = 6;
     float add_speed = 0;
 
     if( keys & Key::L ) {
-      add_speed *= 1.8;
+      add_speed = speed * 1.8;
     }
 
     if( keys & Key::A ) {
@@ -29,7 +29,7 @@ static float speed = 6;
     float* coord = (float*)(add12c(0x33099E50));
     u32* grid = (u32*)(add12c(0x3309A2B8));
 
-    int max_tick = std::max(0, (int)(25 - round(speed * 2)));
+    int max_tick = std::max(0, (int)(25 - round(speed * 1.8)));
     static int tick = 0;
 
     if( *(u32*)(0x95133A) != 0xA500 ) {
@@ -65,7 +65,7 @@ static float speed = 6;
   void change_speed(MenuEntry* entry) {
     float temp_speed = speed;
 
-    Keyboard spd("移動速度を指定してください\nデフォルト: 6");
+    Keyboard spd("移動速度を指定してください\n現在: " << std::to_string(speed) << "\nデフォルト: 6");
     spd.Open(temp_speed, speed);
 
     if( temp_speed != -1 ) {
