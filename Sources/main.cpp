@@ -71,8 +71,6 @@ exit:
 
         long index = menu.open();
 
-        OSD::SwapBuffers();
-
         if( index >= 0 ) {
           OSD::Notify(std::to_string(menu.get_items()[index]));
         }

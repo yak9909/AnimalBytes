@@ -1,6 +1,7 @@
 #include <CTRPluginFramework.hpp>
 #include "Cheats/SpeedHack.h"
 #include "Helpers/InstantMenu.h"
+#include "Helpers/Strings.h"
 #include <map>
 #include <sstream>
 #include <istream>
@@ -25,21 +26,9 @@ namespace CTRPluginFramework::Cheats::SpeedHacks {
     speedhack_map["Pickup"] = {1, {0x65FA28}};
 
     for(auto itr = speedhack_map.begin(); itr != speedhack_map.end(); ++itr) {
-      speedhack_menu.append(itr->first);
+      speedhack_menu.append(itr->first << Color::Red << " OFF");
     }
     initialized = true;
-  }
-
-  std::string get_speedname(std::string speedname) {
-    std::vector<std::string> split_name;
-
-    std::stringstream ss{speedname};
-    std::string buf;
-    while (std::getline(ss, buf, ',')) {
-      if (!buf.empty()) split_name.push_back(buf);
-    }
-
-    return split_name[0];
   }
 
   void speedhackmenu_routine(MenuEntry* entry) {
@@ -51,17 +40,16 @@ namespace CTRPluginFramework::Cheats::SpeedHacks {
 
     if( keys & Key::ZR ) {
       long index = speedhack_menu.open();
-      OSD::SwapBuffers();
 
       if( index >= 0 ) {
-        std::string speed_name = get_speedname(speedhack_menu.get_items()[index]);
+        std::string speed_name = trim_string(speedhack_menu.get_items()[index], ' ')[0];
         for( int i = 0; i < (sizeof(speedhack_map[speed_name].Adresses) / sizeof(u32) / 3); i++ ) {
           *(u32*)(speedhack_map[speed_name].Adresses[i*3]) = (u32)(1.0 + (speedhack_map[speed_name].flag * 30));
         }
 
         if( speedhack_map[speed_name].flag ) {
           OSD::Notify(Color::Yellow << speed_name << Color::LimeGreen << " Speed Boosted!");
-          speedhack_menu.set_item(index, speed_name << " " << Color::Green << "ON");
+          speedhack_menu.set_item(index, speed_name << " " << Color::LimeGreen << "ON");
         }
         else {
           OSD::Notify(Color::Yellow << speed_name << Color::White << " Speed Reset!");
