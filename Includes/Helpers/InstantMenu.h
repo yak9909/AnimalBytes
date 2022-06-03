@@ -22,11 +22,11 @@ namespace CTRPluginFramework {
 
     static int menu_draw_x;
     static int menu_draw_y;
-    static constexpr int menu_width = (is_top ? 400 : 320) - edge * 2;
-    static constexpr int menu_height = 240 - edge * 2;
+    static int menu_width;
+    static int menu_height;
 
     static constexpr int item_height = 14;
-    static constexpr int item_draw_count = menu_height / item_height;
+    static int item_draw_count;
 
     void draw(Screen const& screen) {
       auto const& background_color = Color::Black;
@@ -105,8 +105,7 @@ namespace CTRPluginFramework {
         is_open(false),
         index(0)
     {
-      menu_draw_x = edge;
-      menu_draw_y = edge;
+      set_menu_draw_pos(edge, edge);
     }
 
     InstantMenuImpl(std::string const& title, std::vector<T> const& items)
@@ -115,8 +114,7 @@ namespace CTRPluginFramework {
         is_open(false),
         index(0)
     {
-      menu_draw_x = edge;
-      menu_draw_y = edge;
+      set_menu_draw_pos(edge, edge);
     }
 
     void append(T const& item) {
@@ -130,6 +128,11 @@ namespace CTRPluginFramework {
     void set_menu_draw_pos(int x, int y) {
       menu_draw_x = x;
       menu_draw_y = y;
+
+      menu_width = (is_top ? 400 : 320) - menu_draw_x * 2;
+      menu_height = 240 - menu_draw_y * 2;
+
+      item_draw_count = menu_height / item_height;
     }
 
     long open() {
