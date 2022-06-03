@@ -8,10 +8,10 @@ namespace CTRPluginFramework::DevUtils {
 
   public:
 
-    void gamefunc(MenuEntry* entry);
-    void menufunc(MenuEntry* entry);
+    static void gamefunc(MenuEntry* entry);
+    static void menufunc(MenuEntry* entry);
 
-    
+    static void cmd_line(std::vector<std::string> const& args);
 
   };
 
