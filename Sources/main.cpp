@@ -83,6 +83,7 @@ exit:
     });
 
     menu += Cheats::Movements::make_folder();
+    menu += Cheats::SpeedHacks::make_folder();
   }
 
   int main() {
@@ -94,7 +95,7 @@ exit:
     Cheats::TextToCheats::initialize(menu);
     InitMenu(menu);
 
-    OSD::Notify("AnimalBytes Ready!!");
+    OSD::Notify(Color::DodgerBlue << "AnimalBytes Ready!!");
 
     return menu.Run();
   }
