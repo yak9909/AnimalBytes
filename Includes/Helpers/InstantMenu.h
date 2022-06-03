@@ -135,6 +135,10 @@ namespace CTRPluginFramework {
       item_draw_count = menu_height / item_height;
     }
 
+    std::vector<T> const& set_item(int index, T value) const {
+      this->items[index] = value;
+    }
+
     std::vector<T> const& get_items() const {
       return this->items;
     }

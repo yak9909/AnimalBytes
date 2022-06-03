@@ -74,7 +74,10 @@ exit:
         OSD::SwapBuffers();
 
         if( index >= 0 ) {
-          (MessageBox("", std::to_string(menu.get_items()[index])))();
+          OSD::Notify(std::to_string(menu.get_items()[index]));
+        }
+        else {
+          OSD::Notify("Canceled!");
         }
       }
     });
