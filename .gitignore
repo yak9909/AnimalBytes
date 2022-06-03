@@ -1,4 +1,7 @@
 /Build
+/test
+
+sendpost.txt
 
 *.3gx
 *.elf
@@ -6,3 +9,4 @@
 *.o
 *.a
 *.out
+*.log
