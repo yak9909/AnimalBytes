@@ -26,4 +26,12 @@ namespace CTRPluginFramework::Cheats {
       return folder;
     }
   }
+
+  namespace Items {
+    MenuFolder* make_folder() {
+      MenuFolder* folder = new MenuFolder("Items", "", {
+        new MenuEntry("test")
+      });
+    }
+  }
 }

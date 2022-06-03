@@ -21,6 +21,7 @@ SOURCES 	:= 	Sources	\
 	Sources/Cheats \
 	Sources/Cheats/Movements \
 	Sources/Cheats/SpeedHacks \
+	Sources/Cheats/Items \
 	Sources/Cheats/TextToCheats
 
 #---------------------------------------------------------------------------------
