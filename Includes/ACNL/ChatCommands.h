@@ -30,6 +30,8 @@ namespace CTRPluginFramework::ACNL {
 
     static ChatCommands* get_instance();
 
+    static void init();
+
     static bool append_func(std::string const& name, CommandFuncPointer fp);
 
     static void catch_command_execute();

@@ -9,7 +9,7 @@ namespace CTRPluginFramework::ACNL {
 
   static constexpr auto cmd_run_hotkey = Key::B | Key::R;
 
-  static ChatCommands* instance;
+  static ChatCommands* instance = nullptr;
 
   ChatCommands* ChatCommands::get_instance() {
     if( !instance ) {
@@ -17,6 +17,10 @@ namespace CTRPluginFramework::ACNL {
     }
 
     return instance;
+  }
+
+  void ChatCommands::init() {
+    instance = get_instance();
   }
 
   bool ChatCommands::append_func(std::string const& name, CommandFuncPointer fp) {
@@ -64,12 +68,12 @@ namespace CTRPluginFramework::ACNL {
   }
 
   void ChatCommands::run() {
-    get_instance();
-
     s32 prio;
     svcGetThreadPriority(&prio, CUR_THREAD_HANDLE);
 
     instance->thread = new ThreadEx(ChatCommands::main_routine, 0x1000, prio, 0);
+
+    instance->thread->Start(nullptr);
 
   }
 

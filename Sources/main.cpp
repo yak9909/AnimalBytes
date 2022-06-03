@@ -63,6 +63,7 @@ exit:
         InstantMenu_Int menu;
 
         menu.set_title("numbers");
+        menu.set_menu_draw_pos(50, 30);
 
         for(int i=0;i<100;i++){
           menu.append(i);
@@ -81,7 +82,7 @@ exit:
     menu.SynchronizeWithFrame(true);
     menu.ShowWelcomeMessage(false);
 
-    Cheats::TextToCheats::initialize();
+    //Cheats::TextToCheats::initialize();
     InitMenu(menu);
 
     OSD::Notify("AnimalBytes Ready!!");
