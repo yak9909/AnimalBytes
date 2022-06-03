@@ -19,7 +19,8 @@ SOURCES 	:= 	Sources	\
 	Sources/DevUtils \
 	Sources/Helpers \
 	Sources/Cheats \
-	Sources/Cheats/Movements
+	Sources/Cheats/Movements \
+	Sources/Cheats/TextToCheats
 
 #---------------------------------------------------------------------------------
 # options for code generation

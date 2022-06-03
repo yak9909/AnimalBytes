@@ -12,6 +12,8 @@ namespace CTRPluginFramework::ACNL {
     u32 length = **(u32**)Addresses::Chat::TextLengthPointer;
 
     Process::ReadString(buffer_addr, obj.text, length, StringFormat::Utf16);
+
+    return obj;
   }
 
   bool Chat::is_open() {

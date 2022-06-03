@@ -1,5 +1,4 @@
-#ifndef HELPERS_KEYSEQUENCE_HPP
-#define HELPERS_KEYSEQUENCE_HPP
+#pragma once
 
 #include "types.h"
 #include "CTRPluginFramework/System/Controller.hpp"
@@ -7,30 +6,23 @@
 
 #include <vector>
 
-namespace CTRPluginFramework
-{
-    using KeyVector = std::vector<Key>;
+namespace CTRPluginFramework {
+  using KeyVector = std::vector<Key>;
 
-    class   KeySequence
-    {
-    public:
+  class KeySequence {
+  public:
+    KeySequence(KeyVector sequence);
+    ~KeySequence() {}
 
-        KeySequence(KeyVector sequence);
-        ~KeySequence(){}
+    /**
+     * \brief Check the sequence
+     * \return true if the sequence is completed, false otherwise
+     */
+    bool  operator()(void);
 
-        /**
-         * \brief Check the sequence
-         * \return true if the sequence is completed, false otherwise
-         */
-        bool  operator()(void);
-
-    private:
-
-        KeyVector   _sequence;
-        Clock       _timer;
-        int         _indexInSequence;
-        
-    };
+  private:
+    KeyVector   _sequence;
+    Clock     _timer;
+    int     _indexInSequence;
+  };
 }
-
-#endif
