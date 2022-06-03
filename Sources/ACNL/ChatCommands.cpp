@@ -12,9 +12,7 @@ namespace CTRPluginFramework::ACNL {
   static ChatCommands* instance = nullptr;
 
   ChatCommands::ChatCommands()
-    : is_running(false),
-      hook(nullptr),
-      func_map({ })
+    : is_running(false)
   {
   }
 
@@ -39,8 +37,8 @@ namespace CTRPluginFramework::ACNL {
     return true;
   }
 
-  void ChatCommands::set_hook(HookFuncPointer func) {
-    ChatCommands::get_instance()->hook = func;
+  void ChatCommands::append_hook(HookFuncPointer func) {
+    ChatCommands::get_instance()->hooks.emplace_back(func);
   }
 
   void ChatCommands::catch_command_execute() {
@@ -52,8 +50,10 @@ namespace CTRPluginFramework::ACNL {
       if( chat.text.empty() )
         return;
 
-      if( inst->hook && inst->hook(chat.text) ) {
-        return;
+      for( auto&& h : inst->hooks ) {
+        if( h(chat.text) ) {
+          return;
+        }
       }
 
       std::string name;

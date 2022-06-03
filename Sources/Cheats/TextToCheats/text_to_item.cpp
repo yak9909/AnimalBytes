@@ -38,9 +38,9 @@ namespace CTRPluginFramework::Cheats::TextToCheats {
       return false;
     }
 
-    
 
-    ACNL::Chat::write_text("ポケット 1 = " + item.first);
+
+    ACNL::Chat::write_text("ポケット 0 =" + item.first);
     return true;
   }
 

@@ -11,7 +11,7 @@ namespace CTRPluginFramework::ACNL {
     using HookFuncPointer = bool(*)(std::string const&);
 
     bool is_running;
-    HookFuncPointer hook;
+    std::vector<HookFuncPointer> hooks;
     std::map<std::string, CommandFuncPointer> func_map;
 
     ChatCommands();
@@ -27,7 +27,7 @@ namespace CTRPluginFramework::ACNL {
     static bool append_func(std::string const& name, CommandFuncPointer fp);
 
     // set hook function after pressed hotkey
-    static void set_hook(HookFuncPointer func);
+    static void append_hook(HookFuncPointer func);
 
     static void catch_command_execute();
 
