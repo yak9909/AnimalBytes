@@ -32,7 +32,7 @@ static float speed = 6;
     int max_tick = std::max(0, (int)(25 - round(speed * 1.8)));
     static int tick = 0;
 
-    if( *(u32*)(0x33099F84) == -1 ) {
+    if( *(u32*)(0x33099F84) != -1 ) {
       return;
     }
 
