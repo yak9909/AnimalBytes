@@ -22,7 +22,7 @@ namespace CTRPluginFramework::ACNL {
       return obj;
     }
 
-    if( !Process::Read32(length, length) ) {
+    if( !Process::Read32(length + 0x8, length) ) {
       return obj;
     }
 
