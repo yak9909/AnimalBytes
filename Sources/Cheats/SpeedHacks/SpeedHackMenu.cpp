@@ -3,8 +3,6 @@
 #include "Helpers/InstantMenu.h"
 #include "Helpers/Strings.h"
 #include <map>
-#include <sstream>
-#include <istream>
 
 namespace CTRPluginFramework::Cheats::SpeedHacks {
   static InstantMenu speedhack_menu;
