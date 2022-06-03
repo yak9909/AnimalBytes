@@ -136,7 +136,7 @@ namespace CTRPluginFramework {
     }
 
     std::vector<T> const& get_items() const {
-      return this->items:
+      return this->items;
     }
 
     long open() {
