@@ -20,13 +20,13 @@ namespace CTRPluginFramework {
     static constexpr int edge = 16;
     static constexpr bool is_top = true;
 
-    static int menu_draw_x;
-    static int menu_draw_y;
-    static int menu_width;
-    static int menu_height;
+    static inline int menu_draw_x;
+    static inline int menu_draw_y;
+    static inline int menu_width;
+    static inline int menu_height;
 
     static constexpr int item_height = 14;
-    static int item_draw_count;
+    static inline int item_draw_count;
 
     void draw(Screen const& screen) {
       auto const& background_color = Color::Black;
