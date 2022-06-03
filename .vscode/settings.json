@@ -1,0 +1,17 @@
+{
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "files.associations": {
+    "vector": "cpp",
+    "xstring": "cpp",
+    "algorithm": "cpp",
+    "utility": "cpp",
+    "string": "cpp"
+  },
+  "[cpp]": {
+    "editor.wordBasedSuggestions": true,
+    "editor.suggest.insertMode": "insert",
+    "editor.semanticHighlighting.enabled": true
+  }
+
+}
