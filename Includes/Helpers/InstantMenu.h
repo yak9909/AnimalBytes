@@ -119,10 +119,6 @@ namespace CTRPluginFramework {
       set_menu_draw_pos(edge, edge);
     }
 
-    void append(T const& item) {
-      items.emplace_back(item);
-    }
-
     void set_title(std::string const& title) {
       this->title = title;
     }
@@ -139,6 +135,14 @@ namespace CTRPluginFramework {
 
     void set_item(int index, T const& value) {
       items[index] = value;
+    }
+
+    void append_item(T const& val) {
+      items.emplace_back(val);
+    }
+
+    void append_item(T&& val) {
+      items.emplace_back(std::move(val));
     }
 
     std::vector<T> const& get_items() const {
