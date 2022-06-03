@@ -20,15 +20,15 @@ namespace CTRPluginFramework::ACNL {
   }
 
   void ChatCommands::init() {
-    instance = get_instance();
+    ChatCommands::get_instance();
   }
 
   bool ChatCommands::append_func(std::string const& name, CommandFuncPointer fp) {
-    if( instance->func_map.contains(name) ) {
+    if( ChatCommands::get_instance()->func_map.contains(name) ) {
       return false;
     }
 
-    instance->func_map[name] = fp;
+    ChatCommands::get_instance()->func_map[name] = fp;
     return true;
   }
 
@@ -45,10 +45,10 @@ namespace CTRPluginFramework::ACNL {
       name = args[0];
       args.erase(args.begin());
 
-      auto fp = instance->func_map[name];
+      auto fp = ChatCommands::get_instance()->func_map[name];
 
       if( fp == nullptr ) {
-
+        Chat::write_text(Utils::Format("\"%s\" is not defined.", name.c_str()));
       }
       else {
         fp(args);
@@ -67,7 +67,9 @@ namespace CTRPluginFramework::ACNL {
   }
 
   void ChatCommands::dispose() {
-    delete instance;
+    if( instance ) {
+      delete instance;
+    }
   }
 
 }

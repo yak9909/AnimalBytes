@@ -71,7 +71,7 @@ exit:
 
         long index = menu.open();
 
-        OSD::SwapBuffers();
+        Sleep(Milliseconds(500));
 
         if( index >= 0 ) {
           (MessageBox("", std::to_string(menu.get_items()[index])))();
