@@ -1,6 +1,7 @@
 #include <CTRPluginFramework.hpp>
 #include "Cheats/Movement.h"
 #include "Cheats/SpeedHack.h"
+#include "Cheats/Item.h"
 
 namespace CTRPluginFramework::Cheats {
   namespace Movements {
@@ -30,7 +31,7 @@ namespace CTRPluginFramework::Cheats {
   namespace Items {
     MenuFolder* make_folder() {
       MenuFolder* folder = new MenuFolder("Items", "", {
-        new MenuEntry("test")
+        new MenuEntry("ポケットアイテム", pocket_item)
       });
     }
   }
