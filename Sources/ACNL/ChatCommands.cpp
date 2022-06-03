@@ -11,6 +11,13 @@ namespace CTRPluginFramework::ACNL {
 
   static ChatCommands* instance = nullptr;
 
+  ChatCommands::ChatCommands()
+    : is_running(false),
+      hook(nullptr),
+      func_map({ })
+  {
+  }
+
   ChatCommands* ChatCommands::get_instance() {
     if( !instance ) {
       instance = new ChatCommands();
@@ -32,12 +39,22 @@ namespace CTRPluginFramework::ACNL {
     return true;
   }
 
+  void ChatCommands::set_hook(HookFuncPointer func) {
+    ChatCommands::get_instance()->hook = func;
+  }
+
   void ChatCommands::catch_command_execute() {
+    auto inst = ChatCommands::get_instance();
+
     if( Controller::IsKeysPressed(cmd_run_hotkey) ) {
       Chat chat = Chat::clone_object();
 
       if( chat.text.empty() )
         return;
+
+      if( inst->hook && inst->hook(chat.text) ) {
+        return;
+      }
 
       std::string name;
       auto args = trim_string(chat.text, ' ');
@@ -45,7 +62,7 @@ namespace CTRPluginFramework::ACNL {
       name = args[0];
       args.erase(args.begin());
 
-      auto fp = ChatCommands::get_instance()->func_map[name];
+      auto fp = inst->func_map[name];
 
       if( fp == nullptr ) {
         Chat::write_text(Utils::Format("\"%s\" is not defined.", name.c_str()));

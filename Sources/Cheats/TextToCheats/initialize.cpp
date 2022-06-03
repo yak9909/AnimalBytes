@@ -9,6 +9,8 @@ namespace CTRPluginFramework::Cheats::TextToCheats {
 
     ACNL::ChatCommands::append_func("toggle", toggle_cheat);
 
+    ACNL::ChatCommands::set_hook(text_to_item);
+
     menu += ACNL::ChatCommands::call_back;
   }
 
