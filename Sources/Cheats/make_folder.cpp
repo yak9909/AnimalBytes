@@ -7,7 +7,7 @@ namespace CTRPluginFramework::Cheats {
       MenuFolder* folder = new MenuFolder("Movements", "", {
         new MenuEntry("座標移動", coord_mod),
         new MenuEntry("座標移動(グリッド)", coord_grid),
-        new MenuEntry("座標移動 スピード変更", change_speed),
+        new MenuEntry("座標移動 スピード変更", nullptr, change_speed),
         new MenuEntry("壁抜け", walk_everywhere)
       });
 

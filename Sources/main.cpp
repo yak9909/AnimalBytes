@@ -81,7 +81,7 @@ exit:
     menu.SynchronizeWithFrame(true);
     menu.ShowWelcomeMessage(false);
 
-    OSD::Notify("AnimalBytes Ready!!");
+    OSD::Notify(Color::DodgerBlue << "AnimalBytes Ready!!");
 
     InitMenu(menu);
 

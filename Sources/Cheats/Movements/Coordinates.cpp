@@ -1,5 +1,6 @@
 #include <CTRPluginFramework.hpp>
 #include "Cheats/Movement.h"
+#include <math.h>
 
 namespace CTRPluginFramework::Cheats::Movements {
 static float speed = 6;
@@ -11,13 +12,15 @@ static float speed = 6;
     float add_speed = 0;
 
     if( keys & Key::L ) {
-      add_speed = 3;
+      add_speed *= 1.8;
     }
 
-    if( keys & Key::DPadUp ) coord[2] -= speed + add_speed;
-    if( keys & Key::DPadDown ) coord[2] += speed + add_speed;
-    if( keys & Key::DPadLeft ) coord[0] -= speed + add_speed;
-    if( keys & Key::DPadRight ) coord[0] += speed + add_speed;
+    if( keys & Key::A ) {
+      if( keys & Key::DPadUp ) coord[2] -= speed + add_speed;
+      if( keys & Key::DPadDown ) coord[2] += speed + add_speed;
+      if( keys & Key::DPadLeft ) coord[0] -= speed + add_speed;
+      if( keys & Key::DPadRight ) coord[0] += speed + add_speed;
+    }
   }
 
   void coord_grid(MenuEntry* entry) {
@@ -26,34 +29,36 @@ static float speed = 6;
     float* coord = (float*)(add12c(0x33099E50));
     u32* grid = (u32*)(add12c(0x3309A2B8));
 
-    int max_tick = std::max(0, (int)(40 - round(speed * 2.3)));
+    int max_tick = std::max(0, (int)(25 - round(speed * 2)));
     static int tick = 0;
 
     if( *(u32*)(0x95133A) != 0xA500 ) {
       return;
     }
 
-    if( keys & Key::DPadUp | Key::DPadDown | DPadLeft | DPadRight ) {
-      tick--;
+    if( keys & Key::A ) {
+      if( (keys & Key::A) && (keys & (Key::DPadUp | Key::DPadDown | Key::DPadLeft | Key::DPadRight)) ) {
+        tick--;
 
-      if( keys & Key::L ) {
-        tick -= 3;
+        if( keys & Key::L ) {
+          tick -= 3;
+        }
+
+        if( tick < 0 ) {
+          coord[0] = 528 + ( (grid[0] - 0x10) * 32 );
+          coord[2] = 528 + ( (grid[1] - 0x10) * 32 );
+
+          if( keys & Key::DPadUp ) coord[2] -= 32;
+          if( keys & Key::DPadDown ) coord[2] += 32;
+          if( keys & Key::DPadLeft ) coord[0] -= 32;
+          if( keys & Key::DPadRight ) coord[0] += 32;
+
+          tick = max_tick;
+        }
       }
-
-      if( tick <= 0 ) {
-        coord[0] = 528 + ( (grid[0] - 0x10) * 32 );
-        coord[2] = 528 + ( (grid[2] - 0x10) * 32 );
-
-        if( keys & Key::DPadUp ) coord[2] -= 32;
-        if( keys & Key::DPadDown ) coord[2] += 32;
-        if( keys & Key::DPadLeft ) coord[0] -= 32;
-        if( keys & Key::DPadRight ) coord[0] += 32;
-
-        tick = max_tick;
+      else {
+        tick = 0;
       }
-    }
-    else {
-      tick = 0;
     }
   }
 
