@@ -1,6 +1,6 @@
 import ftplib
 import logging
-
+import os
 
 def ftp_upload(hostname, username, password, port, upload_src_path, upload_dst_path, timeout):
     logger.info({
@@ -39,17 +39,22 @@ logging.basicConfig(
 )
 logger.setLevel(logging.INFO)
 
-# 接続先サーバーのホスト名
-hostname = "192.168.3.16" 
-# アップロードするファイルパス
+hostname = ""
+sendpost_path = "sendpost.txt"
+
+if not os.path.exists(sendpost_path):
+    print(f"`{sendpost_path}` is not found.")
+    exit(1)
+
+with open(sendpost_path) as f:
+    hostname = f.readline()
+
 upload_src_path = "./AnimalBytes.3gx" 
-# アップロード先のファイルパス（STORはファイルをアップロードするためのFTPコマンドなので必要です。）
 upload_dst_path = "STOR /luma/plugins/0004000000086200/AnimalBytes.3gx" 
-# サーバーのユーザー名
+
 username = "" 
-# サーバーのログインパスワード
 password = "" 
-# FTPサーバポート
+
 port = 5000
 timeout = 500
 
