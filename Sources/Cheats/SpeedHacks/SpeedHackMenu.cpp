@@ -33,7 +33,7 @@ namespace CTRPluginFramework::Cheats::SpeedHacks {
     if( Controller::IsKeysPressed(Key::B + Key::DPadDown) ) {
       long index = speedhack_menu.open();
 
-      while( index >= 0 ) {
+      if( index >= 0 ) {
         std::string speed_name = trim_string(speedhack_menu.get_items()[index], ' ')[0];
         for( int i = 0; i < (sizeof(speedhack_map[speed_name].Adresses) / sizeof(u32) / 3); i++ ) {
           *(u32*)(speedhack_map[speed_name].Adresses[i*3]) = (u32)(1.0 + (speedhack_map[speed_name].flag * 30));
@@ -50,7 +50,6 @@ namespace CTRPluginFramework::Cheats::SpeedHacks {
 
         speedhack_map[speed_name].flag ^= 1;
 
-        Sleep(Milliseconds(16));
         index = speedhack_menu.open();
       }
     }
