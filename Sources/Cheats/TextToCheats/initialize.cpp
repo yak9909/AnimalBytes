@@ -6,7 +6,7 @@
 namespace CTRPluginFramework::Cheats::TextToCheats {
   void initialize() {
     ACNL::ChatCommands::init();
-    
+
     ACNL::ChatCommands::append_func("toggle", toggle_cheat);
 
     ACNL::ChatCommands::run();

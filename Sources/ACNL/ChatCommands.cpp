@@ -9,7 +9,7 @@ namespace CTRPluginFramework::ACNL {
 
   static constexpr auto cmd_run_hotkey = Key::B | Key::R;
 
-  static ChatCommands* instance;
+  static ChatCommands* instance = nullptr;
 
   ChatCommands* ChatCommands::get_instance() {
     if( !instance ) {
@@ -20,7 +20,7 @@ namespace CTRPluginFramework::ACNL {
   }
 
   void ChatCommands::init() {
-    get_instance();
+    instance = get_instance();
   }
 
   bool ChatCommands::append_func(std::string const& name, CommandFuncPointer fp) {
