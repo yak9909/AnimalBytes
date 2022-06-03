@@ -23,12 +23,12 @@ namespace ACNL {
       }
 
       *(u32*)(inv_addrs + slot * 4) = item;
-      return slot;
+      return int(slot);
     }
 
     static u32 ReadItem(u16 slot) {
       u32* inv_addrs = (u32*)((*(u32*)(0xAA914c) + 0x6BD0));
-      return inv_addrs[slot * 4]
+      return inv_addrs[slot * 4];
     }
 
   };

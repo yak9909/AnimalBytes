@@ -28,9 +28,7 @@ namespace CTRPluginFramework::Cheats::SpeedHacks {
   }
 
   void speedhackmenu(MenuEntry* entry) {
-    u32 keys = Controller::GetKeysDown();
-
-    if( keys & Key::ZR ) {
+    if( Controller::IsKeysPressed(Key::B + Key::DPadDown) ) {
       long index = speedhack_menu.open();
 
       while( index >= 0 ) {

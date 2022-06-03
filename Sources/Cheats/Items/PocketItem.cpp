@@ -10,7 +10,7 @@ namespace CTRPluginFramework::Cheats::Items {
     int result = kbd.Open(itemid);
     if( result >= 0 ) {
       int inv_index = ACNL::Player::WriteItem(itemid);
-      OSD::Notify("Pocket Item: " << Color::Yellow << "Index " << Color::Green << to_string(inv_index));
+      OSD::Notify("Pocket Item: " << Color::Yellow << "Index " << Color::Green << std::to_string(inv_index));
     }
   }
 }

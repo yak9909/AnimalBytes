@@ -33,6 +33,8 @@ namespace CTRPluginFramework::Cheats {
       MenuFolder* folder = new MenuFolder("Items", "", {
         new MenuEntry("ポケットアイテム", pocket_item)
       });
+
+      return folder;
     }
   }
 }
