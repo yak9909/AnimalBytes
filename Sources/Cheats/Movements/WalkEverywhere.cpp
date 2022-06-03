@@ -5,7 +5,6 @@ namespace CTRPluginFramework::Cheats::Movements {
   void walk_everywhere(MenuEntry* entry) {
     static int flag = 1;
 
-    //
     // Address, Enable-value, Disable-value
     u32 table[] = {
       0x0064EEF4, 0xEA000094, 0x0A000094,
@@ -21,8 +20,15 @@ namespace CTRPluginFramework::Cheats::Movements {
     if( Controller::IsKeysPressed(Key::L | Key::DPadUp) ) {
       flag ^= 1;
 
-      for( int i = 0; i < (sizeof(table) / sizeof(u32)) * 3; i++ ) {
+      for( int i = 0; i < (sizeof(table) / sizeof(u32) / 3); i++ ) {
         *(u32*)(table[i*3]) = table[(i*3) + (flag + 1)];
+      }
+
+      if( !flag ) {
+        OSD::Notify("WalkEverywhere" << Color::LimeGreen << "Enabled!");
+      }
+      else {
+        OSD::Notify("WalkEverywhere" << Color::Red << "Disabled!");
       }
     }
   }
