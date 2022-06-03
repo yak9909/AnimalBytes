@@ -24,7 +24,7 @@ namespace CTRPluginFramework::Cheats::SpeedHacks {
     speedhack_map["Pickup"] = {1, {0x65FA28}};
 
     for(auto itr = speedhack_map.begin(); itr != speedhack_map.end(); ++itr) {
-      speedhack_menu.append(itr->first << " " << Color::Red << "OFF");
+      speedhack_menu.append_item(itr->first << " " << Color::Red << "OFF");
     }
   }
 

@@ -69,7 +69,7 @@ exit:
         menu.set_menu_draw_pos(50, 30);
 
         for(int i=0;i<100;i++){
-          menu.append(i);
+          menu.append_item(i);
         }
 
         long index = menu.open();
