@@ -5,16 +5,15 @@
 #include <map>
 
 namespace CTRPluginFramework::Cheats::SpeedHacks {
-  static InstantMenu speedhack_menu;
-  static bool initialized = false;
-
   struct Cheat {
     int flag;
     std::vector<u32> Adresses;
   };
-  std::map<std::string, Cheat> speedhack_map;
+  
+  static InstantMenu speedhack_menu;
+  static std::map<std::string, Cheat> speedhack_map;
 
-  void Initialize() {
+  void initialize() {
     speedhack_menu.set_title("SpeedHack Menu");
     speedhack_menu.set_menu_draw_pos(150, 30);
 
@@ -26,15 +25,10 @@ namespace CTRPluginFramework::Cheats::SpeedHacks {
     for(auto itr = speedhack_map.begin(); itr != speedhack_map.end(); ++itr) {
       speedhack_menu.append(itr->first << " " << Color::Red << "OFF");
     }
-    initialized = true;
   }
 
-  void speedhackmenu_routine(MenuEntry* entry) {
+  void speedhackmenu(MenuEntry* entry) {
     u32 keys = Controller::GetKeysDown();
-
-    if( !initialized ) {
-      Initialize();
-    }
 
     if( keys & Key::ZR ) {
       long index = speedhack_menu.open();

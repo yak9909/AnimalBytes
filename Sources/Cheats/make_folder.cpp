@@ -20,7 +20,7 @@ namespace CTRPluginFramework::Cheats {
   namespace SpeedHacks {
     MenuFolder* make_folder() {
       MenuFolder* folder = new MenuFolder("SpeedHacks", "", {
-        new MenuEntry("スピードハックメニュー", speedhackmenu_routine, "ZR"),
+        new MenuEntry("スピードハックメニュー", speedhackmenu, "ZR"),
         new MenuEntry("ゲームスピード上昇", gamespeed_boost, "Bぼたんとうえ")
       });
 

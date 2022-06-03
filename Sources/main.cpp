@@ -58,6 +58,9 @@ exit:
   }
 
   void InitMenu(PluginMenu& menu) {
+    Cheats::TextToCheats::initialize(menu);
+    Cheats::SpeedHacks::initialize();
+
     menu += new MenuEntry("test", [] (MenuEntry* e) {
       if( Controller::IsKeyPressed(Key::L) ) {
         InstantMenu_Int menu;
@@ -90,7 +93,6 @@ exit:
     menu.SynchronizeWithFrame(true);
     menu.ShowWelcomeMessage(false);
 
-    Cheats::TextToCheats::initialize(menu);
     InitMenu(menu);
 
     OSD::Notify(Color::DodgerBlue << "AnimalBytes Ready!!");
