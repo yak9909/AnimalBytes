@@ -25,10 +25,10 @@ namespace CTRPluginFramework::Cheats::Movements {
       }
 
       if( !flag ) {
-        OSD::Notify("WalkEverywhere" << Color::LimeGreen << "Enabled!");
+        OSD::Notify("WalkEverywhere " << Color::LimeGreen << "Enabled!");
       }
       else {
-        OSD::Notify("WalkEverywhere" << Color::Red << "Disabled!");
+        OSD::Notify("WalkEverywhere " << Color::Red << "Disabled!");
       }
     }
   }

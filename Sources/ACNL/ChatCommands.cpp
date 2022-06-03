@@ -3,7 +3,7 @@
 #include "ACNL/Address.h"
 #include "ACNL/Chat.h"
 #include "ACNL/ChatCommands.h"
-#include "Helpers/Strings.hpp"
+#include "Helpers/Strings.h"
 
 namespace CTRPluginFramework::ACNL {
 

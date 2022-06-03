@@ -1,4 +1,4 @@
-#include "Helpers/Wrappers.hpp"
+#include "Helpers/Wrappers.h"
 
 namespace CTRPluginFramework
 {

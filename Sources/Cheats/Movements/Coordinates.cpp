@@ -27,12 +27,12 @@ static float speed = 6;
     u32 keys = Controller::GetKeysDown();
 
     float* coord = (float*)(add12c(0x33099E50));
-    u32* grid = (u32*)(add12c(0x3309A2B8));
+    u32* grid = (u32*)(0x3309A2B8);
 
     int max_tick = std::max(0, (int)(25 - round(speed * 1.8)));
     static int tick = 0;
 
-    if( *(u32*)(0x95133A) != 0xA500 ) {
+    if( *(u32*)(0x33099F84) != -1 ) {
       return;
     }
 

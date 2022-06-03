@@ -1,4 +1,4 @@
-#include "Helpers/KeySequence.hpp"
+#include "Helpers/KeySequence.h"
 
 namespace CTRPluginFramework
 {

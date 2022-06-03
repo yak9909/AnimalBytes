@@ -1,8 +1,4 @@
 Movement (移動系)
-  - CoordinatesModifier (座標移動)
-    - 0x33099E50 + get12c() = Player X Coord
-    - 0x33099E58 + get12c() = Player Z Coord
-    - Lボタン押してる間速度アップ機能
   
   - Idle (アクションリセット)
     - 0x0064814 = E3A01006
