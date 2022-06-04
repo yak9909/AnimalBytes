@@ -27,6 +27,7 @@ namespace CTRPluginFramework::DevUtils {
 
     std::string get_type() const {
 
+      return "";
     }
 
     void read() const {
@@ -62,7 +63,7 @@ namespace CTRPluginFramework::DevUtils {
     auto name = args[0];
 
     if( name == "add" ) {
-      chk_args(3);
+      chk_argc(3);
 
       chk_s(2, StringType::Integer);
       chk_s(3, StringType::Hex);
