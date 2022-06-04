@@ -22,14 +22,26 @@ namespace CTRPluginFramework {
         }
       }
 
+      StringType ret = StringType::Integer;
+
       for( auto&& c : str ) {
-        if( !isdigit(c) ) goto other;
+        if( (c >= 'A' && c <= 'F') || (c >= 'a' || c <= 'f') ) {
+          ret = StringType::Hex;
+        }
+        else if( !isdigit(c) ) {
+          goto other;
+        }
       }
 
-      return StringType::Integer;
+      return ret;
     }
     else if( isalpha(ch) ) {
-      return StringType::Char;
+      for( auto&& c : str ) {
+        if( !isalnum(c) && c != '_' )
+          goto other;
+      }
+
+      return StringType::Alphabets;
     }
     else if( isspace(ch) ) {
       return StringType::Space;

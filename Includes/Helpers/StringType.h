@@ -5,8 +5,9 @@
 namespace CTRPluginFramework {
   enum class StringType {
     Integer,
+    Hex,
+    Alphabets,
     Float,
-    Char,
     Space,
     Empty,
     Other

@@ -2,7 +2,7 @@
 #include <vector>
 #include <CTRPluginFramework.hpp>
 #include "DevUtils/ViewerEx.h"
-#include "Helpers/StringType.h"
+#include "Helpers.h"
 
 namespace CTRPluginFramework::DevUtils {
 
@@ -11,26 +11,38 @@ namespace CTRPluginFramework::DevUtils {
       Int,
       UInt,
       Char,
-      String
+      String,
+      Custom,
+      Struct
     };
 
     u32 addr;
+    u32 bytesize;
     Kind kind;
+    std::string val;
+    std::vector<Item> list;
 
     Item() { }
     Item(u32 a, Kind k) :addr(a), kind(k) { }
 
-    std::string read() const {
-      std::string ret;
+    std::string get_type() const {
 
+    }
+
+    void read() const {
       switch( this->kind ) {
-
+        case Kind::Int: {
+          
+        }
       }
-
-      return ret;
     }
   };
 
+  namespace {
+    std::vector<Item> items;
+
+    size_t draw_index;
+  }
 
   void ViewerEx::gamefunc(MenuEntry* entry) {
 
@@ -43,6 +55,7 @@ namespace CTRPluginFramework::DevUtils {
   void ViewerEx::cmd_line(std::vector<std::string> const& args) {
   #define chk_argc(n) if( args.size() != n ) return
   #define chk_empty if( args.empty() ) return
+  #define chk_s(n,k) if(get_strtype(args[n])!=k)return
     
     chk_empty;
 
@@ -51,8 +64,15 @@ namespace CTRPluginFramework::DevUtils {
     if( name == "add" ) {
       chk_args(3);
 
+      chk_s(2, StringType::Integer);
+      chk_s(3, StringType::Hex);
+
 
     }
+    else if( name == "draw" ) {
+      
+    }
+
   }
 
     
