@@ -69,7 +69,8 @@ namespace CTRPluginFramework {
       static int tick = -1;
       static constexpr int tickmax = 60;
 
-      u32 keys = hidKeysHeld();
+      //u32 keys = hidKeysHeld();
+      u32 keys = Controller::GetKeysDown();
 
       if( keys ) {
         tick++;
@@ -77,8 +78,8 @@ namespace CTRPluginFramework {
         if( tick == 0 || tick == tickmax ) {
           if( keys & Key::DPadUp ) index--;
           if( keys & Key::DPadDown ) index++;
-          if( keys & Key::DPadLeft ) index = std::max<long>(0, index - 4);
-          if( keys & Key::DPadDown ) index = std::min<long>(items.size() - 1, index + 4);
+          if( keys & Key::DPadLeft ) index -= 4;
+          if( keys & Key::DPadRight ) index += 4;
 
           if( index < 0 ) index = items.size() - 1;
           else if( index >= items.size() ) index = 0;
