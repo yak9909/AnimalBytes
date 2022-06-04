@@ -3,6 +3,7 @@
 #include "ACNL/Game.h"
 #include "ACNL/Chat.h"
 #include "ACNL/ChatCommands.h"
+#include "ACNL/Player.h"
 #include "Cheats/TextToCheats.h"
 #include "Helpers.h"
 
@@ -17,7 +18,7 @@ namespace CTRPluginFramework::Cheats::TextToCheats {
       v *= 0x10;
     }
 
-    return v;
+    return ret;
   }
 
   bool text_to_item(std::string const& text) {
@@ -31,17 +32,17 @@ namespace CTRPluginFramework::Cheats::TextToCheats {
       }
     }
 
-    ACNL::ItemInfo item;
-    u16 id = str_to_hex(text);
+    u32 id = str_to_hex(text);
+    std::string name;
 
-    if( !ACNL::Game::get_item_name(id, item) ) {
+    if( !ACNL::Game::get_item_name(id, name) ) {
       ACNL::Chat::write_text(Utils::Format("アイテムが見つかりません: %04X", id));
-      return false;
+    }
+    else {
+      ACNL::Player::WriteItem(id, 0);
+      ACNL::Chat::write_text("ポケット 0 =" + name);
     }
 
-    
-
-    ACNL::Chat::write_text("ポケット 0 =" + item.first);
     return true;
   }
 

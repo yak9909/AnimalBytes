@@ -90,11 +90,10 @@ exit:
 
   int main() {
     PluginMenu menu{ "AnimalBytes", 1, 0, 0, "ACNL Plugin by Yakuruto and bomkei" };
+    Logger logger{ "plugin.log" };
 
     menu.SynchronizeWithFrame(true);
     menu.ShowWelcomeMessage(false);
-    
-    Logger logger{ "plugin.log" };
 
     InitMenu(menu);
 

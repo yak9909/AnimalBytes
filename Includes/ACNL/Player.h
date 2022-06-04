@@ -1,7 +1,8 @@
 #pragma once
+
 #include <CTRPluginFramework.hpp>
 
-namespace ACNL {
+namespace CTRPluginFramework::ACNL {
   class Player {
 
   public:
