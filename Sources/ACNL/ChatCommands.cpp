@@ -50,6 +50,7 @@ namespace CTRPluginFramework::ACNL {
       if( chat.text.empty() )
         return;
 
+      // フック関数を探す
       for( auto&& h : inst->hooks ) {
         if( h(chat.text) ) {
           return;

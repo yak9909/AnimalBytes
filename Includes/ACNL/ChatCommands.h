@@ -26,7 +26,8 @@ namespace CTRPluginFramework::ACNL {
     // append function with name key
     static bool append_func(std::string const& name, CommandFuncPointer fp);
 
-    // set hook function after pressed hotkey
+    // フック関数を追加
+    // 関数は、チャットに文字列を書き込んだ場合は必ず true を返してようにしてください
     static void append_hook(HookFuncPointer func);
 
     static void catch_command_execute();

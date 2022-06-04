@@ -184,17 +184,17 @@ namespace CTRPluginFramework::ACNL::Game {
     return conv.to_bytes(str16);
   }
   
-  bool get_item_name(u16 item, ItemInfo& out) {
+  bool get_item_name(u16 item, std::string& out) {
 		if( item >= 0x5 && item <= 0x9E ) {
       item -= 0x5;
-			out = { AllItems[item].first, AllItems[item].second };
+			out = AllItems[item].first;
       return true;
 		}
 
-		if( item == 0xCC ) { out = { "クローバー(雑草)", "くろーばー(ざっそう)" }; return true; };
-		if( item == 0xCD ) { out = { "ラフレシア", "らふれしあ" }; return true; };
-		if( item == 0xF8 ) { out = { "枯れたラフレシア", "かれたらふれしあ" }; return true; };
-		if( item == 0xFD ) { out = { "埋められない穴", "うめられないあな" }; return true; };
+		if( item == 0xCC ) { out = "クローバー(雑草)"; return true; };
+		if( item == 0xCD ) { out = "ラフレシア"; return true; };
+		if( item == 0xF8 ) { out = "枯れたラフレシア"; return true; };
+		if( item == 0xFD ) { out = "埋められない穴"; return true; };
 		
 		bool w = false;
 		
@@ -206,8 +206,7 @@ namespace CTRPluginFramework::ACNL::Game {
 			item += 0x2861;
 		}
 		
-		if( item >= 0x2000 && item <= 0x372B )
-		{
+		if( item >= 0x2000 && item <= 0x372B ) {
 			u32 addr = 0x31724DC0;
 			u32 len = 0;
 
@@ -218,11 +217,10 @@ namespace CTRPluginFramework::ACNL::Game {
       }
 			
 			std::string str;
-			Process::ReadString(addr, str, len * 2, StringFormat::Utf16);
 			std::string isDead = w ? "(枯れた)" : "";
+			Process::ReadString(addr, str, len * 2, StringFormat::Utf16);
 
-      std::string s = str + std::string(w ? "(枯れた)" : "");
-      out = { str, replace_to_hiragana(str) };
+      out = str + std::string(w ? "(枯れた)" : "");
 
       return true;
 		}
