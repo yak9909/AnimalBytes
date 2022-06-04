@@ -2,7 +2,7 @@ import ftplib
 import logging
 import os
 
-def ftp_upload(hostname, username, password, port, upload_src_path, upload_dst_path, timeout):
+def ftp_upload(hostname, port, upload_src_path, upload_dst_path, timeout):
     logger.info({
         'action': 'ftp_upload',
         'status': 'run'
@@ -13,8 +13,7 @@ def ftp_upload(hostname, username, password, port, upload_src_path, upload_dst_p
             ftp.connect(host=hostname, port=port, timeout=timeout)
             # パッシブモード設定
             ftp.set_pasv("true")
-            # FTPサーバログイン
-            ftp.login(username, password)
+
             with open(upload_src_path, 'rb') as fp:
                 ftp.storbinary(upload_dst_path, fp)
 
@@ -47,17 +46,14 @@ if not os.path.exists(sendpost_path):
     exit(1)
 
 with open(sendpost_path) as f:
-    hostname = f.readline()
+    hostname = f.readline().replace("\n", "")
 
 upload_src_path = "./AnimalBytes.3gx" 
 upload_dst_path = "STOR /luma/plugins/0004000000086200/AnimalBytes.3gx" 
-
-username = "" 
-password = "" 
 
 port = 5000
 timeout = 500
 
 logger.info("===START FTP===")
-ftp_upload(hostname, username, password, port, upload_src_path, upload_dst_path, timeout)
+ftp_upload(hostname, port, upload_src_path, upload_dst_path, timeout)
 logger.info("===FINISH FTP===")
