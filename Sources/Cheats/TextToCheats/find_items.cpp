@@ -18,6 +18,11 @@ namespace CTRPluginFramework::Cheats::TextToCheats {
     std::vector<u16> hit_ids;
     std::vector<std::string> hit_names;
 
+    if( !file.IsOpen() ) {
+      ACNL::Chat::write_text("cannot open items.txt");
+      return true;
+    }
+
     while( reader(line) ) {
       auto&& trimmed = trim_string(line, ' ');
 
