@@ -184,10 +184,33 @@ namespace CTRPluginFramework::ACNL::Game {
     return conv.to_bytes(str16);
   }
   
+  std::pair<u16*, u32> get_item_name_addr(u16 item) {
+		if( item >= 0x9F && item <= 0xCB ) {
+			item += 0x2890;
+		}
+		else if( item >= 0xCE && item <= 0xF7 ) {
+			item += 0x2861;
+		}
+		
+		if( item >= 0x2000 && item <= 0x372B ) {
+			u32 addr = 0x31724DC0;
+			u32 len = 0;
+
+			addr += *(u32*)( addr + 4 + (item - 0x2000) * 4 );
+      
+			while( *(u16*)(addr + len * 2) != 0 ) {
+				len++;
+      }
+			
+      return { addr, len };
+		}
+
+    return nullptr;
+  }
+
   bool get_item_name(u16 item, std::string& out) {
 		if( item >= 0x5 && item <= 0x9E ) {
-      item -= 0x5;
-			out = AllItems[item].first;
+			out = AllItems[item - 0x5].first;
       return true;
 		}
 
@@ -205,26 +228,29 @@ namespace CTRPluginFramework::ACNL::Game {
 			w = true;
 			item += 0x2861;
 		}
-		
-		if( item >= 0x2000 && item <= 0x372B ) {
-			u32 addr = 0x31724DC0;
-			u32 len = 0;
+  
+    u32 addr = (u32)get_item_name_addr(item);
+    u32 len = 0;
 
-			addr += *(u32*)( addr + 4 + (item - 0x2000) * 4 );
-      
-			while( *(u16*)(addr + len * 2) != 0 ) {
-				len++;
-      }
-			
-			std::string str;
-			std::string isDead = w ? "(枯れた)" : "";
-			Process::ReadString(addr, str, len * 2, StringFormat::Utf16);
+    if( addr == nullptr ) {
+      return false;
+    }
 
-      out = str + std::string(w ? "(枯れた)" : "");
+    for( u32 i = 0; *(u16*)(addr + i); ) {
+      i += 2;
+      len++;
+    }
 
-      return true;
-		}
-		
-		return false;
-	}
+    // while( *(u16*)(addr + len * 2) != 0 ) {
+    //   len++;
+    // }
+    
+    std::string str;
+    std::string isDead = w ? "(枯れた)" : "";
+    Process::ReadString(addr, str, len * 2, StringFormat::Utf16);
+
+    out = str + std::string(w ? "(枯れた)" : "");
+
+    return true;
+  }
 }
