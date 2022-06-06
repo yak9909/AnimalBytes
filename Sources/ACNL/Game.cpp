@@ -202,10 +202,10 @@ namespace CTRPluginFramework::ACNL::Game {
 				len++;
       }
 			
-      return { addr, len };
+      return std::make_pair((u16*)addr, len);
 		}
 
-    return nullptr;
+    return { };
   }
 
   bool get_item_name(u16 item, std::string& out) {
@@ -229,25 +229,15 @@ namespace CTRPluginFramework::ACNL::Game {
 			item += 0x2861;
 		}
   
-    u32 addr = (u32)get_item_name_addr(item);
-    u32 len = 0;
+    auto [addr, len] = get_item_name_addr(item);
 
     if( addr == nullptr ) {
       return false;
     }
 
-    for( u32 i = 0; *(u16*)(addr + i); ) {
-      i += 2;
-      len++;
-    }
-
-    // while( *(u16*)(addr + len * 2) != 0 ) {
-    //   len++;
-    // }
-    
     std::string str;
     std::string isDead = w ? "(枯れた)" : "";
-    Process::ReadString(addr, str, len * 2, StringFormat::Utf16);
+    Process::ReadString((u32)addr, str, len * 2, StringFormat::Utf16);
 
     out = str + std::string(w ? "(枯れた)" : "");
 

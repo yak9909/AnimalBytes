@@ -11,28 +11,43 @@ namespace CTRPluginFramework::Cheats::TextToCheats {
 
   bool find_item(std::string const& text) {
 
-    File file("items.txt", File::READ);
-    LineReader reader(file);
+    static auto adjustStr = [] (std::u16string& s) -> void {
+      for( auto& c : s ) {
+        if( c >= 0x30A1 && c <= 0x30F3 )
+          c -= 0x60;
+        else if( c >= 0x61 && c <= 0x7A )
+          c -= 0x20;
+      }
+    };
 
-    std::string line;
-    std::vector<u16> hit_ids;
+    u16 buf[0x100] { 0 };
+
+    utf8_to_utf16(buf, (u8*)text.c_str(), sizeof(buf));
+
+    std::u16string find = (char16_t*)buf;
+    std::string str;
+
+    std::vector<u16> hit_id;
     std::vector<std::string> hit_names;
 
-    if( !file.IsOpen() ) {
-      ACNL::Chat::write_text("cannot open items.txt");
-      return true;
-    }
+    adjustStr(find);
 
-    while( reader(line) ) {
-      auto&& trimmed = trim_string(line, ' ');
+    for( u16 id = 0x2000; id <= 0x372B; id++ ) {
+      auto [name_addr, len] = ACNL::Game::get_item_name_addr(id);
 
-      if( trimmed[2].find(text) != std::string::npos ) {
-        hit_ids.emplace_back(std::stoi(trimmed[0], nullptr, 16));
-        hit_names.emplace_back(trimmed[1]);
+      std::u16string name{ (char16_t*)name_addr, len };
+
+      adjustStr(name);
+
+      if( name.find(find) != std::string::npos ) {
+        ACNL::Game::get_item_name(id, str);
+
+        hit_id.emplace_back(id);
+        hit_names.emplace_back(str);
       }
     }
 
-    if( hit_ids.empty() ) {
+    if( hit_id.empty() ) {
       ACNL::Chat::write_text("アイテムが見つかりません。");
       return true;
     }
@@ -41,7 +56,7 @@ namespace CTRPluginFramework::Cheats::TextToCheats {
     int index = kbd.Open();
 
     if( index >= 0 ) {
-      ACNL::Chat::write_text(Utils::Format("ポケット0 = %04X", hit_ids[index]));
+      ACNL::Chat::write_text(Utils::Format("ポケット0 = %04X", hit_id[index]));
       return true;
     }
 
