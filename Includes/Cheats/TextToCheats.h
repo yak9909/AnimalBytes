@@ -11,6 +11,10 @@ namespace CTRPluginFramework::Cheats::TextToCheats {
   // get item from id
   bool text_to_item(std::string const& text);
 
+  // find item with name
+  // warn: must append to commands when last
+  bool find_item(std::string const& text);
+
   // toggle name [true / false]
   void toggle_cheat(Args const& args);
 }

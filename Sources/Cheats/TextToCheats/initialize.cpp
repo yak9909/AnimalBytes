@@ -12,6 +12,7 @@ namespace CTRPluginFramework::Cheats::TextToCheats {
     ACNL::ChatCommands::append_func("vx", DevUtils::ViewerEx::cmd_line);
 
     ACNL::ChatCommands::append_hook(text_to_item);
+    ACNL::ChatCommands::append_hook(find_item);
 
     menu += ACNL::ChatCommands::call_back;
   }

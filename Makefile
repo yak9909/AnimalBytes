@@ -13,8 +13,13 @@ TARGET		:= 	$(notdir $(CURDIR))
 PLGINFO 	:= 	AnimalBytes.plgInfo
 
 BUILD		:= 	Build
-INCLUDES	:= 	Includes ACNL_Wrapper/include
+INCLUDES	:= 	Includes
+
 SOURCES 	:= 	$(shell find Sources -type d 2>/dev/null)
+
+ifeq ($(OS),Windows_NT)
+SOURCES 	= 	$(shell C:/devkitPro/msys2/usr/bin/find.exe Sources -type d -name "*")
+endif
 
 #---------------------------------------------------------------------------------
 # options for code generation
