@@ -6,6 +6,14 @@
 #include "Cheats.h"
 #include "Helpers.h"
 
+static char const* ABOUT =
+  "Animal Bytes: ACNL Plugin\n"
+  "\n"
+  "Developers:\n"
+  "  bomkei (Main Developer)\n"
+  "  yak9909 (Cheat codes)\n"
+  "  HIDE810 (Debuggings)\n";
+
 namespace CTRPluginFramework {
   static void ToggleTouchscreenForceOn() {
     static u32 original = 0;
@@ -89,7 +97,7 @@ exit:
   }
 
   int main() {
-    PluginMenu menu{ "AnimalBytes", 1, 0, 0, "ACNL Plugin by Yakuruto and bomkei" };
+    PluginMenu menu{ "AnimalBytes", 1, 0, 0, ABOUT };
     Logger logger{ "plugin.log" };
 
     menu.SynchronizeWithFrame(true);
