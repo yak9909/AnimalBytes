@@ -5,6 +5,7 @@
 #include <locale>
 #include "ACNL/types.h"
 #include "ACNL/Game.h"
+#include "ACNL/Address/Data.h"
 
 namespace CTRPluginFramework::ACNL::Game {
   ItemInfo const AllItems[] {
@@ -193,16 +194,17 @@ namespace CTRPluginFramework::ACNL::Game {
 		}
 		
 		if( item >= 0x2000 && item <= 0x372B ) {
-			u32 addr = 0x31724DC0;
-			u32 len = 0;
+			u32 addr =
+        ACNL::Addresses::Data::ItemNameBase
+        + *(u32*)(ACNL::Addresses::Data::ItemNameBase + 4 + ((item - 0x2000) << 2));
 
-			addr += *(u32*)( addr + 4 + (item - 0x2000) * 4 );
+			u32 i = 0;
       
-			while( *(u16*)(addr + len * 2) != 0 ) {
-				len++;
+			while( *(u16*)(addr + i) != 0 ) {
+				i += 2;
       }
 			
-      return std::make_pair((u16*)addr, len);
+      return std::make_pair((u16*)addr, i >> 1);
 		}
 
     return { };
