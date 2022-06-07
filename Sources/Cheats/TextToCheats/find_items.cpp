@@ -25,7 +25,6 @@ namespace CTRPluginFramework::Cheats::TextToCheats {
     utf8_to_utf16(buf, (u8*)text.c_str(), sizeof(buf));
 
     std::u16string find = (char16_t*)buf;
-    std::string str;
 
     std::vector<u16> hit_id;
     std::vector<std::string> hit_names;
@@ -40,7 +39,8 @@ namespace CTRPluginFramework::Cheats::TextToCheats {
       adjustStr(name);
 
       if( name.find(find) != std::string::npos ) {
-        ACNL::Game::get_item_name(id, str);
+        std::string str;
+        Process::ReadString((u32)name_addr, str, len * 2, StringFormat::Utf16);
 
         hit_id.emplace_back(id);
         hit_names.emplace_back(str);
