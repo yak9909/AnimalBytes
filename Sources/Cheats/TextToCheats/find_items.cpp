@@ -56,6 +56,7 @@ namespace CTRPluginFramework::Cheats::TextToCheats {
     int index = kbd.Open();
 
     if( index >= 0 ) {
+      ACNL::Player::WriteItem(hit_id[index], 0);
       ACNL::Chat::write_text(Utils::Format("ポケット0 = %04X", hit_id[index]));
       return true;
     }
