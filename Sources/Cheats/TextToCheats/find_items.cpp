@@ -40,7 +40,7 @@ namespace CTRPluginFramework::Cheats::TextToCheats {
 
       if( name.find(find) != std::string::npos ) {
         std::string str;
-        Process::ReadString((u32)name_addr, str, len * 2, StringFormat::Utf16);
+        Process::ReadString((u32)name_addr, str, len * sizeof(u16), StringFormat::Utf16);
 
         hit_id.emplace_back(id);
         hit_names.emplace_back(str);
