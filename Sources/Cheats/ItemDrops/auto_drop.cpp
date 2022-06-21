@@ -18,16 +18,9 @@ namespace CTRPluginFramework::Cheats::ItemDrops {
     auto const ctx = CodeContext::get_instance();
     auto& ctxdrop = ctx->c_autodrop;
 
+    // Enable / Disable
     if( Controller::IsKeysDown(Hotkeys::AutoDrop) ) {
-      ctxdrop.hotkey_held_time++;
-    }
-    else if( ctxdrop.hotkey_held_time >= 30 ) {
-      Keyboard("change item to drop").Open(ctxdrop.item);
-      ctxdrop.hotkey_held_time = -1;
-    }
-    else if( ctxdrop.hotkey_held_time >= 0 ) {
       ctx->enabled_flags.f_autodrop ^= 1;
-      ctxdrop.hotkey_held_time = -1;
     }
 
     // check item id
@@ -44,7 +37,9 @@ namespace CTRPluginFramework::Cheats::ItemDrops {
     u8 wx, wy, u0;
 
     if( Game::drop_check(&wx, &wy, &u0, 0, 0) ) {
-      Game::place_item(0xA, (u32*)(0x955FF4), &ctxdrop.item, &ctxdrop.item, wx, wy, 0, 0, 0, 0, 0);
+      ctx->c_dropcheats.drop(wx, wy);
+
+      //Game::place_item(0xA, (u32*)(0x955FF4), &ctxdrop.item, &ctxdrop.item, wx, wy, 0, 0, 0, 0, 0);
     }
   }
 

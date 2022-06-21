@@ -114,7 +114,7 @@ exit:
     menu.SynchronizeWithFrame(true);
     menu.ShowWelcomeMessage(false);
 
-    Cheats::CodeContext::get_instance()->fill_zero();
+    Cheats::CodeContext::get_instance()->init();
 
     // Create Menu
     InitMenu(menu);

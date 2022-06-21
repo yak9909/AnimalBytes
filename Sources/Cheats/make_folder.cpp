@@ -3,6 +3,11 @@
 #include "Unicode.h"
 
 namespace CTRPluginFramework::Cheats {
+  static MenuEntry* EnableEntry(MenuEntry* e) {
+    e->Enable();
+    return e;
+  }
+
   namespace Movements {
     MenuFolder* make_folder() {
       MenuFolder* folder = new MenuFolder("Movements", "", {
@@ -40,7 +45,7 @@ namespace CTRPluginFramework::Cheats {
   namespace ItemDrops {
     MenuFolder* make_folder() {
       auto folder = new MenuFolder("Item Drops", "", {
-        new MenuEntry("アイテム変更", item_changer),
+        EnableEntry(new MenuEntry("アイテム変更 " FONT_R " + " FONT_DU, item_changer)),
         new MenuEntry("自動ドロップ " FONT_B " + " FONT_DU, auto_drop)
       });
 

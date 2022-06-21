@@ -7,20 +7,28 @@ namespace CTRPluginFramework::Cheats {
       bool f_coordmod   = 0;
       bool f_autodrop   = 0;
 
-
     };
 
-    struct CAutoDrop {
+    struct DropCheats {
       u32 item;
-      int hotkey_held_time;
-      bool view_item_id;
+      u8 type;
 
+      bool drop(u8 wx, u8 wy);
+    };
+
+    // struct CItemChanger {
+    //   int hotkey_held_tick;
+    // };
+
+    struct CAutoDrop {
+      bool view_item_id;
     };
 
     EnabledFlags enabled_flags;
+    DropCheats c_dropcheats;
     CAutoDrop c_autodrop;
 
-    void fill_zero();
+    void init();
 
     static CodeContext* get_instance();
 

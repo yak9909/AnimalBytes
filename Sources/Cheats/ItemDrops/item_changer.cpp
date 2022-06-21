@@ -1,38 +1,48 @@
 #include <CTRPluginFramework.hpp>
-#include "Cheats/ItemDrops.h"
 #include "ACNL/Game.h"
 #include "ACNL/Chat.h"
+#include "Cheats.h"
 
 namespace CTRPluginFramework::Cheats::ItemDrops {
 
   using namespace ACNL;
 
-  static bool enabled = 0;
-  static u32 item = 0x2001;
-  static int counter = -1;
-  static bool check_item_id = 0;
+  // static bool enabled = 0;
+  // static u32 item = 0x2001;
+  // static int counter = -1;
+  
+  namespace {
+    int key_held_tick = 0;
+    bool check_item_id = 0;
 
-  static constexpr int canChangeItemID = 30;
+    constexpr int canChangeItemID = 30;
+    constexpr int notify_showing_time = 60;
+  }
 
   static bool cb(Screen const& screen) {
     static int notify_tick = 0;
-    #define  NOTIFY_TIME  60
 
     if( !screen.IsTop ) {
       return false;
     }
 
     u32 dy = 10;
-    bool b = 0;
+    bool b = 0; // drawed
 
-    if( check_item_id ) {
+    auto ctx = CodeContext::get_instance();
+
+    // Check Item id
+    if( key_held_tick > 0 ) {
+      auto&& item = ctx->c_dropcheats.item;
+
       screen.Draw(Utils::Format((item & (0xFFFF << 16)) ? "%08X" : "%04X", item), 10, dy, Color::White, Color::Blue);
       dy += 10;
       b = 1;
     }
 
-    if( counter >= canChangeItemID ) {
-      screen.Draw("autodrop: change item id ...", 10, dy, Color::White, Color::Blue);
+    // Change Item ID
+    if( key_held_tick >= canChangeItemID ) {
+      screen.Draw("change item id ...", 10, dy, Color::White, Color::Blue);
       dy += 10;
       b = 1;
     }
@@ -42,18 +52,22 @@ namespace CTRPluginFramework::Cheats::ItemDrops {
 
   void item_changer(MenuEntry* e) {
     if( e->WasJustActivated() ) {
+      key_held_tick = 0;
       OSD::Run(cb);
     }
     else if( !e->IsActivated() ) {
       OSD::Stop(cb);
     }
 
-    // check item id
-    if( Controller::IsKeysDown(Key::B | Key::R) ) {
-      check_item_id = 1;
+    if( Controller::IsKeysDown(Hotkeys::ItemChanger) ) {
+      key_held_tick++;
     }
-    else if( check_item_id ) {
-      check_item_id = 0;
+    else if( key_held_tick >= canChangeItemID ) {
+      Keyboard("change item id to drop").Open(CodeContext::get_instance()->c_dropcheats.item);
+      key_held_tick = 0;
+    }
+    else if( key_held_tick > 0 ) {
+      key_held_tick = 0;
     }
   }
 

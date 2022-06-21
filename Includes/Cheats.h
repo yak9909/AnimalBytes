@@ -11,7 +11,8 @@
 namespace CTRPluginFramework::Cheats {
   namespace Hotkeys {
     constexpr u32
-      AutoDrop    = Key::B | Key::DPadUp
+      AutoDrop       = Key::B | Key::DPadUp,
+      ItemChanger    = Key::R | Key::DPadUp
       ;
   };
 }
