@@ -20,11 +20,13 @@ static char const* ABOUT =
   以下のアドレスは、プラグインによって予約されているものです
   Process::CheckAddress がこれらに対して false を返すようになっています
 
-  0x838000: Cheats::CodeContext   ( シングルトンです )
+  0x838000 ~ 0x839000
 
   --------------------- */
 
 namespace CTRPluginFramework {
+  void InitHooks();
+
   static void ToggleTouchscreenForceOn() {
     static u32 original = 0;
     static u32 *patchAddress = nullptr;
@@ -76,8 +78,11 @@ exit:
   }
 
   void InitMenu(PluginMenu& menu) {
+    
     Cheats::TextToCheats::initialize(menu);
     Cheats::SpeedHacks::initialize();
+
+    Cheats::CodeContext::get_instance()->init();
 
     menu += new MenuEntry("test", [] (MenuEntry* e) {
       if( Controller::IsKeyPressed(Key::L) ) {
@@ -114,7 +119,8 @@ exit:
     menu.SynchronizeWithFrame(true);
     menu.ShowWelcomeMessage(false);
 
-    Cheats::CodeContext::get_instance()->init();
+    // Initialize hooks
+    InitHooks();
 
     // Create Menu
     InitMenu(menu);

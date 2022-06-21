@@ -19,16 +19,8 @@ namespace CTRPluginFramework::Cheats::ItemDrops {
     auto& ctxdrop = ctx->c_autodrop;
 
     // Enable / Disable
-    if( Controller::IsKeysDown(Hotkeys::AutoDrop) ) {
+    if( Controller::IsKeysPressed(Hotkeys::AutoDrop) ) {
       ctx->enabled_flags.f_autodrop ^= 1;
-    }
-
-    // check item id
-    if( !Chat::is_opened() && Controller::IsKeysDown(Key::B | Key::R) ) {
-      ctxdrop.view_item_id = 1;
-    }
-    else if( ctxdrop.view_item_id ) {
-      ctxdrop.view_item_id = 0;
     }
 
     if( !ctx->enabled_flags.f_autodrop )

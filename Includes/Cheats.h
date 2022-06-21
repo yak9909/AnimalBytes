@@ -6,7 +6,7 @@
 #include "Cheats/Item.h"
 #include "Cheats/ItemDrops.h"
 #include "Cheats/TextToCheats.h"
-#include "CodeContext.h"
+#include "Cheats/CodeContext.h"
 
 namespace CTRPluginFramework::Cheats {
   namespace Hotkeys {

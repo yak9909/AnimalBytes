@@ -7,13 +7,8 @@ namespace CTRPluginFramework::Cheats::ItemDrops {
 
   using namespace ACNL;
 
-  // static bool enabled = 0;
-  // static u32 item = 0x2001;
-  // static int counter = -1;
-  
   namespace {
     int key_held_tick = 0;
-    bool check_item_id = 0;
 
     constexpr int canChangeItemID = 30;
     constexpr int notify_showing_time = 60;
@@ -31,18 +26,18 @@ namespace CTRPluginFramework::Cheats::ItemDrops {
 
     auto ctx = CodeContext::get_instance();
 
-    // Check Item id
+    // view item
     if( key_held_tick > 0 ) {
       auto&& item = ctx->c_dropcheats.item;
 
-      screen.Draw(Utils::Format((item & (0xFFFF << 16)) ? "%08X" : "%04X", item), 10, dy, Color::White, Color::Blue);
+      screen.Draw(Utils::Format((item & (0xFFFF << 16)) ? "%08X" : "%04X", item), 10, dy);
       dy += 10;
       b = 1;
     }
 
-    // Change Item ID
+    // change item
     if( key_held_tick >= canChangeItemID ) {
-      screen.Draw("change item id ...", 10, dy, Color::White, Color::Blue);
+      screen.Draw("change item id ...", 10, dy);
       dy += 10;
       b = 1;
     }
