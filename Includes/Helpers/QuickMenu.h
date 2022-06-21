@@ -54,8 +54,7 @@ namespace CTRPluginFramework {
         std::vector<QuickMenuItem *>    items;
     };
 
-    class QuickMenu
-    {
+    class QuickMenu {
     public:        
         ~QuickMenu();        
         static QuickMenu &GetInstance(void);

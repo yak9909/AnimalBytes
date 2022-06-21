@@ -94,6 +94,7 @@ exit:
     menu += Cheats::Movements::make_folder();
     menu += Cheats::SpeedHacks::make_folder();
     menu += Cheats::Items::make_folder();
+    menu += Cheats::ItemDrops::make_folder();
   }
 
   int main() {
