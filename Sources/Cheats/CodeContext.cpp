@@ -11,4 +11,8 @@ namespace CTRPluginFramework::Cheats {
 
     return g_cdctx_instance;
   }
+
+  CodeContext::CodeContext() {
+    
+  }
 }

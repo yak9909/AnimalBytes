@@ -14,6 +14,16 @@ static char const* ABOUT =
   "  yak9909 (Cheat codes)\n"
   "  HIDE810 (Debuggings)\n";
 
+/* ---------------------
+
+注意
+  以下、プラグインによって予約されているアドレスです
+  
+
+
+
+  --------------------- */
+
 namespace CTRPluginFramework {
   static void ToggleTouchscreenForceOn() {
     static u32 original = 0;

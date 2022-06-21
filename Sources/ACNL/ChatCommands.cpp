@@ -76,7 +76,7 @@ namespace CTRPluginFramework::ACNL {
 
   void ChatCommands::call_back() {
 
-    if( !Chat::is_open() ) {
+    if( !Chat::is_opened() ) {
       return;
     }
 

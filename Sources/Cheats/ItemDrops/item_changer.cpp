@@ -40,7 +40,7 @@ namespace CTRPluginFramework::Cheats::ItemDrops {
     return b;
   }
 
-  void auto_drop(MenuEntry* e) {
+  void item_changer(MenuEntry* e) {
     if( e->WasJustActivated() ) {
       OSD::Run(cb);
     }
@@ -48,33 +48,12 @@ namespace CTRPluginFramework::Cheats::ItemDrops {
       OSD::Stop(cb);
     }
 
-    if( Controller::IsKeysDown(Key::B | Key::DPadUp) ) {
-      counter++;
-    }
-    else if( counter >= 30 ) {
-      Keyboard("change item to drop").Open(item);
-      counter = -1;
-    }
-    else if( counter >= 0 ) {
-      enabled ^= 1;
-      counter = -1;
-    }
-
     // check item id
-    if( !Chat::is_opened() && Controller::IsKeysDown(Key::B | Key::R) ) {
+    if( Controller::IsKeysDown(Key::B | Key::R) ) {
       check_item_id = 1;
     }
     else if( check_item_id ) {
       check_item_id = 0;
-    }
-
-    if( !enabled )
-      return;
-    
-    u8 wx, wy, u0;
-
-    if( Game::drop_check(&wx, &wy, &u0, 0, 0) ) {
-      Game::place_item(0xA, (u32*)(0x955FF4), &item, &item, wx, wy, 0, 0, 0, 0, 0);
     }
   }
 
