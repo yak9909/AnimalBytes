@@ -20,7 +20,12 @@ namespace CTRPluginFramework::Cheats::ItemDrops {
 
     // Enable / Disable
     if( Controller::IsKeysPressed(Hotkeys::AutoDrop) ) {
-      ctx->enabled_flags.f_autodrop ^= 1;
+      if( ctx->enabled_flags.f_autodrop ^= 1 ) {
+        OSD::Notify("AutoDrop: Enabled", Color::ForestGreen);
+      }
+      else {
+        OSD::Notify("AutoDrop: Disabled", Color::Magenta);
+      }
     }
 
     if( !ctx->enabled_flags.f_autodrop )
@@ -30,8 +35,6 @@ namespace CTRPluginFramework::Cheats::ItemDrops {
 
     if( Game::drop_check(&wx, &wy, &u0, 0, 0) ) {
       ctx->c_dropcheats.drop(wx, wy);
-
-      //Game::place_item(0xA, (u32*)(0x955FF4), &ctxdrop.item, &ctxdrop.item, wx, wy, 0, 0, 0, 0, 0);
     }
   }
 
