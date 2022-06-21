@@ -4,4 +4,6 @@
 #include "Cheats/Movement.h"
 #include "Cheats/SpeedHack.h"
 #include "Cheats/Item.h"
+#include "Cheats/ItemDrops.h"
 #include "Cheats/TextToCheats.h"
+

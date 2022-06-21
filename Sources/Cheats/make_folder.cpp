@@ -1,7 +1,5 @@
 #include <CTRPluginFramework.hpp>
-#include "Cheats/Movement.h"
-#include "Cheats/SpeedHack.h"
-#include "Cheats/Item.h"
+#include "Cheats.h"
 #include "Unicode.h"
 
 namespace CTRPluginFramework::Cheats {
@@ -33,6 +31,16 @@ namespace CTRPluginFramework::Cheats {
     MenuFolder* make_folder() {
       MenuFolder* folder = new MenuFolder("Items", "", {
         new MenuEntry("ポケットアイテム " FONT_L " + " FONT_B, pocket_item)
+      });
+
+      return folder;
+    }
+  }
+
+  namespace ItemDrops {
+    MenuFolder* make_folder() {
+      auto folder = new MenuFolder("Item Drops", "", {
+        new MenuEntry("自動ドロップ", auto_drop)
       });
 
       return folder;
