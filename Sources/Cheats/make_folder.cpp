@@ -40,7 +40,8 @@ namespace CTRPluginFramework::Cheats {
   namespace ItemDrops {
     MenuFolder* make_folder() {
       auto folder = new MenuFolder("Item Drops", "", {
-        new MenuEntry("自動ドロップ", auto_drop)
+        new MenuEntry("アイテム変更", item_changer),
+        new MenuEntry("自動ドロップ " FONT_B " + " FONT_DU, auto_drop)
       });
 
       return folder;

@@ -6,4 +6,12 @@
 #include "Cheats/Item.h"
 #include "Cheats/ItemDrops.h"
 #include "Cheats/TextToCheats.h"
+#include "CodeContext.h"
 
+namespace CTRPluginFramework::Cheats {
+  namespace Hotkeys {
+    constexpr u32
+      AutoDrop    = Key::B | Key::DPadUp
+      ;
+  };
+}

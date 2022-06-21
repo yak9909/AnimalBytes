@@ -17,10 +17,10 @@ static char const* ABOUT =
 /* ---------------------
 
 注意
-  以下、プラグインによって予約されているアドレスです
-  
+  以下のアドレスは、プラグインによって予約されているものです
+  Process::CheckAddress がこれらに対して false を返すようになっています
 
-
+  0x838000: Cheats::CodeContext   ( シングルトンです )
 
   --------------------- */
 
@@ -114,6 +114,9 @@ exit:
     menu.SynchronizeWithFrame(true);
     menu.ShowWelcomeMessage(false);
 
+    Cheats::CodeContext::get_instance()->fill_zero();
+
+    // Create Menu
     InitMenu(menu);
 
     OSD::Notify(Color::DodgerBlue << "AnimalBytes Ready!!");
