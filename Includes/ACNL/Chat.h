@@ -11,7 +11,7 @@ namespace CTRPluginFramework::ACNL {
 
     static Chat clone_object();
 
-    static bool is_open();
+    static bool is_opened();
     static u8 get_length();
 
     static std::string read_text();

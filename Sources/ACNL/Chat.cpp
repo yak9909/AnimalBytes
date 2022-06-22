@@ -43,7 +43,7 @@ namespace CTRPluginFramework::ACNL {
     return obj;
   }
 
-  bool Chat::is_open() {
+  bool Chat::is_opened() {
     return *(u32*)(Addresses::Chat::BufferPointer) != 0;
   }
 

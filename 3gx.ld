@@ -10,6 +10,14 @@ PHDRS
 	data   PT_LOAD FLAGS(6) /* Read | Write */;
 }
 
+SECTIONS {
+	/* Game::drop_check */
+	_ZN18CTRPluginFramework4ACNL4Game10drop_checkEPhS2_S2_bh  = 0x5979E4;
+
+	/* Game::place_item */
+	_ZN18CTRPluginFramework4ACNL4Game10place_itemEhPmS2_S2_hhbhhhh  = 0x59E5B4;
+}
+
 SECTIONS
 {
 	/* =========== CODE section =========== */

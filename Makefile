@@ -105,7 +105,7 @@ $(OUTPUT).3gx : $(OFILES)
 %.3gx: %.elf
 #---------------------------------------------------------------------------------
 	@echo creating $(notdir $@)
-	@3gxtool -s $(word 1, $^) $(TOPDIR)/$(PLGINFO) $@
+	@3gxtool -s -d $(word 1, $^) $(TOPDIR)/$(PLGINFO) $@
 	@mv $(word 1, $^) .
 
 -include $(DEPENDS)
