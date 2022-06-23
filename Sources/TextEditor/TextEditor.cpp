@@ -1,6 +1,6 @@
 #include <CTRPluginFramework.hpp>
 #include "TextEditor.h"
-#include "TextEditorImpl.h"
+#include "TEImpl.h"
 
 namespace CTRPluginFramework {
   TextEditor::TextEditor()
@@ -16,7 +16,7 @@ namespace CTRPluginFramework {
   {
   }
 
-  void TextEditor::open() const {
+  int TextEditor::open() const {
     impl->open();
   }
 

@@ -12,7 +12,11 @@ namespace CTRPluginFramework {
     TextEditor(std::string const& path);
     ~TextEditor();
 
-    void open() const;
+    bool add_callback();
+
+    // 0   = No edited
+    // 1   = 
+    int open() const;
   
   private:
     std::unique_ptr<TextEditorImpl> impl;

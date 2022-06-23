@@ -6,6 +6,8 @@
 #include "Cheats.h"
 #include "Helpers.h"
 
+#include "TextEditor.h"
+
 static char const* ABOUT =
   "Animal Bytes: ACNL Plugin\n"
   "\n"
