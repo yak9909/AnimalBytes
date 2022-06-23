@@ -12,6 +12,7 @@ namespace CTRPluginFramework {
     TextEditor(std::string const& path);
     ~TextEditor();
 
+    // in 
     bool add_callback();
 
     // 0   = No edited

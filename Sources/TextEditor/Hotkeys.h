@@ -1,0 +1,41 @@
+#pragma once
+
+#include <CTRPluginFramework.hpp>
+#include "types.h"
+
+namespace CTRPluginFramework::Hotkeys {
+  constexpr u32
+    CursorUp    = DPadUp,
+    CursorDown  = DPadDown,
+    CursorLeft  = DPadLeft,
+    CursorRight = DPadRight,
+
+    // Circle Pad
+    ScreenUp    = CPadUp,
+    ScreenDown  = CPadDown,
+    ScreenLeft  = CPadLeft,
+    ScreenRight = CPadRight,
+
+    // Insert a new empty line
+    InsertNewLineBase   = Key::L,
+    InsertToForward     = DPadUp,
+    InsertToBackward    = DPadDown,
+
+    // Select
+    ToggleSelect    = Key::X,
+    
+    // Copy and Paste
+    CopyPasteBase   = Key::R,
+    Copy            = DPadLeft,
+    Paste           = DPadRight,
+    
+    // Delete
+    DeleteBase      = Key::Y,
+    DeleteForward   = DPadLeft,
+    DeleteBackword  = DPadRight,
+
+    // General
+    Enter       = Key::A
+
+    ;
+}

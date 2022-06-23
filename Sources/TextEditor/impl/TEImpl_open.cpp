@@ -7,4 +7,8 @@ namespace CTRPluginFramework {
     
   }
 
+  void TextEditorImpl::update() {
+
+  }
+
 }
