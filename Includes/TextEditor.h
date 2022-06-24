@@ -38,7 +38,7 @@ namespace CTRPluginFramework {
     ~TextEditor();
 
     // 
-    bool add_event(EventFuncPointer fp);
+    void add_event(EventFuncPointer fp);
 
     // 0   = No edited
     // 1   = 

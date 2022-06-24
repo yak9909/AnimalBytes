@@ -13,6 +13,7 @@ namespace CTRPluginFramework {
     };
 
     Color const background;
+    Color const linenum_background;
 
     File file;
 

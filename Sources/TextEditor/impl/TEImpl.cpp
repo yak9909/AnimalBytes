@@ -4,6 +4,7 @@
 namespace CTRPluginFramework {
   TextEditorImpl::TextEditorImpl()
     : background(Color(30, 30, 30)),
+      linenum_background(Color(50, 50, 50)),
       is_opening_submenu(false)
   {
   }
