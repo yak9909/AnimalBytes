@@ -44,8 +44,8 @@ namespace CTRPluginFramework {
     int open();
 
     void insert_char(char ch);
-    void insert_newline();
     void delete_char();
+    void newline();
 
     void update();
     void control(KeyboardEvent::EventType type, u32 key);

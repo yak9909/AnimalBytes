@@ -37,6 +37,10 @@ namespace CTRPluginFramework {
         }
       }
 
+      if( key & Hotkeys::Enter ) {
+        newline();
+      }
+
       if( type == KeyboardEvent::KeyPressed ) {
         clock.Restart();
       }

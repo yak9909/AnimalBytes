@@ -15,35 +15,6 @@ namespace CTRPluginFramework {
     cursor.x++;
   }
 
-  void TextEditorImpl::insert_newline() {
-    auto& line = data[cursor.y];
-
-    if( cursor.x == line.length() ) {
-      cursor.x = 0;
-      
-      if( ++cursor.y >= data.size() ) {
-        data.emplace_back();
-      }
-      else {
-        data.insert(data.begin() + cursor.y, "");
-      }
-      
-      return;
-    }
-
-    cursor.y++;
-
-    if( cursor.y >= data.size() ) {
-      data.emplace_back(line.substr(cursor.x));
-    }
-    else {
-      data.insert(data.begin() + cursor.y, line.substr(cursor.x));
-    }
-
-    line = line.substr(0, cursor.x);
-    cursor.x = 0;
-  }
-
   void TextEditorImpl::delete_char() {
     if( cursor.x == 0 ) {
       if( cursor.y == 0 ) {
@@ -67,6 +38,35 @@ namespace CTRPluginFramework {
     auto& line = data[cursor.y];
 
     line.erase(line.begin() + --cursor.x);
+  }
+
+  void TextEditorImpl::newline() {
+    auto& line = data[cursor.y];
+
+    if( cursor.x == line.length() ) {
+      cursor.x = 0;
+      
+      if( ++cursor.y >= data.size() ) {
+        data.emplace_back();
+      }
+      else {
+        data.insert(data.begin() + cursor.y, "");
+      }
+
+      return;
+    }
+
+    cursor.y++;
+
+    if( cursor.y >= data.size() ) {
+      data.emplace_back(line.substr(cursor.x));
+    }
+    else {
+      data.insert(data.begin() + cursor.y, line.substr(cursor.x));
+    }
+
+    line = line.substr(0, cursor.x);
+    cursor.x = 0;
   }
 
 }
