@@ -4,17 +4,20 @@
 namespace CTRPluginFramework {
   void TextEditorImpl::draw(Screen const& screen) {
     constexpr int char_width = 6;
-    constexpr int linenum_width = 5;
+    constexpr int linenum_len = 5;
+    constexpr int linenum_width = linenum_len * char_width + 2;
     constexpr int height_max = 240 / 10;
     constexpr int width_max = 400 / char_width - linenum_width;
-
-    static Clock clock;
+    constexpr char fmt[] = { '%', '0' + linenum_len, 'd', 0 };
 
     // line num
-    screen.DrawRect(0, 0, linenum_width * char_width, 240, linenum_background);
+    screen.DrawRect(0, 0, linenum_width, 240, linenum_background);
+
+    // sepalator
+    screen.DrawRect(linenum_width, 0, 1, 240, Color::White);
 
     // background
-    screen.DrawRect(linenum_width * char_width, 0, 400 - linenum_width * char_width, 240, Color(30, 30, 30));
+    screen.DrawRect(linenum_width + 1, 0, 400 - linenum_width - 1, 240, Color(30, 30, 30));
 
     // lines
     {
@@ -25,9 +28,9 @@ namespace CTRPluginFramework {
 
       for( ; begin < end; begin++, dy += 10 ) {
         auto const& line = data[begin];
-        u32 dx = linenum_width * char_width;
+        u32 dx = linenum_width + 3;
 
-        screen.Draw(Utils::Format("%5d", begin + 1), 0, dy, Color::White, linenum_background);
+        screen.Draw(Utils::Format(fmt, begin + 1), 0, dy, Color::White, linenum_background);
 
         if( line.length() > width_max ) {
           screen.Draw(line.substr(width_max), dx, dy, Color::White, background);
@@ -39,12 +42,12 @@ namespace CTRPluginFramework {
     }
 
     // cursor
-    if( scroll_pos.y <= cursor.y && cursor.y < scroll_pos.y + height_max && clock.HasTimePassed(Milliseconds(500)) ) {
+    if( scroll_pos.y <= cursor.y && cursor.y < scroll_pos.y + height_max && (forceDrawCursor || cursor_clock.HasTimePassed(Milliseconds(600))) ) {
       u32 cy = cursor.y - scroll_pos.y;
-      screen.DrawRect(linenum_width * char_width + cursor.x * char_width, cy * 10, 1, 10, Color::Yellow);
+      screen.DrawRect(linenum_width + cursor.x * char_width + 3, cy * 10, 1, 10, Color::Yellow);
 
-      if( clock.HasTimePassed(Milliseconds(1000)) ) {
-        clock.Restart();
+      if( !forceDrawCursor && cursor_clock.HasTimePassed(Milliseconds(1200)) ) {
+        cursor_clock.Restart();
       }
     }
   }

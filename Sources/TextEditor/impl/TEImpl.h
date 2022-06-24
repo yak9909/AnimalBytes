@@ -19,6 +19,9 @@ namespace CTRPluginFramework {
 
     Point cursor{ 0 };
     Point scroll_pos{ 0 };
+    Clock cursor_clock;
+    bool forceDrawCursor = 0;
+
     std::vector<std::string> data{ "" };
 
     TextEditor::EventType event;

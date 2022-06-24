@@ -20,13 +20,26 @@ namespace CTRPluginFramework {
 
     if( cursor.x == line.length() ) {
       cursor.x = 0;
-      cursor.y++;
-      data.insert(data.begin() + cursor.y, "");
+      
+      if( ++cursor.y >= data.size() ) {
+        data.emplace_back();
+      }
+      else {
+        data.insert(data.begin() + cursor.y, "");
+      }
+      
       return;
     }
 
     cursor.y++;
-    data.insert(data.begin() + cursor.y, line.substr(cursor.x));
+
+    if( cursor.y >= data.size() ) {
+      data.emplace_back(line.substr(cursor.x));
+    }
+    else {
+      data.insert(data.begin() + cursor.y, line.substr(cursor.x));
+    }
+
     line = line.substr(0, cursor.x);
     cursor.x = 0;
   }
