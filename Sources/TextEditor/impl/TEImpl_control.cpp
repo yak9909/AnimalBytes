@@ -3,7 +3,7 @@
 #include "../Hotkeys.h"
 
 constexpr int keyRepeatWait = 300;
-constexpr int waitRepeatMilli = 50;
+constexpr int waitRepeatMilli = 30;
 
 namespace CTRPluginFramework {
   void TextEditorImpl::control(KeyboardEvent::EventType type, u32 key) {
@@ -81,7 +81,7 @@ namespace CTRPluginFramework {
       if( type == KeyboardEvent::KeyPressed ) {
         clock.Restart();
       }
-      
+
       clock2.Restart();
 
       forceDrawCursor = true;

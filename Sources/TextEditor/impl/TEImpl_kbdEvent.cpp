@@ -29,6 +29,11 @@ namespace CTRPluginFramework {
         break;
 
       case KeyboardEvent::KeyPressed:
+        if( ev.affectedKey == Hotkeys::Submenu ) {
+          editor.submenu_open(OSD::GetTopScreen());
+          break;
+        }
+
       case KeyboardEvent::KeyDown:
       case KeyboardEvent::KeyReleased:
         editor.control(ev.type, ev.affectedKey);

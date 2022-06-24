@@ -78,7 +78,7 @@ namespace CTRPluginFramework {
     ptr[135] = 0xE8BD80F0;
   }
 
-  int TextEditorImpl::open() {
+  TextEditor::Result TextEditorImpl::open() {
     Keyboard kbd;
 
     kbd.DisplayTopScreen = true;
@@ -99,8 +99,5 @@ namespace CTRPluginFramework {
     return 0;
   }
 
-  void TextEditorImpl::update() {
-
-  }
 
 }

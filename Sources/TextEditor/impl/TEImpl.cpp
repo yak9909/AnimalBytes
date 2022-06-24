@@ -2,10 +2,18 @@
 #include "TEImpl.h"
 
 namespace CTRPluginFramework {
+  char const* TextEditorImpl::sys_submenu_entries[] = {
+    "Open file",
+    "Create a file",
+    "Save",
+    "Save as ..."
+  };
+
   TextEditorImpl::TextEditorImpl()
     : background(Color(30, 30, 30)),
       linenum_background(Color(50, 50, 50)),
-      is_opening_submenu(false)
+      submenu_background(Color(50, 50, 50)),
+      submenu_background_box(Color(100, 100, 100))
   {
   }
 

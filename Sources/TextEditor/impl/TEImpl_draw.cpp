@@ -7,7 +7,7 @@ namespace CTRPluginFramework {
     constexpr int linenum_len = 5;
     constexpr int linenum_width = linenum_len * char_width + 2;
     constexpr int height_max = 240 / 10;
-    constexpr int width_max = 400 / char_width - linenum_width;
+    constexpr int width_max = (400 - linenum_width - 4) / char_width;
     constexpr char fmt[] = { '%', '0' + linenum_len, 'd', 0 };
 
     // line num

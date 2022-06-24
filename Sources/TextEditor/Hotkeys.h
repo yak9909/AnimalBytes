@@ -16,6 +16,9 @@ namespace CTRPluginFramework::Hotkeys {
     ScreenLeft  = CPadLeft,
     ScreenRight = CPadRight,
 
+    // Submenu
+    Submenu     = Key::Start,
+
     // Insert a new empty line
     InsertNewLineBase   = Key::L,
     InsertToForward     = DPadUp,

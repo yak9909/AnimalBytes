@@ -8,6 +8,7 @@ namespace CTRPluginFramework {
   class TextEditorImpl;
   class TextEditor {
   public:
+    // not used ??
     enum class UpdateFlags : uint32_t {
       None = 0,
 
@@ -15,6 +16,12 @@ namespace CTRPluginFramework {
       Text = BIT(1),
 
       All = 0xFFFFFFFF
+    };
+
+    enum class Result {
+      Saved,
+      Aborted,
+      NoEdited
     };
 
     struct EventType {
@@ -32,17 +39,19 @@ namespace CTRPluginFramework {
     };
 
     using EventFuncPointer = UpdateFlags(*)(TextEditor&, EventType&);
+    
 
     TextEditor();
     TextEditor(std::string const& path);
     ~TextEditor();
 
     // 
-    void add_event(EventFuncPointer fp);
+    void add_event(EventFuncPointer func);
 
-    // 0   = No edited
-    // 1   = 
-    int open() const;
+    // 
+    void add_submenu_entry(std::string const& name, EventFuncPointer func);
+
+    TextEditor::Result open() const;
   
     std::vector<std::string>& get_source();
 
