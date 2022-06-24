@@ -9,7 +9,7 @@ namespace CTRPluginFramework {
     friend class TextEditor;
 
     struct Point {
-      u32 x, y;
+      int x, y;
     };
 
     Color const background;
