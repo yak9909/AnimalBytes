@@ -36,6 +36,7 @@ namespace CTRPluginFramework {
 
     ptr = (u32*)&_ZN18CTRPluginFramework12KeyboardImpl10_CheckKeysEv;
     ptr[199] = 0xE28FF008;
+    ptr[339] |= 1;
   }
 
   void TextEditorImpl::_hook_reset() {
@@ -48,6 +49,38 @@ namespace CTRPluginFramework {
 
     ptr = (u32*)&_ZN18CTRPluginFramework12KeyboardImpl10_CheckKeysEv;
     ptr[199] = 0xE350000A;
+    *(u8*)(ptr + 339) = 0;
+  }
+
+  void TextEditorImpl::keyboardEvent(Keyboard& kbd, KeyboardEvent& ev) {
+    auto& editor = *TextEditor::get_instance()->impl;
+
+    switch( ev.type ) {
+      case KeyboardEvent::CharacterAdded: {
+        auto ch = kbd.GetInput()[0];
+
+        if( ch == 0xA ) {
+          editor.insert_newline();
+        }
+        else {
+          editor.insert_char(kbd.GetInput()[0]);
+        }
+
+        break;
+      }
+
+      case KeyboardEvent::CharacterRemoved:
+        editor.delete_char();
+        break;
+
+      case KeyboardEvent::KeyPressed:
+      case KeyboardEvent::KeyDown:
+      case KeyboardEvent::KeyReleased:
+        editor.control(ev.type, ev.affectedKey);
+        break;
+    }
+
+    kbd.GetInput().clear();
   }
 
   int TextEditorImpl::open() {
@@ -55,29 +88,7 @@ namespace CTRPluginFramework {
 
     kbd.DisplayTopScreen = true;
 
-    kbd.OnKeyboardEvent([] (Keyboard& kbd, KeyboardEvent& event) -> void {
-
-      auto& editor = *TextEditor::get_instance()->impl;
-
-      switch( event.type ) {
-        case KeyboardEvent::CharacterAdded:
-          editor.insert_char(kbd.GetInput()[0]);
-          break;
-
-        case KeyboardEvent::CharacterRemoved:
-          editor.delete_char();
-          break;
-
-        case KeyboardEvent::KeyPressed:
-        case KeyboardEvent::KeyDown:
-        case KeyboardEvent::KeyReleased:
-          editor.control(event.type, event.affectedKey);
-          break;
-      }
-
-      kbd.GetInput().clear();
-
-    });
+    kbd.OnKeyboardEvent(keyboardEvent);
 
     _hook_init();
 

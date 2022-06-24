@@ -15,9 +15,32 @@ namespace CTRPluginFramework {
     cursor.x++;
   }
 
+  void TextEditorImpl::insert_newline() {
+    auto& line = data[cursor.y];
+
+    if( cursor.x == line.length() ) {
+      cursor.x = 0;
+      cursor.y++;
+      data.insert(data.begin() + cursor.y, "");
+      return;
+    }
+
+    cursor.y++;
+    data.insert(data.begin() + cursor.y, line.substr(cursor.x));
+    line = line.substr(0, cursor.x);
+    cursor.x = 0;
+  }
+
   void TextEditorImpl::delete_char() {
     if( cursor.x == 0 ) {
       if( cursor.y == 0 ) {
+        return;
+      }
+
+      if( data[cursor.y].empty() ) {
+        cursor.x = data[cursor.y - 1].length();
+        data.erase(data.begin() + cursor.y);
+        cursor.y--;
         return;
       }
 

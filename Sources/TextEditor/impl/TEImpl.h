@@ -41,6 +41,7 @@ namespace CTRPluginFramework {
     int open();
 
     void insert_char(char ch);
+    void insert_newline();
     void delete_char();
 
     void update();
@@ -49,6 +50,7 @@ namespace CTRPluginFramework {
     static void _hook_init();
     static void _hook_reset();
     static void _KbdImpl_RenderTop_hook(void*);
+    static void keyboardEvent(Keyboard& kbd, KeyboardEvent& ev);
 
   public:
     ~TextEditorImpl() = default;
