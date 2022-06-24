@@ -17,10 +17,13 @@ namespace CTRPluginFramework {
 
     File file;
 
-    Point cursor{ 0 };
-    Point scroll_pos{ 0 };
+    Point cursor{ };
+    Point scroll_pos{ };
     Clock cursor_clock;
     bool forceDrawCursor = 0;
+
+    bool is_selecting = 0;
+    Point select_started_pos{ };
 
     std::vector<std::string> data{ "" };
 
@@ -34,6 +37,7 @@ namespace CTRPluginFramework {
     TextEditorImpl(std::string const& path);
 
     void draw(Screen const& screen);
+    void draw_bottom(Screen const& screen);
     void draw_submenu(Screen const& screen);
 
     int open_menu();
@@ -53,6 +57,7 @@ namespace CTRPluginFramework {
     static void _hook_init();
     static void _hook_reset();
     static void _KbdImpl_RenderTop_hook(void*);
+    static void _KbdImpl_RenderBottom_hook(void*);
     static void keyboardEvent(Keyboard& kbd, KeyboardEvent& ev);
 
   public:

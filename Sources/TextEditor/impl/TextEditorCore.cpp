@@ -30,6 +30,7 @@ namespace CTRPluginFramework {
 
       cursor.x = data[cursor.y - 1].length();
       data[cursor.y - 1] += data[cursor.y];
+      data.erase(data.begin() + cursor.y);
 
       cursor.y--;
       return;
@@ -65,7 +66,7 @@ namespace CTRPluginFramework {
       data.insert(data.begin() + cursor.y, line.substr(cursor.x));
     }
 
-    line = line.substr(0, cursor.x);
+    data[cursor.y - 1] = data[cursor.y - 1].substr(0, cursor.x);
     cursor.x = 0;
   }
 

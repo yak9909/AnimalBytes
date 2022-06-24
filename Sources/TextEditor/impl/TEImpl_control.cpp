@@ -3,14 +3,47 @@
 #include "../Hotkeys.h"
 
 constexpr int keyRepeatWait = 300;
+constexpr int waitRepeatMilli = 50;
 
 namespace CTRPluginFramework {
   void TextEditorImpl::control(KeyboardEvent::EventType type, u32 key) {
     #define adjustX  if( cursor.x > data[cursor.y].length() ) cursor.x = data[cursor.y].length()
 
     static Clock clock;
+    static Clock clock2;
+    static bool flag;
 
-    if( key && (type == KeyboardEvent::KeyPressed || clock.HasTimePassed(Milliseconds(keyRepeatWait))) ) {
+    if( key == 0 ) {
+      return;
+    }
+
+    switch( type ) {
+      case KeyboardEvent::EventType::KeyPressed: {
+
+        if( key & Hotkeys::Selecting ) {
+          is_selecting = true;
+          select_started_pos = cursor;
+        }
+
+        break;
+      }
+
+      case KeyboardEvent::EventType::KeyDown: {
+
+        if( key & Hotkeys::Selecting ) {
+          is_selecting = false;
+        }
+
+        break;
+      }
+
+      case KeyboardEvent::EventType::KeyReleased: {
+        forceDrawCursor = false;
+        break;
+      }
+    }
+
+    if( type == KeyboardEvent::EventType::KeyPressed || (clock.HasTimePassed(Milliseconds(keyRepeatWait)) && clock2.HasTimePassed(Milliseconds(waitRepeatMilli))) ) {
       if( key & Hotkeys::CursorUp ) {
         if( --cursor.y < 0 ) cursor.y = 0;
         adjustX;
@@ -41,17 +74,17 @@ namespace CTRPluginFramework {
         newline();
       }
 
+      if( key & Hotkeys::Backspace ) {
+        delete_char();
+      }
+
       if( type == KeyboardEvent::KeyPressed ) {
         clock.Restart();
       }
-      else if( clock.HasTimePassed(Milliseconds(keyRepeatWait + 100)) ) {
-        clock = Milliseconds(keyRepeatWait);
-      }
+      
+      clock2.Restart();
 
       forceDrawCursor = true;
-    }
-    else if( type == KeyboardEvent::KeyReleased ) {
-      forceDrawCursor = false;
     }
 
 

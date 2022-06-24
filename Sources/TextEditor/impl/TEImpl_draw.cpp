@@ -52,4 +52,15 @@ namespace CTRPluginFramework {
     }
   }
 
+  void TextEditorImpl::draw_bottom(Screen const& screen) {
+
+    u32 dy = 0;
+
+    if( is_selecting ) {
+      screen.Draw("selecting...", 0, dy, Color::Black, Color::ForestGreen);
+      dy += 10;
+    }
+
+  }
+
 }

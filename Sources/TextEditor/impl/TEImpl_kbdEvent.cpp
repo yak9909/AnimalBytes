@@ -14,6 +14,9 @@ namespace CTRPluginFramework {
         if( ch == 0xA ) {
           editor.newline();
         }
+        else if( ch == 0 ) {
+          editor.insert_char(' ');
+        }
         else {
           editor.insert_char(kbd.GetInput()[0]);
         }

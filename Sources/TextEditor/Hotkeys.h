@@ -22,7 +22,7 @@ namespace CTRPluginFramework::Hotkeys {
     InsertToBackward    = DPadDown,
 
     // Select
-    ToggleSelect    = Key::X,
+    Selecting       = Key::X,
     
     // Copy and Paste
     CopyPasteBase   = Key::R,
@@ -30,7 +30,8 @@ namespace CTRPluginFramework::Hotkeys {
     Paste           = DPadRight,
 
     // General
-    Enter       = Key::A
+    Enter       = Key::A,
+    Backspace   = Key::Y
 
     ;
 }

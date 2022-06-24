@@ -13,11 +13,20 @@ _hookFn_OSDMessage_ctor:
   push {r4-r7, lr}       @
   mov r5, r3             @ original op
   ldr ip, .L_return_to
-@  add ip, #8
   bx ip
 .L_return_to:
   .word _ZN18CTRPluginFramework7OSDImpl10OSDMessageC1ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERKNS_5ColorESC_ + 8
 .L_elemdeleter:
   .word _hookFnHelper_OSDMessageElementDeleter_
 
-
+  .section .text
+  .global _hookHelperFn_KbdImpl_RenderBottom
+  .type _hookHelperFn_KbdImpl_RenderBottom, %function
+_hookHelperFn_KbdImpl_RenderBottom:
+  add sp, #0x24
+  pop {r4-r7}
+  mov lr ,pc
+  ldr pc, .L_RenderBottomHook
+  pop {pc}
+.L_RenderBottomHook:
+  .word _ZN18CTRPluginFramework14TextEditorImpl26_KbdImpl_RenderBottom_hookEPv
