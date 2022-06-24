@@ -3,7 +3,7 @@
 #include "TEImpl.h"
 
 namespace CTRPluginFramework {
-  void TextEditorImpl::draw_menu(Screen const& screen) {
+  void TextEditorImpl::draw_submenu(Screen const& screen) {
     constexpr int menu_width = 100;
 
     int x = menu_width;
@@ -16,7 +16,7 @@ namespace CTRPluginFramework {
     while( 1 ) {
       Controller::Update();
 
-      
+
     }
 
     return -1;

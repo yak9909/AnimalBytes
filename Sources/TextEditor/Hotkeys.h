@@ -28,11 +28,6 @@ namespace CTRPluginFramework::Hotkeys {
     CopyPasteBase   = Key::R,
     Copy            = DPadLeft,
     Paste           = DPadRight,
-    
-    // Delete
-    DeleteBase      = Key::Y,
-    DeleteForward   = DPadLeft,
-    DeleteBackword  = DPadRight,
 
     // General
     Enter       = Key::A

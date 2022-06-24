@@ -19,7 +19,10 @@ namespace CTRPluginFramework {
     // 1   = 
     int open() const;
   
+    static TextEditor* get_instance();
+
   private:
+    friend class TextEditorImpl;
     std::unique_ptr<TextEditorImpl> impl;
   };
 }

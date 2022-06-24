@@ -67,7 +67,8 @@ namespace CTRPluginFramework {
   CTextData::Line* CTextData::operator[] (size_t index) {
     size_t pos = linepos_list[index];
 
-    
+
+    return nullptr;
   }
 
   void CTextData::clear() {
