@@ -12,12 +12,7 @@ namespace CTRPluginFramework {
     auto& te = *TextEditor::get_instance()->impl;
     auto const& screen = OSD::GetTopScreen();
     
-    if( te.is_opening_submenu ) {
-      te.draw_submenu(screen);
-    }
-    else {
-      te.draw(screen);
-    }
+    te.draw(screen);
 
   }
 
@@ -45,13 +40,18 @@ namespace CTRPluginFramework {
 
       auto& editor = *TextEditor::get_instance()->impl;
 
-      kbd.GetInput().clear();
-
       switch( event.type ) {
+        case KeyboardEvent::CharacterAdded:
+          editor.insert_char();
+
         case KeyboardEvent::KeyPressed:
-          editor.control();
+        case KeyboardEvent::KeyDown:
+        case KeyboardEvent::KeyReleased:
+          editor.control(event.type, event.affectedKey);
           break;
       }
+
+      kbd.GetInput().clear();
 
     });
 

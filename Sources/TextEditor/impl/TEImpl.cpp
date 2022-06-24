@@ -3,16 +3,21 @@
 
 namespace CTRPluginFramework {
   TextEditorImpl::TextEditorImpl()
-    : is_opening_submenu(false)
+    : background(Color(30, 30, 30)),
+      is_opening_submenu(false)
   {
   }
 
   TextEditorImpl::TextEditorImpl(std::string const& path)
-    : is_opening_submenu(false)
+    : TextEditorImpl()
   {
-    //File::Open(file, path);
+    File::Open(file, path);
     
-    data.open(path);
+    LineReader reader{ file };
+
+    for( std::string line; reader(line); ) {
+      data.emplace_back(line);
+    }
 
   }
 }

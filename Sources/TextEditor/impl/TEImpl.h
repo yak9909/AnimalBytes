@@ -1,35 +1,33 @@
 #pragma once
 
 #include <CTRPluginFramework.hpp>
-#include "CTextData.h"
+#include "TextEditor.h"
 
 namespace CTRPluginFramework {
   class TextEditor;
   class TextEditorImpl {
     friend class TextEditor;
 
-    enum class UpdateFlags : uint32_t {
-      None = 0,
-
-      // Redraw lines within screen
-      Text = BIT(1),
-
-      All = 0xFFFFFFFF
+    struct Point {
+      u32 x, y;
     };
 
-    struct Callback {
-      using FuncPointer = UpdateFlags(*)(TextEditor*);
-    };
-    
-    //File file;
-    CTextData data;
-    UpdateFlags update_flags;
+    Color const background;
+
+    File file;
+
+    Point cursor{ 0 };
+    Point scroll_pos{ 0 };
+    std::vector<std::string> data{ "" };
+
+    TextEditor::EventType event;
+    std::vector<TextEditor::EventFuncPointer> event_funcs;
+
+    //UpdateFlags update_flags;
     bool is_opening_submenu;
 
     TextEditorImpl();
     TextEditorImpl(std::string const& path);
-
-    bool add_callback();
 
     void draw(Screen const& screen);
     void draw_submenu(Screen const& screen);
@@ -41,8 +39,11 @@ namespace CTRPluginFramework {
     // 2  = Aborted (edited)
     int open();
 
+    void insert_char(char ch);
+    void delete_char();
+
     void update();
-    void control();
+    void control(KeyboardEvent::EventType type, u32 key);
 
     static void _hook_init();
     static void _hook_reset();

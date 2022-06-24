@@ -2,8 +2,10 @@
 #include "TEImpl.h"
 
 namespace CTRPluginFramework {
-  void TextEditorImpl::control() {
+  void TextEditorImpl::control(KeyboardEvent::EventType type, u32 key) {
     
+    
+
   }
 
 }

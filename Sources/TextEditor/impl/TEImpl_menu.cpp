@@ -12,6 +12,8 @@ namespace CTRPluginFramework {
   }
 
   int TextEditorImpl::open_menu() {
+
+    
     
     while( 1 ) {
       Controller::Update();

@@ -20,6 +20,10 @@ namespace CTRPluginFramework {
   {
   }
 
+  bool TextEditor::add_event(EventFuncPointer fp) {
+    impl->event_funcs.emplace_back(fp);
+  }
+
   int TextEditor::open() const {
     impl->open();
   }
