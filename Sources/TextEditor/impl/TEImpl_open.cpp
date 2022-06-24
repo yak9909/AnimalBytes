@@ -3,7 +3,11 @@
 #include "TEImpl.h"
 #include "../Hotkeys.h"
 
-extern "C" void _ZN18CTRPluginFramework12KeyboardImpl10_RenderTopEv(void*);
+extern "C" {
+  void _ZN18CTRPluginFramework12KeyboardImpl3RunEv(void*);
+  void _ZN18CTRPluginFramework12KeyboardImpl10_RenderTopEv(void*);
+  void _ZN18CTRPluginFramework12KeyboardImpl10_CheckKeysEv(void*);
+};
 
 namespace CTRPluginFramework {
   static u32 _hook_bak[2];
@@ -20,18 +24,30 @@ namespace CTRPluginFramework {
   }
 
   void TextEditorImpl::_hook_init() {
-    u32* ptr = (u32*)&_ZN18CTRPluginFramework12KeyboardImpl10_RenderTopEv;
 
+    u32* ptr = (u32*)&_ZN18CTRPluginFramework12KeyboardImpl10_RenderTopEv;
     memcpy(_hook_bak, ptr, sizeof(_hook_bak));
 
     ptr[0] = 0xE51FF004;  // ldr pc, [pc, #-4]
     ptr[1] = (u32)&TextEditorImpl::_KbdImpl_RenderTop_hook;
+
+    ptr = (u32*)&_ZN18CTRPluginFramework12KeyboardImpl3RunEv;
+    ptr[117] = 0xEA00000B;
+
+    ptr = (u32*)&_ZN18CTRPluginFramework12KeyboardImpl10_CheckKeysEv;
+    ptr[199] = 0xE28FF008;
   }
 
   void TextEditorImpl::_hook_reset() {
+
     u32* ptr = (u32*)&_ZN18CTRPluginFramework12KeyboardImpl10_RenderTopEv;
     memcpy(ptr, _hook_bak, sizeof(_hook_bak));
     
+    ptr = (u32*)&_ZN18CTRPluginFramework12KeyboardImpl3RunEv;
+    ptr[117] = 0x0A00000B;
+
+    ptr = (u32*)&_ZN18CTRPluginFramework12KeyboardImpl10_CheckKeysEv;
+    ptr[199] = 0xE350000A;
   }
 
   int TextEditorImpl::open() {

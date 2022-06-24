@@ -27,7 +27,7 @@ namespace CTRPluginFramework {
         auto const& line = data[begin];
         u32 dx = linenum_width * char_width;
 
-        screen.Draw(Utils::Format("%6d", begin + 1), 0, dy, Color::White, linenum_background);
+        screen.Draw(Utils::Format("%5d", begin + 1), 0, dy, Color::White, linenum_background);
 
         if( line.length() > width_max ) {
           screen.Draw(line.substr(width_max), dx, dy, Color::White, background);
