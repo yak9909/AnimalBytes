@@ -77,9 +77,18 @@ namespace CTRPluginFramework {
         case 0: {
           std::string name;
 
-          if( Keyboard().Open(name) == 0 ) {
+          if( file.IsOpen() && !saved ) {
+            auto warn = MessageBox("Warning",
+              "You are editing the file but it is not saved yet. Do you save ?", DialogType::DialogYesNo)();
             
+            if( warn == true ) { // Yes
+              save_file(file.GetName());
+            }
+
+            OSD::SwapBuffers();
           }
+
+          
 
           break;
         }

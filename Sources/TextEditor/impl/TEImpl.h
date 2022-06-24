@@ -49,10 +49,18 @@ namespace CTRPluginFramework {
     TextEditorImpl();
     TextEditorImpl(std::string const& path);
 
+    // file operations
+    void open_file(std::string const& path, bool create_new);
+    void save_file(std::string const& path);
+    void close_file();
+    bool choice_file(std::string& path);
+
+    // editor-core
     void insert_char(char ch);
     void delete_char();
     void newline();
 
+    // draw main screen
     void draw(Screen const& screen);
     void draw_bottom(Screen const& screen);
 
