@@ -17,7 +17,7 @@ namespace CTRPluginFramework {
   }
 
   void TextEditorImpl::submenu_draw(Screen const& screen) {
-    constexpr int menu_width = 160;
+    constexpr int menu_width = 200;
 
     int x = 400 - menu_width;
 
@@ -70,12 +70,13 @@ namespace CTRPluginFramework {
     u32 keys = Controller::GetKeysDown();
 
     if( Controller::IsKeyPressed(Key::A) ) {
+      std::string path;
+
       _hook_reset();
 
       switch( submenu_index ) {
         // Open file
         case 0: {
-          std::string name;
 
           if( file.IsOpen() && !saved ) {
             auto warn = MessageBox("Warning",
@@ -88,13 +89,53 @@ namespace CTRPluginFramework {
             OSD::SwapBuffers();
           }
 
-          
+          if( choice_file(path) ) {
+            open_file(path, false);
+          }
 
+          break;
+        }
+
+        // Create a new file
+        case 1: {
+          while( 1 ) {
+            auto res = Keyboard("Enter name to create").Open(path);
+
+            if( res != 0 ) {
+              goto _return;
+            }
+
+            if( File::Exists(path) ) {
+              if( MessageBox("The file `" + path + "` is already found.\nDo you want to clear the file?", DialogType::DialogYesNo)() == true ) {
+                File::Open(file, path, File::RW | File::TRUNCATE | File::SYNC);
+
+                data.clear();
+                goto _return;
+              }
+            }
+            
+            break;
+          }
+
+          open_file(path, true);
+          break;
+        }
+        
+        // Save
+        case 2: {
+          save_file(file.GetName());
           break;
         }
       }
 
+    _return:
       _hook_init();
+      return;
+    }
+
+    if( Controller::IsKeyPressed(B) ) {
+      is_opening_submenu = false;
+      return;
     }
 
     if( keys ) {
@@ -120,8 +161,9 @@ namespace CTRPluginFramework {
 
   int TextEditorImpl::submenu_open(Screen const& screen) {
     submenu_index = 0;
+    is_opening_submenu = true;
     
-    while( 1 ) {
+    while( is_opening_submenu ) {
       Controller::Update();
 
       submenu_update();

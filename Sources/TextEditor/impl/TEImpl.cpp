@@ -4,7 +4,7 @@
 namespace CTRPluginFramework {
   char const* TextEditorImpl::sys_submenu_entries[] = {
     "Open file",
-    "Create a file",
+    "Create a new file",
     "Save",
     "Save as ..."
   };

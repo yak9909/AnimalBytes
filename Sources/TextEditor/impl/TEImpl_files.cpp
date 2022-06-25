@@ -4,10 +4,19 @@
 namespace CTRPluginFramework {
   void TextEditorImpl::open_file(std::string const& path, bool create_new) {
     if( create_new ) {
-      
+      File::Open(file, path, File::RW | File::TRUNCATE | File::SYNC);
     }
     else {
+      File::Open(file, path, File::RW);
+    }
 
+    LineReader reader{ file };
+    std::string line;
+
+    data.clear();
+    
+    while( reader(line) ) {
+      data.emplace_back(line);
     }
   }
 
@@ -16,7 +25,7 @@ namespace CTRPluginFramework {
       return;
     }
 
-    File::Open(file, path, File::WRITE | File::CREATE | File::TRUNCATE);
+    File::Open(file, path, File::RWC | File::TRUNCATE | File::SYNC);
 
     LineWriter writer{ file };
 

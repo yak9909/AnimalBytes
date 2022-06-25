@@ -20,8 +20,7 @@ namespace CTRPluginFramework {
 
     enum class Result {
       Saved,
-      Aborted,
-      NoEdited
+      Canceled
     };
 
     struct EventType {
