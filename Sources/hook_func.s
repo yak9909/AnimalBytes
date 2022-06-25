@@ -24,9 +24,11 @@ _hookFn_OSDMessage_ctor:
   .type _hookHelperFn_KbdImpl_RenderBottom, %function
 _hookHelperFn_KbdImpl_RenderBottom:
   add sp, #0x24
-  pop {r4-r7}
+  pop {r4-r7, lr}
+  push {lr}
   mov lr ,pc
   ldr pc, .L_RenderBottomHook
   pop {pc}
+
 .L_RenderBottomHook:
   .word _ZN18CTRPluginFramework14TextEditorImpl26_KbdImpl_RenderBottom_hookEPv

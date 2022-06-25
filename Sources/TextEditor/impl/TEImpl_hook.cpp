@@ -14,17 +14,13 @@ extern "C" {
 };
 
 namespace CTRPluginFramework {
-  static u32 _hook_bak[2];
+  static std::vector<std::pair<u32*, u32>> _hook_bak;
 
   void TextEditorImpl::_KbdImpl_RenderTop_hook(void*) {
-    asm volatile ("push {r5}");
-
     auto& te = *TextEditor::get_instance()->impl;
     auto const& screen = OSD::GetTopScreen();
     
     te.draw(screen);
-
-    asm volatile ("pop {r5}");
   }
 
   void TextEditorImpl::_KbdImpl_RenderBottom_hook(void*) {
@@ -40,38 +36,35 @@ namespace CTRPluginFramework {
 
     constexpr u32 asmjmp = 0xE51FF004; // ldr pc, [pc, #-4]
 
-    u32* ptr = (u32*)&_ZN18CTRPluginFramework12KeyboardImpl10_RenderTopEv;
-    memcpy(_hook_bak, ptr, sizeof(_hook_bak));
+    std::pair<u32*, u32> const hookMap[] {
+      // Don't return with KEY_ENTER
+      { (u32*)_ZN18CTRPluginFramework12KeyboardImpl3RunEv + 117, 0xEA00000B },
 
-    ptr[0] = asmjmp;
-    ptr[1] = (u32)TextEditorImpl::_KbdImpl_RenderTop_hook;
+      // Allow space key
+      { (u32*)_ZN18CTRPluginFramework12KeyboardImpl10_CheckKeysEv + 203,
+          (0xEA << 24) | calc_branch_offset((u32)_ZN18CTRPluginFramework12KeyboardImpl10_CheckKeysEv + 0x32C,
+            (u32)_ZN18CTRPluginFramework12KeyboardImpl10_CheckKeysEv + 0x380) },
+      
+      // Draw editor
+      { (u32*)_ZN18CTRPluginFramework12KeyboardImpl10_RenderTopEv, asmjmp },
+      { (u32*)_ZN18CTRPluginFramework12KeyboardImpl10_RenderTopEv + 1, (u32)TextEditorImpl::_KbdImpl_RenderTop_hook },
 
-    ptr = (u32*)_ZN18CTRPluginFramework12KeyboardImpl3RunEv;
-    ptr[117] = 0xEA00000B; // Enter
+      // bottom
+      { (u32*)_ZN18CTRPluginFramework12KeyboardImpl13_RenderBottomEv + 134, asmjmp },
+      { (u32*)_ZN18CTRPluginFramework12KeyboardImpl13_RenderBottomEv + 135, (u32)_hookHelperFn_KbdImpl_RenderBottom },
+    };
 
-    ptr = (u32*)_ZN18CTRPluginFramework12KeyboardImpl10_CheckKeysEv;
-    ptr[203] = (0xEA << 24) | calc_branch_offset((u32)ptr + 0x32C, (u32)ptr + 0x32C + 0x54);
-    ptr[339] |= 1;
-
-    ptr = (u32*)_ZN18CTRPluginFramework12KeyboardImpl13_RenderBottomEv;
-    ptr[134] = asmjmp;
-    ptr[135] = (u32)_hookHelperFn_KbdImpl_RenderBottom;
+    for( auto&& item : hookMap ) {
+      _hook_bak.emplace_back(item.first, *item.first);
+      *item.first = item.second;
+    }
   }
 
   void TextEditorImpl::_hook_reset() {
+    for( auto&& item : _hook_bak ) {
+      *item.first = item.second;
+    }
 
-    u32* ptr = (u32*)_ZN18CTRPluginFramework12KeyboardImpl10_RenderTopEv;
-    memcpy(ptr, _hook_bak, sizeof(_hook_bak));
-    
-    ptr = (u32*)_ZN18CTRPluginFramework12KeyboardImpl3RunEv;
-    ptr[117] = 0x0A00000B; // Enter
-
-    ptr = (u32*)_ZN18CTRPluginFramework12KeyboardImpl10_CheckKeysEv;
-    ptr[203] = 0xE3700005;
-    *(u8*)(ptr + 339) = 0;
-
-    ptr = (u32*)_ZN18CTRPluginFramework12KeyboardImpl13_RenderBottomEv;
-    ptr[134] = 0xE28DD024;
-    ptr[135] = 0xE8BD80F0;
+    _hook_bak.clear();
   }
 }

@@ -57,6 +57,11 @@ namespace CTRPluginFramework {
       }
     }
 
+    if( txtFiles.empty() ) {
+      MessageBox("Text file is no found.")();
+      return false;
+    }
+
     int index = Keyboard("Choice the file to open.", txtFiles).Open();
 
     if( index >= 0 ) {
