@@ -6,6 +6,8 @@
 #include "Cheats.h"
 #include "Helpers.h"
 
+#include "TextEditor.h"
+
 static char const* ABOUT =
   "Animal Bytes: ACNL Plugin\n"
   "\n"
@@ -44,26 +46,10 @@ namespace CTRPluginFramework {
 
     Cheats::CodeContext::get_instance()->init();
 
-    menu += new MenuEntry("test", [] (MenuEntry* e) {
-      if( Controller::IsKeyPressed(Key::L) ) {
-        InstantMenu_Int menu;
+    menu += new MenuEntry("TextEditor", nullptr, [] (MenuEntry* e) {
+      static TextEditor editor;
 
-        menu.set_title("numbers");
-        menu.set_menu_draw_pos(50, 30);
-
-        for(int i=0;i<100;i++){
-          menu.append_item(i);
-        }
-
-        long index = menu.open();
-
-        if( index >= 0 ) {
-          OSD::Notify(std::to_string(menu.get_items()[index]));
-        }
-        else {
-          OSD::Notify("Canceled!");
-        }
-      }
+      editor.open();
     });
 
     menu += Cheats::Movements::make_folder();
