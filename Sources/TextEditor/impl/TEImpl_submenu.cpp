@@ -78,7 +78,6 @@ namespace CTRPluginFramework {
       switch( submenu_index ) {
         // Open file
         case 0: {
-
           if( file.IsOpen() && !saved ) {
             auto warn = MessageBox("Warning",
               "You are editing the file but it is not saved yet. Do you save ?", DialogType::DialogYesNo)();
@@ -101,22 +100,19 @@ namespace CTRPluginFramework {
 
         // Create a new file
         case 1: {
-          while( 1 ) {
-            auto res = Keyboard("Enter name to create").Open(path);
+          auto res = Keyboard("Enter name to create").Open(path);
 
-            if( res != 0 ) {
-              goto _return;
-            }
-
-            if( File::Exists(path) ) {
-              MessageBox("The file `" + path + "` is already found.")();
-              goto _return;
-            }
-            
+          if( res != 0 ) {
             break;
           }
 
-          open_file(path, true);
+          if( File::Exists(path) ) {
+            MessageBox("The file `" + path + "` is already found.")();
+            break;
+          }
+          
+          File::Create(path + ".txt");
+
           break;
         }
         
@@ -146,7 +142,6 @@ namespace CTRPluginFramework {
         }
       }
 
-    _return:
       *((u32*)_ZN18CTRPluginFramework12KeyboardImpl10_RenderTopEv) = 0xE51FF004;
       *((u32*)_ZN18CTRPluginFramework12KeyboardImpl10_RenderTopEv + 1) = (u32)TextEditorImpl::_KbdImpl_RenderTop_hook;
 
