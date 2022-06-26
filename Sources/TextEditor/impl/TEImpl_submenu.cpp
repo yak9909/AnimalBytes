@@ -135,7 +135,7 @@ namespace CTRPluginFramework {
             }
 
             save_file(file.GetName());
-            MessageBox("Done.");
+            MessageBox("Done.")();
           }
 
           break;
