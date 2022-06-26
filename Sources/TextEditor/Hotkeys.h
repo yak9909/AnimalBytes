@@ -34,7 +34,10 @@ namespace CTRPluginFramework::Hotkeys {
 
     // General
     Enter       = Key::A,
-    Backspace   = Key::Y
+    Backspace   = Key::Y,
+
+    // Debug
+    DBG_ShowLine0addr = Key::L
 
     ;
 }

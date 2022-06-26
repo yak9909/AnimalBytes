@@ -4,7 +4,7 @@
 namespace CTRPluginFramework {
   void TextEditorImpl::open_file(std::string const& path, bool create_new) {
     if( create_new ) {
-      File::Open(file, path, File::RW | File::TRUNCATE | File::SYNC);
+      File::Open(file, path, File::RWC | File::TRUNCATE | File::SYNC);
     }
     else {
       File::Open(file, path, File::RW);
@@ -18,6 +18,13 @@ namespace CTRPluginFramework {
     while( reader(line) ) {
       data.emplace_back(line);
     }
+
+    if( data.empty() ) {
+      data.emplace_back();
+    }
+
+    cursor = { 0 };
+    file.Flush();
   }
 
   void TextEditorImpl::save_file(std::string const& path) {
@@ -43,7 +50,7 @@ namespace CTRPluginFramework {
   }
 
   bool TextEditorImpl::choice_file(std::string& path) {
-    Directory dir{ "" };
+    Directory dir{ "/luma/plugins/0004000000086200/" };
     std::vector<std::string> txtFiles;
 
     dir.ListFiles(txtFiles, ".txt");

@@ -72,8 +72,6 @@ namespace CTRPluginFramework {
     if( Controller::IsKeyPressed(Key::A) ) {
       std::string path;
 
-      _hook_reset();
-
       switch( submenu_index ) {
         // Open file
         case 0: {
@@ -91,6 +89,7 @@ namespace CTRPluginFramework {
 
           if( choice_file(path) ) {
             open_file(path, false);
+            is_opening_submenu = false;
           }
 
           break;
@@ -102,16 +101,12 @@ namespace CTRPluginFramework {
             auto res = Keyboard("Enter name to create").Open(path);
 
             if( res != 0 ) {
-              goto _return;
+              return;
             }
 
             if( File::Exists(path) ) {
-              if( MessageBox("The file `" + path + "` is already found.\nDo you want to clear the file?", DialogType::DialogYesNo)() == true ) {
-                File::Open(file, path, File::RW | File::TRUNCATE | File::SYNC);
-
-                data.clear();
-                goto _return;
-              }
+              MessageBox("The file `" + path + "` is already found.")();
+              return;
             }
             
             break;
@@ -123,13 +118,30 @@ namespace CTRPluginFramework {
         
         // Save
         case 2: {
-          save_file(file.GetName());
+          if( !saved ) {
+            if( !file.IsOpen() ) {
+              auto res = Keyboard("You don't have opened any file. Please enter file name to create and save.").Open(path);
+              OSD::SwapBuffers();
+
+              if( res != 0 )
+                break;
+              
+              if( File::Exists(path) ) {
+                if( MessageBox("The file \"" + path + "\" is already exists, Do you want to overwrite to it?", DialogType::DialogYesNo)() == 0 )
+                  break;
+              }
+
+              File::Open(file, path, File::RWC | File::TRUNCATE | File::SYNC);
+            }
+
+            save_file(file.GetName());
+            MessageBox("Done.");
+          }
+
           break;
         }
       }
 
-    _return:
-      //_hook_init();
       return;
     }
 

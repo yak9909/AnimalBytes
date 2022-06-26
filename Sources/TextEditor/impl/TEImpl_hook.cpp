@@ -30,13 +30,11 @@ namespace CTRPluginFramework {
     constexpr u32 asmJumpIP   = 0xE12FFF1C; // bx ip
 
     std::pair<u32*, u32> const hookMap[] {
-      // Don't return with KEY_ENTER
-      { (u32*)_ZN18CTRPluginFramework12KeyboardImpl3RunEv + 117, 0xEA00000B },
-
       // Space key
       { (u32*)_ZN18CTRPluginFramework12KeyboardImpl10_CheckKeysEv + 203, asmNop },
       
       // Enter
+      { (u32*)_ZN18CTRPluginFramework12KeyboardImpl3RunEv + 117, 0xEA00000B }, // don't exit
       { (u32*)_ZN18CTRPluginFramework12KeyboardImpl10_CheckKeysEv + 199, 0xE28FF008 },
 
       // Backspace

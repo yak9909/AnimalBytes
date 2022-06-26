@@ -77,7 +77,7 @@ namespace CTRPluginFramework {
       if( key & Hotkeys::Backspace ) {
         delete_char();
       }
-
+      
       if( type == KeyboardEvent::KeyPressed ) {
         clock.Restart();
       }

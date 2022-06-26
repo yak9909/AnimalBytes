@@ -13,6 +13,8 @@ namespace CTRPluginFramework {
     }
 
     cursor.x++;
+    
+    saved = 0;
   }
 
   void TextEditorImpl::delete_char() {
@@ -39,6 +41,8 @@ namespace CTRPluginFramework {
     auto& line = data[cursor.y];
 
     line.erase(line.begin() + --cursor.x);
+
+    saved = 0;
   }
 
   void TextEditorImpl::newline() {
@@ -68,6 +72,8 @@ namespace CTRPluginFramework {
 
     data[cursor.y - 1] = data[cursor.y - 1].substr(0, cursor.x);
     cursor.x = 0;
+
+    saved = 0;
   }
 
 }
