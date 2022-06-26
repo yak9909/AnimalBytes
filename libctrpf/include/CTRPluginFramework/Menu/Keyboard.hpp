@@ -17,6 +17,7 @@ namespace CTRPluginFramework
         {
             CharacterAdded,
             CharacterRemoved,
+            EnterPressed,
             InputWasCleared,
             SelectionChanged,
             KeyPressed,
