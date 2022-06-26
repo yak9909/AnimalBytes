@@ -72,9 +72,6 @@ namespace CTRPluginFramework {
     if( Controller::IsKeyPressed(Key::A) ) {
       std::string path;
 
-      *((u32*)_ZN18CTRPluginFramework12KeyboardImpl10_RenderTopEv) = 0xE92D4030;
-      *((u32*)_ZN18CTRPluginFramework12KeyboardImpl10_RenderTopEv + 1) = 0xE59F5168;
-
       switch( submenu_index ) {
         // Open file
         case 0: {
@@ -141,9 +138,6 @@ namespace CTRPluginFramework {
           break;
         }
       }
-
-      *((u32*)_ZN18CTRPluginFramework12KeyboardImpl10_RenderTopEv) = 0xE51FF004;
-      *((u32*)_ZN18CTRPluginFramework12KeyboardImpl10_RenderTopEv + 1) = (u32)TextEditorImpl::_KbdImpl_RenderTop_hook;
 
       return;
     }

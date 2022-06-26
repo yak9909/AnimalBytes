@@ -16,8 +16,9 @@ namespace CTRPluginFramework
         enum EventType
         {
             CharacterAdded,
-            CharacterRemoved,
+            //CharacterRemoved,
             EnterPressed,
+            BackspacePressed,
             InputWasCleared,
             SelectionChanged,
             KeyPressed,
@@ -26,6 +27,7 @@ namespace CTRPluginFramework
         };
 
         EventType   type{};       ///< Type of the event
+        bool        ch_removed = 0; // was character removed when BackspacePressed
         u32         codepoint{0};  ///< The codepoint of the character that thrown the event (used for CharacterAdded and CharacterRemoved, 0 otherwise)
         u32         selectedIndex{0}; ///< The entry index in a custom keyboard being selected (used for SelectionChanged, 0 otherwise)
         Key         affectedKey{(Key)0}; //< Button affected not mapped to any keyboard feature (used for ButtonPressed, ButtonHold and ButtonReleased, 0 otherwise)
@@ -72,9 +74,6 @@ namespace CTRPluginFramework
          * \param canAbort  Whether the user can press B to close the keyboard and abort the current operation
          */
         void    CanAbort(bool canAbort) const;
-
-        // don't exit after pressed enter key if passed false.
-        void  DontExitWithEnter(bool val) const;
 
         /**
          * \brief Define if the input must be hexadecimal or not \n
@@ -303,6 +302,11 @@ namespace CTRPluginFramework
          * Note that when disabled, errors messages can't be displayed
          */
         bool    DisplayTopScreen;
+
+        // flags
+        bool  DontReturnAfterEnter;
+        bool  MakeEventOfSpace;
+        bool  ForceMakeEventOfBackspace;
 
         /**
          * \brief Render top screen your like
