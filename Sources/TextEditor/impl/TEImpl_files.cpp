@@ -65,7 +65,7 @@ namespace CTRPluginFramework {
     }
 
     if( txtFiles.empty() ) {
-      MessageBox("Text file is no found.")();
+      MessageBox("Text file is not found.")();
       return false;
     }
 
