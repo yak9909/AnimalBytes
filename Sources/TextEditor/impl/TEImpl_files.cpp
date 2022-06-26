@@ -36,9 +36,11 @@ namespace CTRPluginFramework {
 
     LineWriter writer{ file };
 
-    for( auto&& line : data ) {
-      writer << line << LineWriter::endl();
+    for( auto it = data.begin(); it < data.end() - 1; it++ ) {
+      writer << *it << LineWriter::endl();
     }
+
+    writer << *data.rbegin() << LineWriter::endl();
 
     file.Flush();
 
