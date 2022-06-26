@@ -75,6 +75,11 @@ namespace CTRPluginFramework {
 
     if( index >= 0 ) {
       path = txtFiles[index];
+
+      do {
+        Controller::Update();
+      } while( Controller::IsKeyDown(Key::A) );
+
       return true;
     }
 
