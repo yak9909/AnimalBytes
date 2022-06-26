@@ -1,0 +1,199 @@
+
+C:\Users\mrzkr\sources\3ds\cheats\AnimalBytes\libctrpf>make -j > err.txt
+fatal: Not a valid object name 3gx_crt0.o
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/MessageBoxImpl.cpp:                     C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/Window.cpp:void CTRPluginFramework::MessageBoxImpl::_ProcessEvent(CTRPluginFramework::Event&) In constructor '
+CTRPluginFramework::Window::Window(u32, u32, u32, u32, bool, CTRPluginFramework::BMPImage*)C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/MessageBoxImpl.cpp:164:25:':
+ C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/Window.cpp:21:24:
+error:
+SoundEngine'
+  164 |                         class CTRPluginFramework::ButtonSoundEngine' has no member named '
+      |                         SetAcceptSoundEvent^~~~~~~~~~~'
+   21 |             _closeBtn->
+SetAcceptSoundEventC:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/MessageBoxImpl.cpp:164:52:(SoundEngine::Event::NUM_EVENTS);
+      |                         ^~~~~~~~~~~~~~~~~~~
+error: 'C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/Window.cpp:21:44:SoundEngine ' has not been declared
+  164 |                         SoundEngine::PlayMenuSound(error: SoundEngine'::Event::CURSOR);
+      |                                                    SoundEngine^~~~~~~~~~~' has not been declared
+   21 |             _closeBtn->SetAcceptSoundEvent(
+SoundEngine::Event::NUM_EVENTS);
+      |                                            C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/MessageBoxImpl.cpp:173:25:^~~~~~~~~~~
+error: 'SoundEngine' has not been declared
+  173 |                         SoundEngine::PlayMenuSound(SoundEngine::Event::CURSOR);
+      |                         ^~~~~~~~~~~
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/MessageBoxImpl.cpp:173:52:
+error:
+'SoundEngine' has not been declared
+  173 |                         SoundEngine::PlayMenuSound(SoundEngine::Event::CURSOR);
+      |                                                    ^~~~~~~~~~~
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/MessageBoxImpl.cpp:181:25:
+error:
+'SoundEngine' has not been declared
+  181 |                         SoundEngine::PlayMenuSound(SoundEngine::Event::ACCEPT);
+      |                         ^~~~~~~~~~~
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/MessageBoxImpl.cpp:181:52:
+error:
+'SoundEngine' has not been declared
+  181 |                         SoundEngine::PlayMenuSound(SoundEngine::Event::ACCEPT);
+      |                                                    ^~~~~~~~~~~
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/MessageBoxImpl.cpp:183:25:
+error:
+'SoundEngine' has not been declared
+  183 |                         SoundEngine::PlayMenuSound(SoundEngine::Event::CANCEL);
+      |                         ^~~~~~~~~~~
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/MessageBoxImpl.cpp:183:52:
+error:
+'SoundEngine' has not been declared
+  183 |                         SoundEngine::PlayMenuSound(SoundEngine::Event::CANCEL);
+      |                                                    ^~~~~~~~~~~
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/MessageBoxImpl.cpp:190:21:
+error:
+'SoundEngine' has not been declared
+  190 |                     SoundEngine::PlayMenuSound(SoundEngine::Event::CANCEL);
+      |                     ^~~~~~~~~~~
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/MessageBoxImpl.cpp:190:48:
+error:
+'SoundEngine' has not been declared
+  190 |                     SoundEngine::PlayMenuSound(SoundEngine::Event::CANCEL);
+      |                                                ^~~~~~~~~~~
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKeyString.cpp:make[1]: *** [C:\devkitPro\devkitARM/base_rules:79: Window.o] エラー 1
+make[1]: *** 未完了のジョブを待っています....
+ In constructor 'CTRPluginFramework::TouchKeyString::TouchKeyString(CTRPluginFramework::IntRect, bool)':
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKeyString.cpp:12:9:
+error:
+'_acceptSoundEvent' was not declared in this scope; did you mean 'ExceptionEvent'?    
+   12 |         _acceptSoundEvent = SoundEngine::Event::ACCEPT;
+      |         make[1]: *** [C:\devkitPro\devkitARM/base_rules:79: MessageBoxImpl.o] エラー 1
+^~~~~~~~~~~~~~~~~
+      |         C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKey.cpp:ExceptionEvent In constructor '
+CTRPluginFramework::TouchKey::TouchKey(CTRPluginFramework::TouchKey&&)C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKeyString.cpp:12:29:':
+ C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKey.cpp:19:9:error:  
+error:
+SoundEngine'' has not been declared
+   12 |         _acceptSoundEvent = _acceptSoundEventSoundEngine' was not declared in this scope; did you mean '::Event::ACCEPT;
+      |                             ExceptionEvent^~~~~~~~~~~'?
+   19 |
+_acceptSoundEventC:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKeyString.cpp: = tk._acceptSoundEvent;
+      |                              ^~~~~~~~~~~~~~~~~void CTRPluginFramework::TouchKeyString::Update(bool, const CTRPluginFramework::IntVector&)
+      |         ':
+ExceptionEventC:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKeyString.cpp:106:17:
+                                                                                                                          '                   ' has not been declared
+  106 |                                                                                     ::PlayMenuSound(SoundEngine::Event::SELECT);
+      |                                             '
+   19 |         _acceptSoundEvent = tk.
+_acceptSoundEventC:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKeyString.cpp:106:44:;
+      |                                 ^~~~~~~~~~~~~~~~~error:
+'SoundEngineC:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKey.cpp:' has not been declared
+  106 |                 SoundEngine::PlayMenuSound( In constructor 'SoundEngineCTRPluginFramework::TouchKey::TouchKey(int, CTRPluginFramework::IntRect, bool)::Event::SELECT);
+      |                                            ':
+^~~~~~~~~~~C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKey.cpp:30:9:
+ C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKeyString.cpp:108:17:error:  'error: _acceptSoundEvent'' was not declared in this scope; did you mean 'SoundEngineExceptionEvent' has not been declared
+  108 |                 '?
+   30 |         SoundEngine_acceptSoundEvent::PlayMenuSound(SoundEngine::Event::DESELECT);
+      |                  = SoundEngine::Event::DESELECT;
+      |         ^~~~~~~~~~~^~~~~~~~~~~~~~~~~
+
+      |         C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKeyString.cpp:108:44:ExceptionEvent
+error: C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKey.cpp:30:29:' SoundEngineerror: ' has not been declared
+  108 |                 SoundEngine::PlayMenuSound( SoundEngineSoundEngine::Event::DESELECT);
+      |                                            ' has not been declared
+   30 |         _acceptSoundEvent = ^~~~~~~~~~~SoundEngine
+::Event::DESELECT;
+      |                             C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKeyString.cpp:^~~~~~~~~~~ In member function '
+int CTRPluginFramework::TouchKeyString::operator()()':
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKeyString.cpp:143:13:
+error:
+'SoundEngine' has not been declared
+  143 |             SoundEngine::PlayMenuSound(_acceptSoundEvent);
+      |             ^~~~~~~~~~~
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKey.cpp: In constructor 'CTRPluginFramework::TouchKey::TouchKey(const std::string&, CTRPluginFramework::IntRect, int, bool)':
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKey.cpp:52:9:
+error:
+'_acceptSoundEvent' was not declared in this scope; did you mean 'ExceptionEvent'?
+   52 |         _acceptSoundEvent = SoundEngine::Event::DESELECT;
+      |         ^~~~~~~~~~~~~~~~~
+      |         ExceptionEvent
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKeyString.cpp:143:40:C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKey.cpp:52:29:                 '                                                                            ' has not been declared
+   52 |         _acceptSoundEvent = ExceptionEvent           '?
+  143 |             SoundEngine::PlayMenuSound(::Event::DESELECT;
+      |                                                         );
+      |
+^~~~~~~~~~~~~~~~~
+      |                                        ExceptionEvent
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKeyString.cpp: At global scope:
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKeyString.cpp:149:10:
+error:
+variable or field 'SetAcceptSoundEvent' declared void
+  149 |     void TouchKeyString::SetAcceptSoundEvent(SoundEngine::Event event)
+      |          ^~~~~~~~~~~~~~C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKey.cpp:
+ In constructor '                                                                                                                        CTRPluginFramework::TouchKey::TouchKey(int, IconCallback, CTRPluginFramework::IntRect, bool) ':
+                                                                                                                                           ' has not been declared
+  149 |     void TouchKeyString::SetAcceptSoundEvent('                            ::Event event)
+      |                                              ' was not declared in this scope; did you mean '
+'?
+   69 |         C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKeyString.cpp:154:5:_acceptSoundEvent  = SoundEngine::Event::DESELECT;
+      |        
+error:
+^~~~~~~~~~~~~~~~~'
+      |         SoundEngineExceptionEvent' does not name a type
+  154 |
+SoundEngineC:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKey.cpp:69:29:::Event TouchKeyString::GetAcceptSoundEvent()
+      |
+'SoundEngine' has not been declared
+   69 |         _acceptSoundEvent = SoundEngine::Event::DESELECT;
+      |                             ^~~~~~~~~~~
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKey.cpp: In member function 'virtual void CTRPluginFramework::TouchKey::Update(bool, const CTRPluginFramework::IntVector&)':
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKey.cpp:157:17:
+error:
+'SoundEngine' has not been declared
+  157 |                 SoundEngine::PlayMenuSound(SoundEngine::Event::SELECT);
+      |                 ^~~~~~~~~~~
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKey.cpp:157:44:
+error:
+'SoundEngine' has not been declared
+  157 |                 SoundEngine::PlayMenuSound(SoundEngine::Event::SELECT);
+      |                                            ^~~~~~~~~~~
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKey.cpp:159:17:
+error:
+'SoundEngine' has not been declared
+  159 |                 SoundEngine::PlayMenuSound(SoundEngine::Event::DESELECT);
+      |                 ^~~~~~~~~~~
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKey.cpp:159:44:
+error:
+'SoundEngine' has not been declared
+  159 |                 SoundEngine::PlayMenuSound(SoundEngine::Event::DESELECT);
+      |                                            ^~~~~~~~~~~
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKey.cpp: In member function 'int CTRPluginFramework::TouchKey::operator()(std::string&)':
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKey.cpp:175:17:
+error:
+'SoundEngine' has not been declared
+  175 |                 SoundEngine::PlayMenuSound(_acceptSoundEvent);
+      |                 ^~~~~~~~~~~
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKey.cpp:175:44: make[1]: *** [C:\devkitPro\devkitARM/base_rules:79: TouchKeyString.o] エラー 1
+error: '_acceptSoundEvent' was not declared in this scope; did you mean 'ExceptionEvent'?
+  175 |                 SoundEngine::PlayMenuSound(_acceptSoundEvent);
+      |                                            ^~~~~~~~~~~~~~~~~
+      |                                            ExceptionEvent
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKey.cpp:185:17:
+error:
+'SoundEngine' has not been declared
+  185 |                 SoundEngine::PlayMenuSound(_acceptSoundEvent);
+      |                 ^~~~~~~~~~~
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKey.cpp:185:44:
+error:
+'_acceptSoundEvent' was not declared in this scope; did you mean 'ExceptionEvent'?        
+  185 |                 SoundEngine::PlayMenuSound(_acceptSoundEvent);
+      |                                            ^~~~~~~~~~~~~~~~~
+      |                                            ExceptionEvent
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKey.cpp: At global scope:
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKey.cpp:197:10:
+error:
+variable or field 'SetAcceptSoundEvent' declared void
+  197 |     void TouchKey::SetAcceptSoundEvent(SoundEngine::Event event)
+      |          ^~~~~~~~
+C:/Users/mrzkr/sources/3ds/cheats/AnimalBytes/libctrpf/source/CTRPluginFrameworkImpl/Graphics/TouchKey.cpp:197:40:
+error:
+'SoundEngine' has not been declared
+  197 |     void TouchKey::SetAcceptSoundEvent(SoundEngine::Event event)
+      |                                        ^~~~~~~~~~~
+make[1]: *** [C:\devkitPro\devkitARM/base_rules:79: TouchKey.o] エラー 1
+make: *** [Makefile:174: lib/libctrpf.a] エラー 2

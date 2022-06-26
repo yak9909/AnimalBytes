@@ -115,13 +115,6 @@ namespace CTRPluginFramework
         int     GetLastSelectedEntry();
 
         /**
-         * \brief Sets the sound event to play when the entry is activated
-         * \param entry Entry index to change the sound event
-         * \param soundEvent Event to set for the given entry.
-         */
-        void	ChangeEntrySound(int entry, SoundEngine::Event soundEvent);
-
-        /**
          * \brief Populate a keyboard with the strings contained in an std::vector
          * \param input  A std::vector that contain a list of strings
          * \param resetScroll  Set to true to reset the scroll position if the list is the same size

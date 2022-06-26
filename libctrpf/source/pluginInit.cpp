@@ -211,12 +211,7 @@ namespace CTRPluginFramework
         fsInit();
         hidInitFake();
         cfguInit();
-        ncsndInit(false);
         plgLdrInit();
-
-        // Set cwav VA to PA function
-        SoundEngineImpl::Initializelibcwav();
-        SoundEngineImpl::SetVaToPaConvFunction([](const void* addr) {return svcConvertVAToPA(addr, false);});
 
         // Initialize Kernel stuff
         Kernel::Initialize();
@@ -321,9 +316,6 @@ namespace CTRPluginFramework
             hidInit();
         }
 
-        // Init menu sounds.
-        SoundEngineImpl::InitializeMenuSounds();
-
         // Load settings
         Preferences::LoadSettings();
 
@@ -365,24 +357,17 @@ namespace CTRPluginFramework
 
                 if (event == PLG_SLEEP_ENTRY)
                 {
-                    SoundEngineImpl::NotifyAptEvent(APT_HookType::APTHOOK_ONSLEEP);
                     SystemImpl::AptStatus |= BIT(6);
                     PLGLDR__Reply(event);
                 }
                 else if (event == PLG_SLEEP_EXIT)
                 {
                     SystemImpl::WakeUpFromSleep();
-                    SoundEngineImpl::NotifyAptEvent(APT_HookType::APTHOOK_ONWAKEUP);
                     PLGLDR__Reply(event);
                 }
                 else if (event == PLG_ABOUT_TO_SWAP)
                 {
                     OnPluginToSwap();
-
-                    SoundEngineImpl::NotifyAptEvent(APT_HookType::APTHOOK_ONSUSPEND);
-
-                    // Close csnd as it may be needed by other processes (4 sessions max.)
-                    ncsndExit();
 
                     // Un-map hook memory
                     HookManager::Lock();
@@ -399,20 +384,12 @@ namespace CTRPluginFramework
                     HookManager::RecoverFromUnmapMemory();
                     HookManager::Unlock();
 
-                    // Init csnd again.
-                    ncsndInit(false);
-
-                    SoundEngineImpl::NotifyAptEvent(APT_HookType::APTHOOK_ONRESTORE);
-
                     OnPluginFromSwap();
                 }
                 else if (event == PLG_ABOUT_TO_EXIT)
                 {
                     OnProcessExit();
                     ProcessImpl::SignalExit();
-
-                    SoundEngineImpl::NotifyAptEvent(APT_HookType::APTHOOK_ONEXIT);
-                    SoundEngineImpl::ClearMenuSounds();
 
                     SystemImpl::AptStatus |= BIT(3);
                     Scheduler::Exit();
@@ -421,7 +398,6 @@ namespace CTRPluginFramework
                     PluginMenuImpl::ForceExit();
 
                     // Close some handles
-                    ncsndExit();
                     if (settings.UseGameHidMemory)
                         hidExitFake();
                     else

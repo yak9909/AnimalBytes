@@ -7,7 +7,6 @@
 #include "CTRPluginFramework/System/System.hpp"
 #include "CTRPluginFrameworkImpl/System/SystemImpl.hpp"
 #include "CTRPluginFrameworkImpl/Preferences.hpp"
-#include "CTRPluginFramework/Sound.hpp"
 
 namespace CTRPluginFramework
 {
@@ -116,7 +115,6 @@ namespace CTRPluginFramework
             }
         }
         if (sleepClose) _keys = oldKeys;
-        SoundEngine::PlayMenuSound(SoundEngine::Event::CANCEL);
     }
 
     void    HotkeysModifier::_DrawTop(void) const

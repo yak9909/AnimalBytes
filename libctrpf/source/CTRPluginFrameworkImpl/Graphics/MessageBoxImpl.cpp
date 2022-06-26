@@ -7,7 +7,6 @@
 #include "CTRPluginFramework/System/FwkSettings.hpp"
 #include "CTRPluginFrameworkImpl/Preferences.hpp"
 #include "CTRPluginFramework/System/Sleep.hpp"
-#include "CTRPluginFramework/Sound.hpp"
 
 namespace CTRPluginFramework
 {
@@ -162,7 +161,6 @@ namespace CTRPluginFramework
                 {
                     if (_cursor == 1)
                     {
-                        SoundEngine::PlayMenuSound(SoundEngine::Event::CURSOR);
                         _cursor = 0;
                     }
                     break;
@@ -171,24 +169,18 @@ namespace CTRPluginFramework
                 {
                     if (_cursor == 0 && _dialogType != DialogType::DialogOk)
                     {
-                        SoundEngine::PlayMenuSound(SoundEngine::Event::CURSOR);
                         _cursor = 1;
                     }
                     break;
                 }
                 case Key::A:
                 {
-                    if (_cursor == 0)
-                        SoundEngine::PlayMenuSound(SoundEngine::Event::ACCEPT);
-                    else
-                        SoundEngine::PlayMenuSound(SoundEngine::Event::CANCEL);
                     _exit = true;
                     _exitKey |= Key::A;
                     break;
                 }
                 case Key::B:
                 {
-                    SoundEngine::PlayMenuSound(SoundEngine::Event::CANCEL);
                     _cursor = 1;
                     _exit = true;
                     _exitKey |= Key::B;

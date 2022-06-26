@@ -177,9 +177,9 @@ lib/libctrpf.a : lib release
 	@rm release/PluginMenuTools.o # Force update of revision, date etc
 #	@cp $(CURDIR)/libcwav/lib/libcwav.a lib/libcwav.a
 #	@cp $(CURDIR)/libcwav/libncsnd/lib/libncsnd.a lib/libncsnd.a
-	@mv $@ $@tmp
-	@$(AR) -M <<< $$'create $@ \naddlib $@tmp \naddlib lib/libcwav.a\naddlib lib/libncsnd.a\nsave\nend'
-	@rm $@tmp
+#	@mv $@ $@tmp
+#	@$(AR) -M <<< $$'create $@ \naddlib $@tmp \naddlib lib/libcwav.a\naddlib lib/libncsnd.a\nsave\nend'
+#	@rm $@tmp
 #	@rm lib/libcwav.a
 #	@rm lib/libncsnd.a
 

@@ -230,14 +230,6 @@ namespace CTRPluginFramework
         }
     }
 
-    void    KeyboardImpl::ChangeEntrySound(int entry, SoundEngine::Event soundEvent)
-    {
-        if (_customKeyboard && entry >= 0 && entry < static_cast<int>(_strKeys.size()) && _strKeys[entry]->CanUse())
-        {
-            _strKeys[entry]->SetAcceptSoundEvent(soundEvent);
-        }
-    }
-
     void    KeyboardImpl::Populate(const std::vector<std::string> &input, bool resetScroll)
     {
         bool mustReset = (_strKeys.size() != input.size()) || resetScroll || _isIconKeyboard;
@@ -750,14 +742,12 @@ namespace CTRPluginFramework
                 if (_canAbort)
                 {
                     _userAbort = true;
-                    SoundEngine::PlayMenuSound(SoundEngine::Event::CANCEL);
                 }
 
                 return;
             }
             if (!_customKeyboard && event.key.code == Y && !_userInput.empty())
             {
-                SoundEngine::PlayMenuSound(SoundEngine::Event::DESELECT);
                 keyPressIntended  = true;
                 _userInput.clear();
                 _ClearKeyboardEvent();
@@ -769,7 +759,6 @@ namespace CTRPluginFramework
             }
             if (event.key.code == X && !_customKeyboard && _layout != QWERTY && _canChangeLayout)
             {
-                SoundEngine::PlayMenuSound(SoundEngine::Event::DESELECT);
                 keyPressIntended = true;
                 _userInput.clear();
                 _ClearKeyboardEvent();
@@ -1077,7 +1066,6 @@ namespace CTRPluginFramework
         _QwertyKeys.emplace_back('l', pos); pos.leftTop.x += 25;
         _QwertyKeys.emplace_back('\'', pos); pos.leftTop.x += 25;
         _QwertyKeys.emplace_back(KEY_ENTER, Icon::DrawEnterKey, pos);
-        _QwertyKeys.back().SetAcceptSoundEvent(SoundEngine::Event::ACCEPT);
 
         pos.leftTop.x = 20;
         pos.leftTop.y = 116;
@@ -1136,7 +1124,6 @@ namespace CTRPluginFramework
         _QwertyKeys.emplace_back('L', pos); pos.leftTop.x += 25;
         _QwertyKeys.emplace_back('"', pos); pos.leftTop.x += 25;
         _QwertyKeys.emplace_back(KEY_ENTER, Icon::DrawEnterKey, pos);
-        _QwertyKeys.back().SetAcceptSoundEvent(SoundEngine::Event::ACCEPT);
 
         pos.leftTop.x = 20;
         pos.leftTop.y = 116;
@@ -1195,7 +1182,6 @@ namespace CTRPluginFramework
         _QwertyKeys.emplace_back('5', pos); pos.leftTop.x += 25;
         _QwertyKeys.emplace_back('6', pos); pos.leftTop.x += 25;
         _QwertyKeys.emplace_back(KEY_ENTER, Icon::DrawEnterKey, pos);
-        _QwertyKeys.back().SetAcceptSoundEvent(SoundEngine::Event::ACCEPT);
 
         pos.leftTop.x = 20;
         pos.leftTop.y = 116;
@@ -1253,7 +1239,6 @@ namespace CTRPluginFramework
         _QwertyKeys.emplace_back('5', pos); pos.leftTop.x += 25;
         _QwertyKeys.emplace_back('6', pos); pos.leftTop.x += 25;
         _QwertyKeys.emplace_back(KEY_ENTER, Icon::DrawEnterKey, pos);
-        _QwertyKeys.back().SetAcceptSoundEvent(SoundEngine::Event::ACCEPT);
 
         pos.leftTop.x = 20;
         pos.leftTop.y = 116;
@@ -1315,7 +1300,6 @@ namespace CTRPluginFramework
         _QwertyKeys.emplace_back("\uE042" /* A Wii */, pos); pos.leftTop.x += 25;
         _QwertyKeys.emplace_back("\uE043" /* B Wii */, pos); pos.leftTop.x += 25;
         _QwertyKeys.emplace_back(KEY_ENTER, Icon::DrawEnterKey, pos);
-        _QwertyKeys.back().SetAcceptSoundEvent(SoundEngine::Event::ACCEPT);
 
         pos.leftTop.x = 20;
         pos.leftTop.y = 116;
@@ -1372,7 +1356,6 @@ namespace CTRPluginFramework
         _QwertyKeys.emplace_back("\uE00F" /* Snowman */, pos); pos.leftTop.x += 25;
         _QwertyKeys.emplace_back("\uE06B" /* ? */, pos); pos.leftTop.x += 25;
         _QwertyKeys.emplace_back(KEY_ENTER, Icon::DrawEnterKey, pos);
-        _QwertyKeys.back().SetAcceptSoundEvent(SoundEngine::Event::ACCEPT);
 
         pos.leftTop.x = 20;
         pos.leftTop.y = 116;
@@ -2232,8 +2215,6 @@ namespace CTRPluginFramework
         }
 
         if (key == A) {
-            if (_manualKey != -1)
-                SoundEngine::PlayMenuSound(_strKeys[_manualKey]->GetAcceptSoundEvent());
             _userSelectedKey = true;
         }
     }
@@ -2250,7 +2231,6 @@ namespace CTRPluginFramework
         _manualKey = newVal;
         static bool preventRecursion = false;
         if (_manualKey != _prevManualKey && !preventRecursion && playSound)
-            SoundEngine::PlayMenuSound(SoundEngine::Event::CURSOR);
         if (_onKeyboardEvent != nullptr && _owner != nullptr && _manualKey != _prevManualKey && !preventRecursion) {
             preventRecursion = true;
             _ClearKeyboardEvent();
