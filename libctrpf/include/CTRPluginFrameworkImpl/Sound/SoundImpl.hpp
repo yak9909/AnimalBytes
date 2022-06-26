@@ -8,41 +8,41 @@
 
 namespace CTRPluginFramework
 {
-    class SoundImpl
-    {
-    public:
+  class SoundImpl
+  {
+  public:
 
-        SoundImpl(const std::string& bcwavFile, int maxSimultPlays = 1);
+    SoundImpl(const std::string& bcwavFile, int maxSimultPlays = 1);
 
-        SoundImpl(const u8* bcwavBuffer, int maxSimultPlays = 1);
+    SoundImpl(const u8* bcwavBuffer, int maxSimultPlays = 1);
 
-        cwavStatus_t GetLoadStatus();
+    cwavStatus_t GetLoadStatus();
 
-        void SetVolume(float volume);
+    void SetVolume(float volume);
 
-        float GetVolume();
+    float GetVolume();
 
-        void SetPan(float pan);
+    void SetPan(float pan);
 
-        float GetPan();
+    float GetPan();
 
-        u32 GetChannelAmount();
+    u32 GetChannelAmount();
 
-        bool IsLooped();
+    bool IsLooped();
 
-        cwavStatus_t Play(int leftEarChannel, int rightEarChannel);
+    cwavStatus_t Play(int leftEarChannel, int rightEarChannel);
 
-        bool PlayDirectly(int leftEarChannel, int rightEarChannel, u32 directSoundChannel, u32 priority, DirectSoundModifiers& modifiers);
+    bool PlayDirectly(int leftEarChannel, int rightEarChannel, u32 directSoundChannel, u32 priority, DirectSoundModifiers& modifiers);
 
-        void Stop(int leftEarChannel, int rightEarChannel);
+    void Stop(int leftEarChannel, int rightEarChannel);
 
-        ~SoundImpl();
+    ~SoundImpl();
 
-        s32     _refcount = 1;
+    s32     _refcount = 1;
 
-    private:
-        CWAV    _cwav;
-    };
+  private:
+    CWAV    _cwav;
+  };
 }
 
 #endif

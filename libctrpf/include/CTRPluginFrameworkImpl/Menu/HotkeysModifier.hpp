@@ -7,26 +7,26 @@
 
 namespace CTRPluginFramework
 {
-    class HotkeysModifier
-    {
-    public:
-        HotkeysModifier(u32 &keys, const std::string &message);
-        ~HotkeysModifier(void);
+  class HotkeysModifier
+  {
+  public:
+    HotkeysModifier(u32 &keys, const std::string &message);
+    ~HotkeysModifier(void);
 
-        void operator()(void);
+    void operator()(void);
 
-    private:
+  private:
 
-        void    _DrawTop(void) const;
-        void    _DrawBottom(void);
-        void    _Update(void);
+    void    _DrawTop(void) const;
+    void    _DrawBottom(void);
+    void    _Update(void);
 
-        u32                     &_keys;
-        std::vector<Button>     _checkboxs;
-        const std::string       _message;
+    u32                     &_keys;
+    std::vector<Button>     _checkboxs;
+    const std::string       _message;
 
 
-    };
+  };
 }
 
 #endif

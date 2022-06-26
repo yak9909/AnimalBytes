@@ -4,8 +4,7 @@
 
 namespace CTRPluginFramework
 {
-    class Time;
-    
+  class Time;
     void    Sleep(Time sleepTime);
 }
 

@@ -6,25 +6,25 @@
 
 namespace CTRPluginFramework
 {
-    class Converter
-    {
-    public:
-        Converter(void);
-        ~Converter(void);
+  class Converter
+  {
+  public:
+    Converter(void);
+    ~Converter(void);
 
-        // Blocking call
-        void operator()(u32 val = 0);
+    // Blocking call
+    void operator()(u32 val = 0);
 
-        static Converter *Instance(void);
+    static Converter *Instance(void);
 
-    private:
-        NumericTextBox  _decimalTB;
-        NumericTextBox  _hexadecimalTB;
-        NumericTextBox  _floatTB;
-        NumericTextBox  _hexfloatTB;
+  private:
+    NumericTextBox  _decimalTB;
+    NumericTextBox  _hexadecimalTB;
+    NumericTextBox  _floatTB;
+    NumericTextBox  _hexfloatTB;
 
-        void        _Draw(void);
-    };
+    void        _Draw(void);
+  };
 }
 
 #endif

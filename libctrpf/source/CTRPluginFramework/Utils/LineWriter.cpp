@@ -4,59 +4,59 @@
 
 namespace CTRPluginFramework
 {
-    #define BUFFER_SIZE 0x1000
+  #define BUFFER_SIZE 0x1000
 
-    LineWriter::LineWriter(File &output) :
-        _output{ output }, _offsetInBuffer{ 0 }, _buffer{ static_cast<u8 *>(Heap::Alloc(BUFFER_SIZE)) }
-    {
-    }
+  LineWriter::LineWriter(File &output) :
+    _output{ output }, _offsetInBuffer{ 0 }, _buffer{ static_cast<u8 *>(Heap::Alloc(BUFFER_SIZE)) }
+  {
+  }
 
-    LineWriter::~LineWriter(void)
+  LineWriter::~LineWriter(void)
+  {
+    Flush();
+    Heap::Free(_buffer);
+  }
+
+  LineWriter & LineWriter::operator<<(const std::string &input)
+  {
+    if (input.empty())
+      return *this;
+
+    u8  *dest = _buffer + _offsetInBuffer;
+
+    for (const char c : input)
     {
+      if (_offsetInBuffer >= BUFFER_SIZE)
+      {
         Flush();
-        Heap::Free(_buffer);
+        dest = _buffer;
+      }
+
+      *dest++ = c;
+      ++_offsetInBuffer;
     }
 
-    LineWriter & LineWriter::operator<<(const std::string &input)
-    {
-        if (input.empty())
-            return *this;
+    return *this;
+  }
 
-        u8  *dest = _buffer + _offsetInBuffer;
+  const std::string &LineWriter::endl(void)
+  {
+    static const std::string end = "\r\n";
+    return end;
+  }
 
-        for (const char c : input)
-        {
-            if (_offsetInBuffer >= BUFFER_SIZE)
-            {
-                Flush();
-                dest = _buffer;
-            }
+  void    LineWriter::Flush(void)
+  {
+    if (!_offsetInBuffer || !_output.IsOpen())
+      return;
+    _output.Write(_buffer, _offsetInBuffer);
+    _output.Flush();
+    _offsetInBuffer = 0;
+  }
 
-            *dest++ = c;
-            ++_offsetInBuffer;
-        }
-
-        return *this;
-    }
-
-    const std::string &LineWriter::endl(void)
-    {
-        static const std::string end = "\r\n";
-        return end;
-    }
-
-    void    LineWriter::Flush(void)
-    {
-        if (!_offsetInBuffer || !_output.IsOpen())
-            return;
-        _output.Write(_buffer, _offsetInBuffer);
-        _output.Flush();
-        _offsetInBuffer = 0;
-    }
-
-    void    LineWriter::Close(void)
-    {
-        Flush();
-        _output.Close();
-    }
+  void    LineWriter::Close(void)
+  {
+    Flush();
+    _output.Close();
+  }
 }

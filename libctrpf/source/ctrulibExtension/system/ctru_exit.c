@@ -6,11 +6,11 @@ void    envDestroyHandles(void);
 
 void    __attribute__((noreturn)) __libctru_exit(int rc)
 {
-    envDestroyHandles();
+  envDestroyHandles();
 
-    if (__sync_fini)
-        __sync_fini();
+  if (__sync_fini)
+    __sync_fini();
 
-    // End this thread
-    svcExitThread();
+  // End this thread
+  svcExitThread();
 }

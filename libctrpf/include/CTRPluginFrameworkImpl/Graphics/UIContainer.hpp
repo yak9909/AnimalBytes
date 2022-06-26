@@ -6,20 +6,19 @@
 
 namespace CTRPluginFramework
 {
-    class UIContainer
-    {
-    public:
-        UIContainer(void);
-        ~UIContainer(void);
+  class UIContainer
+  {
+  public:
+    UIContainer(void);
+    ~UIContainer(void);
 
-        void    operator+=(Drawable *uiControl);
-        void    Draw(void);
-        void    Update(const bool isTouchDown, const IntVector &touchPos);
-        void    ExecuteAll(void);
-        
-    private:
-        std::vector<Drawable*> _uiControls;
-    };
+    void    operator+=(Drawable *uiControl);
+    void    Draw(void);
+    void    Update(const bool isTouchDown, const IntVector &touchPos);
+    void    ExecuteAll(void);
+      private:
+    std::vector<Drawable*> _uiControls;
+  };
 }
 
 #endif

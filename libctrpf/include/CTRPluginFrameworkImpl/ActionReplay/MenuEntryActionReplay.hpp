@@ -6,17 +6,17 @@
 
 namespace CTRPluginFramework
 {
-    class MenuEntryActionReplay : public MenuEntryImpl
-    {
-        friend class Menu;
-    public:
-        MenuEntryActionReplay(const std::string &name, const std::string &note = "");
-        ~MenuEntryActionReplay();
+  class MenuEntryActionReplay : public MenuEntryImpl
+  {
+    friend class Menu;
+  public:
+    MenuEntryActionReplay(const std::string &name, const std::string &note = "");
+    ~MenuEntryActionReplay();
 
-        MenuEntryActionReplay*    Update(void);
+    MenuEntryActionReplay*    Update(void);
 
-        ARCodeContext   context;
-    };
+    ARCodeContext   context;
+  };
 }
 
 #endif

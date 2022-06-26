@@ -7,7 +7,7 @@ int g_charPerSheet = 1;
 
 Result fontEnsureMappedExtension(void)
 {
-    Result res = fontEnsureMapped();
-    if (R_SUCCEEDED(res)) g_charPerSheet = g_sharedFont->finf.tglp->nRows * g_sharedFont->finf.tglp->nLines;
-    return res;
+  Result res = fontEnsureMapped();
+  if (R_SUCCEEDED(res)) g_charPerSheet = g_sharedFont->finf.tglp->nRows * g_sharedFont->finf.tglp->nLines;
+  return res;
 }

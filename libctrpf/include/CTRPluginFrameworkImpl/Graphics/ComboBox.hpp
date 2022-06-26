@@ -9,29 +9,29 @@
 
 namespace CTRPluginFramework
 {
-    class ComboBox : public Drawable
-    {
-    public:
-        ComboBox(int posX, int posY, int width, int height);
+  class ComboBox : public Drawable
+  {
+  public:
+    ComboBox(int posX, int posY, int width, int height);
 
-        void    Add(const std::string &item);
-        void    Clear(void);
-        void    Draw(void) override;
-        void    Update(const bool isTouchDown, const IntVector &touchPos) override;
-        bool    operator()(void) override;
+    void    Add(const std::string &item);
+    void    Clear(void);
+    void    Draw(void) override;
+    void    Update(const bool isTouchDown, const IntVector &touchPos) override;
+    bool    operator()(void) override;
 
-        bool    IsEnabled;
-        bool    IsVisible;
-        int     SelectedItem;
+    bool    IsEnabled;
+    bool    IsVisible;
+    int     SelectedItem;
 
 
-    private:
-        bool                        _execute;
-        bool                        _isTouched;
-        IntRect                     _rectPos;
-        std::vector<std::string>    _items;
+  private:
+    bool                        _execute;
+    bool                        _isTouched;
+    IntRect                     _rectPos;
+    std::vector<std::string>    _items;
 
-    };
+  };
 }
 
 #endif

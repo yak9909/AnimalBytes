@@ -5,25 +5,25 @@
 
 namespace CTRPluginFramework
 {
-    class CustomIcon {
+  class CustomIcon {
 
-    public:
-        struct Pixel
-        {
-            u8 a;
-            u8 b;
-            u8 g;
-            u8 r;
-        };
-
-        Pixel*  pixArray;
-        int     sizeX;
-        int     sizeY;
-        bool    isEnabled;
-
-        CustomIcon(Pixel* pixArray, int sizeX, int sizeY, bool isEnabled);
-        CustomIcon();
+  public:
+    struct Pixel
+    {
+      u8 a;
+      u8 b;
+      u8 g;
+      u8 r;
     };
+
+    Pixel*  pixArray;
+    int     sizeX;
+    int     sizeY;
+    bool    isEnabled;
+
+    CustomIcon(Pixel* pixArray, int sizeX, int sizeY, bool isEnabled);
+    CustomIcon();
+  };
 
 }
 

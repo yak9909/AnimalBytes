@@ -3,14 +3,14 @@
 
 namespace CTRPluginFramework
 {
-    namespace Heap
-    {
-        void    *Alloc(const size_t size);
-        void    *MemAlign(const size_t size, size_t alignment);
-        void    *Realloc(void *ptr, const size_t size);
-        void    Free(void *ptr);
-        size_t  SpaceFree(void);
-    }
+  namespace Heap
+  {
+    void    *Alloc(const size_t size);
+    void    *MemAlign(const size_t size, size_t alignment);
+    void    *Realloc(void *ptr, const size_t size);
+    void    Free(void *ptr);
+    size_t  SpaceFree(void);
+  }
 }
 
 #endif

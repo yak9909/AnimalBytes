@@ -1,7 +1,7 @@
 /**
- * @file types.h
- * @brief Various system types.
- */
+* @file types.h
+* @brief Various system types.
+*/
 #pragma once
 #ifndef TYPES_H
 #define TYPES_H
@@ -50,33 +50,33 @@ typedef void (*voidfn)(void);
 // Fix intellisense errors
 #ifdef _MSC_VER
 
-    #define ALIGN(m)
-    #define PACKED
-    #define USED
-    #define UNUSED
-    #define DEPRECATED
-    #define NAKED
-    #define NORETURN
+  #define ALIGN(m)
+  #define PACKED
+  #define USED
+  #define UNUSED
+  #define DEPRECATED
+  #define NAKED
+  #define NORETURN
 
 #else
 
-    /// Aligns a struct (and other types?) to m, making sure that the size of the struct is a multiple of m.
-    #define ALIGN(m)   __attribute__((aligned(m)))
-    /// Packs a struct (and other types?) so it won't include padding bytes.
-    #define PACKED     __attribute__((packed))
+  /// Aligns a struct (and other types?) to m, making sure that the size of the struct is a multiple of m.
+  #define ALIGN(m)   __attribute__((aligned(m)))
+  /// Packs a struct (and other types?) so it won't include padding bytes.
+  #define PACKED     __attribute__((packed))
 
-    #define USED       __attribute__((used))
-    #define UNUSED     __attribute__((unused))
+  #define USED       __attribute__((used))
+  #define UNUSED     __attribute__((unused))
 
-    #ifndef LIBCTRU_NO_DEPRECATION
-        /// Flags a function as deprecated.
-        #define DEPRECATED __attribute__ ((deprecated))
-    #else
-        /// Flags a function as deprecated.
-        #define DEPRECATED
-    #endif
-    #define NAKED __attribute__((naked))
-    #define NORETURN __attribute__((noreturn))
+  #ifndef LIBCTRU_NO_DEPRECATION
+    /// Flags a function as deprecated.
+    #define DEPRECATED __attribute__ ((deprecated))
+  #else
+    /// Flags a function as deprecated.
+    #define DEPRECATED
+  #endif
+  #define NAKED __attribute__((naked))
+  #define NORETURN __attribute__((noreturn))
 
 #endif
 

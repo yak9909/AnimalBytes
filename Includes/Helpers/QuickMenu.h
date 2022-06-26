@@ -7,72 +7,72 @@
 #include "HoldKey.h"
 
 namespace CTRPluginFramework {
-    using VoidMethod = void(*)(void);
-    using ArgMethod = void(*)(void *);
-    using StringVector = std::vector<std::string>;
-    struct QuickMenuItem
+  using VoidMethod = void(*)(void);
+  using ArgMethod = void(*)(void *);
+  using StringVector = std::vector<std::string>;
+  struct QuickMenuItem
+  {
+    enum class ItemType
     {
-        enum class ItemType
-        {
-            Entry, SubMenu
-        };
-
-        QuickMenuItem(const std::string &name, const ItemType itemType);
-
-        std::string name;
-        const ItemType    itemType;
+      Entry, SubMenu
     };
 
-    struct QuickMenuEntry : QuickMenuItem
+    QuickMenuItem(const std::string &name, const ItemType itemType);
+
+    std::string name;
+    const ItemType    itemType;
+  };
+
+  struct QuickMenuEntry : QuickMenuItem
+  {
+    enum class MethodType
     {
-        enum class MethodType
-        {
-            VOID, ARG
-        };
-
-        QuickMenuEntry(const std::string &name, VoidMethod method);
-        QuickMenuEntry(const std::string &name, ArgMethod method, void *arg);
-        ~QuickMenuEntry();
-
-        MethodType      methodType;
-        union
-        {
-            VoidMethod  voidMethod;
-            ArgMethod   argMethod;
-        };
-        void            *methodArg;
+      VOID, ARG
     };
 
-    struct QuickMenuSubMenu : QuickMenuItem
+    QuickMenuEntry(const std::string &name, VoidMethod method);
+    QuickMenuEntry(const std::string &name, ArgMethod method, void *arg);
+    ~QuickMenuEntry();
+
+    MethodType      methodType;
+    union
     {
-        QuickMenuSubMenu(const std::string &name);
-        QuickMenuSubMenu(const std::string &name, const std::vector<QuickMenuItem *> &items);
-        ~QuickMenuSubMenu();
-        void    operator += (QuickMenuItem *item);
-        void    operator -= (QuickMenuItem *item);
-
-        std::vector<QuickMenuItem *>    items;
+      VoidMethod  voidMethod;
+      ArgMethod   argMethod;
     };
+    void            *methodArg;
+  };
 
-    class QuickMenu {
-    public:        
-        ~QuickMenu();        
-        static QuickMenu &GetInstance(void);
+  struct QuickMenuSubMenu : QuickMenuItem
+  {
+    QuickMenuSubMenu(const std::string &name);
+    QuickMenuSubMenu(const std::string &name, const std::vector<QuickMenuItem *> &items);
+    ~QuickMenuSubMenu();
+    void    operator += (QuickMenuItem *item);
+    void    operator -= (QuickMenuItem *item);
 
-        void     ChangeHotkey(u32 newHotkey);
+    std::vector<QuickMenuItem *>    items;
+  };
 
-        void    operator += (QuickMenuItem *item);
-        void    operator -= (QuickMenuItem *item);
-        void    operator () (void);
+  class QuickMenu {
+  public:        
+    ~QuickMenu();        
+    static QuickMenu &GetInstance(void);
 
-    private:
-        QuickMenu(u32 hotkey);
+    void     ChangeHotkey(u32 newHotkey);
 
-        HoldKey                         _hotkey;
-        QuickMenuSubMenu                *_subMenuOpened;
-        std::vector<QuickMenuItem *>    _root;
-        std::stack<QuickMenuSubMenu *>  _submenus;
+    void    operator += (QuickMenuItem *item);
+    void    operator -= (QuickMenuItem *item);
+    void    operator () (void);
 
-        static QuickMenu                _instance;
-    };
+  private:
+    QuickMenu(u32 hotkey);
+
+    HoldKey                         _hotkey;
+    QuickMenuSubMenu                *_subMenuOpened;
+    std::vector<QuickMenuItem *>    _root;
+    std::stack<QuickMenuSubMenu *>  _submenus;
+
+    static QuickMenu                _instance;
+  };
 }

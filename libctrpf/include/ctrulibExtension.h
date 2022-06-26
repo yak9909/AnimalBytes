@@ -11,38 +11,38 @@
 // Needed to override ctrulib Thread_tag
 struct CThread_tag
 {
-    Handle handle;
-    ThreadFunc ep;
-    void* arg;
-    int rc;
-    bool detached, finished;
-    struct _reent reent;
-    void* stacktop;
+  Handle handle;
+  ThreadFunc ep;
+  void* arg;
+  int rc;
+  bool detached, finished;
+  struct _reent reent;
+  void* stacktop;
 };
 
 // Keep this structure under 0x80 bytes
 typedef struct
 {
-	// Magic value used to check if the struct is initialized
-	u32 magic;
+// Magic value used to check if the struct is initialized
+u32 magic;
 
-	// Pointer to the current thread (if exists)
-	Thread thread_ptr;
+// Pointer to the current thread (if exists)
+Thread thread_ptr;
 
-	// Pointer to this thread's newlib state
-	struct _reent* reent;
+// Pointer to this thread's newlib state
+struct _reent* reent;
 
-	// Pointer to this thread's thread-local segment
-	void* tls_tp; // !! Keep offset in sync inside __aeabi_read_tp !!
+// Pointer to this thread's thread-local segment
+void* tls_tp; // !! Keep offset in sync inside __aeabi_read_tp !!
 
-	// FS session override
-	u32    fs_magic;
-	Handle fs_session;
+// FS session override
+u32    fs_magic;
+Handle fs_session;
 } ThreadVars;
 
 static inline ThreadVars* getThreadVars(void)
 {
-	return (ThreadVars*)getThreadLocalStorage();
+return (ThreadVars*)getThreadLocalStorage();
 }
 
 #ifdef __cplusplus

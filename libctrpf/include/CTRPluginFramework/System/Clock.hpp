@@ -5,18 +5,18 @@
 
 namespace CTRPluginFramework
 {
-    class Clock
-    {
-    public:
-        Clock(void);
-        Clock(Time time);
+  class Clock
+  {
+  public:
+    Clock(void);
+    Clock(Time time);
 
-        Time    GetElapsedTime(void) const;
-        bool    HasTimePassed(Time time) const;
-        Time    Restart(void);
-    private:
-        Time    _startTime;
-    };
+    Time    GetElapsedTime(void) const;
+    bool    HasTimePassed(Time time) const;
+    Time    Restart(void);
+  private:
+    Time    _startTime;
+  };
 }
 
 #endif

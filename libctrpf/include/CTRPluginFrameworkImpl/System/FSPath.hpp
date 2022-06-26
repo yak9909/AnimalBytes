@@ -9,39 +9,39 @@
 
 namespace CTRPluginFramework
 {
-    #define PATH_LENGTH_MAX 256
+  #define PATH_LENGTH_MAX 256
 
-    struct FSPath
+  struct FSPath
+  {
+    FSPath(std::string path);
+
+    int     Error{0};
+    s32     Units{0};
+    std::vector<u16>     Utf16Path;
+
+
+    operator FS_Path()
     {
-        FSPath(std::string path);
+      FS_Path     fspath;
 
-        int     Error{0};
-        s32     Units{0};
-        std::vector<u16>     Utf16Path;
+      if (Error == 0)
+      {
+        fspath.type = PATH_UTF16;
+        fspath.size = (Units + 1) * sizeof(u16);
+        fspath.data = (const u8 *)Utf16Path.data();
+        return fspath;
+      }
+      fspath.type = PATH_EMPTY;
+      fspath.size = 0;
+      fspath.data = nullptr;
+      return fspath;
+    }
 
+    static int              SdmcFixPath(std::string &path);
 
-        operator FS_Path()
-        {
-            FS_Path     fspath;
-
-            if (Error == 0)
-            {
-                fspath.type = PATH_UTF16;
-                fspath.size = (Units + 1) * sizeof(u16);
-                fspath.data = (const u8 *)Utf16Path.data();
-                return fspath;
-            }
-            fspath.type = PATH_EMPTY;
-            fspath.size = 0;
-            fspath.data = nullptr;
-            return fspath;
-        }
-
-        static int              SdmcFixPath(std::string &path);
-
-        static Mutex            FSMutex;
-        static std::string      CurrentWorkingDirectory;
-    };
+    static Mutex            FSMutex;
+    static std::string      CurrentWorkingDirectory;
+  };
 }
 
 #endif

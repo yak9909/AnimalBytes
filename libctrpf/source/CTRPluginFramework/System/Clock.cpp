@@ -6,37 +6,37 @@
 
 namespace CTRPluginFramework
 {
-    static inline Time GetCurrentTime(void)
-    {
-        return Ticks(svcGetSystemTick());
-    }
+  static inline Time GetCurrentTime(void)
+  {
+    return Ticks(svcGetSystemTick());
+  }
 
-    Clock::Clock(void) : _startTime(GetCurrentTime())
-    {
+  Clock::Clock(void) : _startTime(GetCurrentTime())
+  {
 
-    }
+  }
 
-    Clock::Clock(Time time) : _startTime{ time }
-    {
-    }
+  Clock::Clock(Time time) : _startTime{ time }
+  {
+  }
 
-    Time    Clock::GetElapsedTime(void) const
-    {
-        return (GetCurrentTime() - _startTime);
-    }
+  Time    Clock::GetElapsedTime(void) const
+  {
+    return (GetCurrentTime() - _startTime);
+  }
 
-    bool    Clock::HasTimePassed(Time time) const
-    {
-        return (GetElapsedTime() >= time);
-    }
+  bool    Clock::HasTimePassed(Time time) const
+  {
+    return (GetElapsedTime() >= time);
+  }
 
-    Time    Clock::Restart(void)
-    {
-        Time now = GetCurrentTime();
+  Time    Clock::Restart(void)
+  {
+    Time now = GetCurrentTime();
 
-        Time ret = now - _startTime;
+    Time ret = now - _startTime;
 
-        _startTime = now;
-        return (ret);
-    }
+    _startTime = now;
+    return (ret);
+  }
 }

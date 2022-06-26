@@ -7,29 +7,29 @@ extern u8 *fake_heap_start;   // current heap end
 
 u8  *getHeapStart(void)
 {
-    return fake_heap_start;
+  return fake_heap_start;
 }
 
 u8  *getHeapEnd(void)
 {
-    return (u8*)sbrk(0);
+  return (u8*)sbrk(0);
 }
 
 u8  *getHeapLimit(void)
 {
-    return fake_heap_end;
+  return fake_heap_end;
 }
 
 // returns the amount of used memory in bytes 
 int getMemUsed(void)
 { 
-    struct mallinfo mi = mallinfo();
-    return mi.uordblks;
+  struct mallinfo mi = mallinfo();
+  return mi.uordblks;
 }
 
 // returns the amount of free memory in bytes 
 int getMemFree(void)
 { 
-    struct mallinfo mi = mallinfo();
-    return mi.fordblks + (getHeapLimit() - getHeapEnd());
+  struct mallinfo mi = mallinfo();
+  return mi.fordblks + (getHeapLimit() - getHeapEnd());
 }

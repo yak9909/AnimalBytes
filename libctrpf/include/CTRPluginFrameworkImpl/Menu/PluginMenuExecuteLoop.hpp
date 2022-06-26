@@ -9,34 +9,34 @@
 
 namespace CTRPluginFramework
 {
-    class MenuEntryImpl;
-    class MenuEntryActionReplay;
-    class PluginMenuExecuteLoop
-    {
-    public:
-        PluginMenuExecuteLoop(void);
-        ~PluginMenuExecuteLoop(void) = default;
+  class MenuEntryImpl;
+  class MenuEntryActionReplay;
+  class PluginMenuExecuteLoop
+  {
+  public:
+    PluginMenuExecuteLoop(void);
+    ~PluginMenuExecuteLoop(void) = default;
 
-        static void WriteEnabledCheatsToFile(Preferences::Header &header, File &file);
+    static void WriteEnabledCheatsToFile(Preferences::Header &header, File &file);
 
-        static void     Add(MenuEntryImpl *entry);
-        static void     Remove(MenuEntryImpl *entry);
-        static void     ExecuteBuiltin(void);
+    static void     Add(MenuEntryImpl *entry);
+    static void     Remove(MenuEntryImpl *entry);
+    static void     ExecuteBuiltin(void);
 
-        static void     AddAR(MenuEntryActionReplay *entry);
-        static void     RemoveAR(MenuEntryActionReplay *entry);
-        static void     ExecuteAR(void);
+    static void     AddAR(MenuEntryActionReplay *entry);
+    static void     RemoveAR(MenuEntryActionReplay *entry);
+    static void     ExecuteAR(void);
 
-        bool    operator()(void);
+    bool    operator()(void);
 
-    private:
-        static PluginMenuExecuteLoop          * _firstInstance;
+  private:
+    static PluginMenuExecuteLoop          * _firstInstance;
 
-        Mutex   _mutex;
+    Mutex   _mutex;
 
-        std::vector<MenuEntryImpl *>            _builtinEnabledList{};
-        std::vector<MenuEntryActionReplay *>    _arEnabledList{};
-    };
+    std::vector<MenuEntryImpl *>            _builtinEnabledList{};
+    std::vector<MenuEntryActionReplay *>    _arEnabledList{};
+  };
 }
 
 #endif

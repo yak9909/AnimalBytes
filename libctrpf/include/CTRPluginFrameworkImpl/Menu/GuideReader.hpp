@@ -16,38 +16,38 @@
 
 namespace CTRPluginFramework
 {
-    class GuideReader
-    {
-        using EventList = std::vector<Event>;
-    public:
-        GuideReader(void);
-        ~GuideReader(void){};
+  class GuideReader
+  {
+    using EventList = std::vector<Event>;
+  public:
+    GuideReader(void);
+    ~GuideReader(void){};
 
-        bool    Draw(void);
+    bool    Draw(void);
 
 
-        void    Open(void);
-        void    Close(void);
-        bool    IsOpen(void);
+    void    Open(void);
+    void    Close(void);
+    bool    IsOpen(void);
 
-        // Return true if the Close Button is pressed, else false
-        bool    operator()(EventList &eventList, Time &delta);
+    // Return true if the Close Button is pressed, else false
+    bool    operator()(EventList &eventList, Time &delta);
 
-    private:
-        bool    _ProcessEvent(Event &event);
-        void    _LoadBMP(void);
+  private:
+    bool    _ProcessEvent(Event &event);
+    void    _LoadBMP(void);
 
-        bool            _isOpen;
-        Menu            _menu;
-        TextBox         _guideTB;
-        std::string     _text;
-        MenuEntryImpl   *_last;
-        Directory       _currentDirectory;
-        std::vector<std::string>    _bmpList;
-        int     _currentBMP;
+    bool            _isOpen;
+    Menu            _menu;
+    TextBox         _guideTB;
+    std::string     _text;
+    MenuEntryImpl   *_last;
+    Directory       _currentDirectory;
+    std::vector<std::string>    _bmpList;
+    int     _currentBMP;
 
-        BMPImage        *_image;
-    };
+    BMPImage        *_image;
+  };
 }
 
 #endif
