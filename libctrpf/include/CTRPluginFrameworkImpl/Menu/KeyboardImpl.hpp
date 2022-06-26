@@ -27,6 +27,7 @@ namespace CTRPluginFramework
         using   CompareCallback = bool (*)(const void *, std::string&);
         using   ConvertCallback = void *(*)(std::string&, bool);
         using   OnEventCallback = void(*)(Keyboard&, KeyboardEvent&);
+        using   TopSceenRendererPointer = void(*)(Keyboard&, Screen const&);
         using   KeyIter  = std::vector<TouchKey>::iterator;
         using   KeyStringIter  = std::vector<TouchKeyString>::iterator;
     public:
@@ -60,6 +61,10 @@ namespace CTRPluginFramework
         bool        operator()(int &out);
 
         bool        DisplayTopScreen;
+        TopSceenRendererPointer  TopScreenRenderer;
+
+        bool  _no_exit_with_enter; // = 0;
+        bool  _make_event_of_space; // = 0;
 
     private:
         friend class HexEditor;
@@ -92,7 +97,7 @@ namespace CTRPluginFramework
         void    _ClearKeyboardEvent();
         void    _ChangeManualKey(int newVal, bool playSound = true);
 
-        Keyboard                *_owner{nullptr};
+        Keyboard                *_owner; //{nullptr};
 
         std::string             _title;
         std::string             _text;

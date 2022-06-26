@@ -30,6 +30,7 @@ namespace CTRPluginFramework
         Key         affectedKey{(Key)0}; //< Button affected not mapped to any keyboard feature (used for ButtonPressed, ButtonHold and ButtonReleased, 0 otherwise)
     };
 
+    class Screen;
     class KeyboardImpl;
     class Keyboard
     {
@@ -39,14 +40,20 @@ namespace CTRPluginFramework
          * \param error     A reference to the string that hold the error message. You can edit it according to what you want to display
          * \return A boolean \n Return true if the input is valid, false if it's not
          */
-        using   CompareCallback = bool (*)(const void *, std::string&);
+        using CompareCallback = bool (*)(const void *, std::string&);
 
         /**
          * \brief The signature of the callback called when the input change (user enter / delete a character)
          * \param keyboard  A reference to the Keyboard object that called the callback
          * \event event     The event that caused the input to change
          */
-        using   OnEventCallback = void(*)(Keyboard&, KeyboardEvent &event);
+        using OnEventCallback = void(*)(Keyboard&, KeyboardEvent &event);
+
+        /**
+         * \brief Use function your like to render top screen.
+         */
+        using TopSceenRendererPointer = void(*)(Keyboard&, Screen const&);
+
     public:
 
         /**
@@ -64,6 +71,9 @@ namespace CTRPluginFramework
          * \param canAbort  Whether the user can press B to close the keyboard and abort the current operation
          */
         void    CanAbort(bool canAbort) const;
+
+        // don't exit after pressed enter key if passed false.
+        void  DontExitWithEnter(bool val) const;
 
         /**
          * \brief Define if the input must be hexadecimal or not \n
@@ -292,6 +302,11 @@ namespace CTRPluginFramework
          * Note that when disabled, errors messages can't be displayed
          */
         bool    DisplayTopScreen;
+
+        /**
+         * \brief Render top screen your like
+         */
+        TopSceenRendererPointer  TopScreenRenderer;
 
     private:
         std::unique_ptr<KeyboardImpl>   _keyboard;

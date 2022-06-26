@@ -77,7 +77,7 @@ CFLAGS	:=	-Wall -Werror -Wno-psabi -mword-relocations \
 			$(ARCH) \
 			$(BUILD_CFLAGS) $(G)
 
-CFLAGS	+=	-IC:/devkitPro/libctru/include/ $(INCLUDE) -D__3DS__ $(DEFINES)
+CFLAGS	+=	-IC:/devkitPro/libctru/include/ $(INCLUDE) -D__3DS__ $(DEFINES) -Wno-reorder
 
 CXXFLAGS 	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++20
 
@@ -88,7 +88,7 @@ ASFLAGS	:=	$(G) $(ARCH) $(INCLUDE) -Os -Wl,$(WL)--gc-sections
 # include and lib
 #---------------------------------------------------------------------------------
 LIBS	:= -lctru -lm -lcwav -lncsnd
-LIBDIRS	:= $(CTRULIB) $(CURDIR)/libcwav $(CURDIR)/libcwav/libncsnd
+LIBDIRS	:= $(CTRULIB)
 
 #---------------------------------------------------------------------------------
 # no real need to edit anything past this point unless you need to add additional
