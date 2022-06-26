@@ -1,14 +1,15 @@
 # Animal Bytes: A CTRPF Plugin for ACNL
-It's good
+It's good.
 
-# Build
-## Install devkitPro
-if you using Windows, download [installer](https://github.com/devkitPro/installer/releases) and run it.
+## Dependencies
+if you are using Windows, download [the devkitPro installer](https://github.com/devkitPro/installer/releases) and run it.
 
-## Compile
+## Building
 ```
-make -j
+git clone https://github.com/yak9909/AnimalBytes.git
+cd AnimalBytes
+make
 ```
 
-## Send to your SD card
-Create the `sendpost.txt` and write IP address of your 3ds, then run send.py.
+## Setup
+To send to your 3DS's SD card, create a file named `sendpost.txt` and write the local IP address of your 3DS, then run `send.py`.
