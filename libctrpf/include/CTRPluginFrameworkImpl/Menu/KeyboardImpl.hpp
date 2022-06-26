@@ -60,12 +60,15 @@ namespace CTRPluginFramework
         void        Close(void);
         bool        operator()(int &out);
 
-        bool        DisplayTopScreen;
-        SceenRendererPointer  TopScreenRenderer;
-        SceenRendererPointer  BottomScreenRenderer;
+        void update_v();
 
-        bool  _no_exit_with_enter; // = 0;
-        bool  _make_event_of_space; // = 0;
+        bool  DisplayTopScreen = 0;
+        bool  DontReturnAfterEnter = 0;
+        bool  MakeEventOfSpace = 0;
+        bool  ForceMakeEventOfBackspace = 0;
+
+        SceenRendererPointer  TopScreenRenderer{ nullptr };
+        SceenRendererPointer  BottomScreenRenderer{ nullptr };
 
     private:
         friend class HexEditor;
@@ -98,7 +101,7 @@ namespace CTRPluginFramework
         void    _ClearKeyboardEvent();
         void    _ChangeManualKey(int newVal, bool playSound = true);
 
-        Keyboard                *_owner; //{nullptr};
+        Keyboard                *_owner{ };
 
         std::string             _title;
         std::string             _text;

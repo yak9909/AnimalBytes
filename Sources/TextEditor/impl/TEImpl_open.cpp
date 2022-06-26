@@ -7,7 +7,22 @@ namespace CTRPluginFramework {
   TextEditor::Result TextEditorImpl::open() {
     Keyboard kbd;
 
-    kbd.DisplayTopScreen = true;
+    kbd.DisplayTopScreen = false;
+    kbd.DontReturnAfterEnter = true;
+    kbd.MakeEventOfSpace = true;
+    kbd.ForceMakeEventOfBackspace = true;
+
+    kbd.TopScreenRenderer = [] (Keyboard& kbd, Screen const& screen) -> void {
+      auto& inst = *TextEditor::get_instance()->impl;
+
+      inst.draw(screen);
+    };
+
+    kbd.BottomScreenRenderer = [] (Keyboard& kbd, Screen const& screen) -> void {
+      auto& inst = *TextEditor::get_instance()->impl;
+
+      inst.draw_bottom(screen);
+    };
 
     kbd.OnKeyboardEvent(keyboardEvent);
 
@@ -15,12 +30,8 @@ namespace CTRPluginFramework {
       Controller::Update();
     } while ( Controller::GetKeysDown() );
 
-    _hook_init();
-
     std::string s;
     kbd.Open(s);
-
-    _hook_reset();
 
     if( saved ) {
       return TextEditor::Result::Saved;

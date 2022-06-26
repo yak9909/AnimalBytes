@@ -238,12 +238,22 @@ namespace CTRPluginFramework
     _hexadecimal = true;
     _isPopulated = false;
     DisplayTopScreen = !text.empty();
+    TopScreenRenderer = nullptr;
+    BottomScreenRenderer = nullptr;
+    DontReturnAfterEnter = 0;
+    MakeEventOfSpace = 0;
+    ForceMakeEventOfBackspace = 0;
   }
 
   Keyboard::Keyboard(const std::string &text, const std::vector<std::string> &options) : _keyboard(new KeyboardImpl(this, text))
   {
     _hexadecimal = false;
     DisplayTopScreen = !text.empty();
+    TopScreenRenderer = nullptr;
+    BottomScreenRenderer = nullptr;
+    DontReturnAfterEnter = 0;
+    MakeEventOfSpace = 0;
+    ForceMakeEventOfBackspace = 0;
     _keyboard->Populate(options, true);
     _isPopulated = !options.empty();
   }
@@ -252,6 +262,11 @@ namespace CTRPluginFramework
   {
     _hexadecimal = false;
     DisplayTopScreen = false;
+    TopScreenRenderer = nullptr;
+    BottomScreenRenderer = nullptr;
+    DontReturnAfterEnter = 0;
+    MakeEventOfSpace = 0;
+    ForceMakeEventOfBackspace = 0;
     _keyboard->Populate(options, true);
     _isPopulated = !options.empty();
   }
@@ -331,6 +346,7 @@ namespace CTRPluginFramework
     }
     _keyboard->CanChangeLayout(true);
     _keyboard->SetConvertCallback(ConvertToU8);
+    _keyboard->update_v();
 
     int ret = _keyboard->Run();
 
@@ -364,6 +380,7 @@ namespace CTRPluginFramework
       input = Utils::Format("%d", start);
     _keyboard->CanChangeLayout(true);
     _keyboard->SetConvertCallback(ConvertToU8);
+    _keyboard->update_v();
 
     int ret = _keyboard->Run();
 
@@ -396,6 +413,7 @@ namespace CTRPluginFramework
     }
     _keyboard->CanChangeLayout(true);
     _keyboard->SetConvertCallback(ConvertToU16);
+    _keyboard->update_v();
 
     int ret = _keyboard->Run();
 
@@ -429,6 +447,7 @@ namespace CTRPluginFramework
       input = Utils::Format("%d", start);
     _keyboard->CanChangeLayout(true);
     _keyboard->SetConvertCallback(ConvertToU16);
+    _keyboard->update_v();
 
     int ret = _keyboard->Run();
 
@@ -461,6 +480,7 @@ namespace CTRPluginFramework
     }
     _keyboard->CanChangeLayout(true);
     _keyboard->SetConvertCallback(ConvertToU32);
+    _keyboard->update_v();
 
     int ret = _keyboard->Run();
 
@@ -494,6 +514,7 @@ namespace CTRPluginFramework
       input = Utils::Format("%d", start);
     _keyboard->CanChangeLayout(true);
     _keyboard->SetConvertCallback(ConvertToU32);
+    _keyboard->update_v();
 
     int ret = _keyboard->Run();
 
@@ -526,6 +547,7 @@ namespace CTRPluginFramework
     }
     _keyboard->CanChangeLayout(true);
     _keyboard->SetConvertCallback(ConvertToU64);
+    _keyboard->update_v();
 
     int ret = _keyboard->Run();
 
@@ -559,6 +581,7 @@ namespace CTRPluginFramework
       input = Utils::Format("%d", start);
     _keyboard->CanChangeLayout(true);
     _keyboard->SetConvertCallback(ConvertToU64);
+    _keyboard->update_v();
 
     int ret = _keyboard->Run();
 
@@ -586,6 +609,7 @@ namespace CTRPluginFramework
 
     _keyboard->SetLayout(DECIMAL);
     _keyboard->SetConvertCallback(ConvertToFloat);
+    _keyboard->update_v();
 
     int ret = _keyboard->Run();
 
@@ -610,6 +634,7 @@ namespace CTRPluginFramework
 
     _keyboard->SetLayout(DECIMAL);
     _keyboard->SetConvertCallback(ConvertToFloat);
+    _keyboard->update_v();
 
     std::string &input = _keyboard->GetInput();
     input = Utils::ToString(start, 4);
@@ -639,6 +664,7 @@ namespace CTRPluginFramework
     }
     _keyboard->SetLayout(DECIMAL);
     _keyboard->SetConvertCallback(ConvertToDouble);
+    _keyboard->update_v();
 
     int ret = _keyboard->Run();
 
@@ -663,6 +689,7 @@ namespace CTRPluginFramework
 
     _keyboard->SetLayout(DECIMAL);
     _keyboard->SetConvertCallback(ConvertToDouble);
+    _keyboard->update_v();
 
     std::string &input = _keyboard->GetInput();
     input = Utils::Format("%.4lf", start);
@@ -692,6 +719,7 @@ namespace CTRPluginFramework
     }
 
     _keyboard->SetLayout(QWERTY);
+    _keyboard->update_v();
 
     int ret = _keyboard->Run();
 
@@ -714,6 +742,7 @@ namespace CTRPluginFramework
     }
 
     _keyboard->SetLayout(QWERTY);
+    _keyboard->update_v();
 
     _keyboard->GetInput() = start;
 
@@ -744,10 +773,6 @@ namespace CTRPluginFramework
   void Keyboard::CanAbort(bool canAbort) const
   {
     _keyboard->CanAbort(canAbort);
-  }
-
-  void Keyboard::DontExitWithEnter(bool val) const {
-    _keyboard->_no_exit_with_enter = true;
   }
 
   void Keyboard::Close(void) const

@@ -29,10 +29,7 @@ namespace CTRPluginFramework
   std::vector<TouchKey>  KeyboardImpl::_QwertyKeys;
 
   KeyboardImpl::KeyboardImpl(const std::string &text)
-    : _owner(nullptr),
-      DisplayTopScreen(1),
-      TopScreenRenderer(nullptr),
-      BottomScreenRenderer(nullptr)
+    : _owner(nullptr)
   {
     _text = text;
     _error = "";
@@ -77,10 +74,7 @@ namespace CTRPluginFramework
   }
 
   KeyboardImpl::KeyboardImpl(Keyboard* kb, const std::string &text)
-    : _owner(kb),
-      DisplayTopScreen(kb->DisplayTopScreen),
-      TopScreenRenderer(kb->TopScreenRenderer),
-      BottomScreenRenderer(kb->BottomScreenRenderer)
+    : _owner(kb)
   {
     _text = text;
     _error = "";
@@ -1875,6 +1869,13 @@ namespace CTRPluginFramework
               return (false);
           }
           backspacetimer.Restart();
+
+          if( ForceMakeEventOfBackspace ) {
+            _ClearKeyboardEvent();
+            _KeyboardEvent.type = KeyboardEvent::BackspacePressed;
+            return true;
+          }
+
           goto _backspacePressed;
         }
 
@@ -1912,14 +1913,13 @@ namespace CTRPluginFramework
           return (true);
         }
         if( ret == KEY_ENTER ) {
-          _askForExit = true;
-
-          if( _no_exit_with_enter ) {
+          if( DontReturnAfterEnter ) {
             _ClearKeyboardEvent();
             _KeyboardEvent.type = KeyboardEvent::EnterPressed;
             return true;
           }
 
+          _askForExit = true;
           return false;
         }
         else if (ret == KEY_SPACE && (!_max || Utils::GetSize(_userInput) < _max))
@@ -1927,9 +1927,10 @@ namespace CTRPluginFramework
           _userInput.insert(_cursorPositionInString, " ");
           _ScrollUp();
 
-          if( _make_event_of_space ) {
+          if( MakeEventOfSpace ) {
             _ClearKeyboardEvent();
             _KeyboardEvent.type = KeyboardEvent::CharacterAdded;
+            _userInput += ' ';
             return true;
           }
 
@@ -2000,14 +2001,16 @@ namespace CTRPluginFramework
     _ScrollDown(); ///< Scroll down before removing the char
     _ClearKeyboardEvent();
     _KeyboardEvent.codepoint = Utils::RemoveLastChar(_userInput);
+    _KeyboardEvent.ch_removed = _KeyboardEvent.codepoint != 0;
     _userInput += right;
 
-    if (_KeyboardEvent.codepoint != 0)
-    {
-      _KeyboardEvent.type = KeyboardEvent::CharacterRemoved;
-      return (true);
+    if( ForceMakeEventOfBackspace || _KeyboardEvent.ch_removed ) {
+      _KeyboardEvent.type = KeyboardEvent::BackspacePressed;
+      _KeyboardEvent.ch_removed = true;
+      return true;
     }
-    return (false);
+
+    return false;
   }
 
   bool  KeyboardImpl::_CheckInput(void)
@@ -2283,6 +2286,17 @@ namespace CTRPluginFramework
       return (true);
     }
     return (false);
+  }
+
+  void KeyboardImpl::update_v() {
+    DisplayTopScreen = _owner->DisplayTopScreen;
+
+    DontReturnAfterEnter = _owner->DontReturnAfterEnter;
+    MakeEventOfSpace = _owner->MakeEventOfSpace;
+    ForceMakeEventOfBackspace = _owner->ForceMakeEventOfBackspace;
+
+    TopScreenRenderer = _owner->TopScreenRenderer;
+    BottomScreenRenderer = _owner->BottomScreenRenderer;
   }
 
   void  KeyboardImpl::CanChangeLayout(bool canChange)

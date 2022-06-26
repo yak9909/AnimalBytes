@@ -77,9 +77,9 @@ CFLAGS	:=	-Wall -Werror -Wno-psabi -mword-relocations \
 			$(ARCH) \
 			$(BUILD_CFLAGS) $(G)
 
-CFLAGS	+=	-IC:/devkitPro/libctru/include/ $(INCLUDE) -D__3DS__ $(DEFINES) -Wno-reorder
+CFLAGS	+=	-IC:/devkitPro/libctru/include/ $(INCLUDE) -D__3DS__ $(DEFINES)
 
-CXXFLAGS 	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++20
+CXXFLAGS 	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++20 -Wno-reorder
 
 ASFLAGS	:=	$(G) $(ARCH) $(INCLUDE) -Os -Wl,$(WL)--gc-sections
 
