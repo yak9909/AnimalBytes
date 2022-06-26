@@ -476,12 +476,16 @@ namespace CTRPluginFramework
       if( DisplayTopScreen ) {
         _RenderTop();
       }
-      else if( TopScreenRenderer ) {
+      if( TopScreenRenderer ) {
         TopScreenRenderer(*_owner, OSD::GetTopScreen());
       }
 
       // Render Bottom Screen
       _RenderBottom();
+      if( BottomScreenRenderer ) {
+        BottomScreenRenderer(*_owner, OSD::GetBottomScreen());
+      }
+
       Renderer::EndFrame();
 
       // if it's a standard keyboard
