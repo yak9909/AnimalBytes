@@ -52,7 +52,7 @@ namespace CTRPluginFramework
         /**
          * \brief Use function your like to render top screen.
          */
-        using TopSceenRendererPointer = void(*)(Keyboard&, Screen const&);
+        using SceenRendererPointer = void(*)(Keyboard&, Screen const&);
 
     public:
 
@@ -306,7 +306,8 @@ namespace CTRPluginFramework
         /**
          * \brief Render top screen your like
          */
-        TopSceenRendererPointer  TopScreenRenderer;
+        SceenRendererPointer  TopScreenRenderer;
+        SceenRendererPointer  BottomScreenRenderer;
 
     private:
         std::unique_ptr<KeyboardImpl>   _keyboard;
