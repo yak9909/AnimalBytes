@@ -1911,10 +1911,16 @@ namespace CTRPluginFramework
           }
           return (true);
         }
-        if (!_no_exit_with_enter && ret == KEY_ENTER)
-        {
+        if( ret == KEY_ENTER ) {
           _askForExit = true;
-          return (false);
+
+          if( _no_exit_with_enter ) {
+            _ClearKeyboardEvent();
+            _KeyboardEvent.type = KeyboardEvent::EnterPressed;
+            return true;
+          }
+
+          return false;
         }
         else if (ret == KEY_SPACE && (!_max || Utils::GetSize(_userInput) < _max))
         {
