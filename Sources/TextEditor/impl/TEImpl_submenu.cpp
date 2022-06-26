@@ -95,6 +95,7 @@ namespace CTRPluginFramework {
             is_opening_submenu = false;
           }
 
+          saved = true;
           break;
         }
 
