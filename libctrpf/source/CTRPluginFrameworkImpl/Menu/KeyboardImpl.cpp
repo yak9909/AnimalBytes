@@ -31,7 +31,8 @@ namespace CTRPluginFramework
   KeyboardImpl::KeyboardImpl(const std::string &text)
     : _owner(nullptr),
       DisplayTopScreen(1),
-      TopScreenRenderer(nullptr)
+      TopScreenRenderer(nullptr),
+      BottomScreenRenderer(nullptr)
   {
     _text = text;
     _error = "";
@@ -78,7 +79,8 @@ namespace CTRPluginFramework
   KeyboardImpl::KeyboardImpl(Keyboard* kb, const std::string &text)
     : _owner(kb),
       DisplayTopScreen(kb->DisplayTopScreen),
-      TopScreenRenderer(kb->TopScreenRenderer)
+      TopScreenRenderer(kb->TopScreenRenderer),
+      BottomScreenRenderer(kb->BottomScreenRenderer)
   {
     _text = text;
     _error = "";
