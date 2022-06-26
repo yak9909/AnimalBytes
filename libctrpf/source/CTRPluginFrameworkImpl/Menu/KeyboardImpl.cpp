@@ -1927,9 +1927,13 @@ namespace CTRPluginFramework
           _userInput.insert(_cursorPositionInString, " ");
           _ScrollUp();
 
-          if( !_make_event_of_space ) {
+          if( _make_event_of_space ) {
+            _ClearKeyboardEvent();
+            _KeyboardEvent.type = KeyboardEvent::CharacterAdded;
             return true;
           }
+
+          return false;
         }
         else if (ret == KEY_CAPS)
         {
