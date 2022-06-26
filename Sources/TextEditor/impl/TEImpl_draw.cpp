@@ -50,11 +50,6 @@ namespace CTRPluginFramework {
         cursor_clock.Restart();
       }
     }
-
-    // debug
-    if( _draw_addr ) {
-      screen.Draw(Utils::Format("%08X", _dbg_addr_value), 0, 0);
-    }
   }
 
   void TextEditorImpl::draw_bottom(Screen const& screen) {
