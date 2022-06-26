@@ -2,7 +2,7 @@
 It's good.
 
 ## Dependencies
-if you are using Windows, download [the devkitPro installer](https://github.com/devkitPro/installer/releases) and run it.
+Please follow [this guide](https://devkitpro.org/wiki/Getting_Started) to set up devkitPro.
 
 ## Building
 ```
