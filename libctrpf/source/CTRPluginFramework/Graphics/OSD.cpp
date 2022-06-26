@@ -86,6 +86,10 @@ namespace CTRPluginFramework
             return (-1);
         }
 
+        if( OSDImpl::Notifications.size() > 8 ) {
+            OSDImpl::Notifications.erase(OSDImpl::Notifications.begin());
+        }
+
         OSDImpl::Notifications.push_back(new OSDImpl::OSDMessage(str, fg, bg));
         OSDImpl::Unlock();
 

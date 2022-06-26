@@ -27,8 +27,6 @@ static char const* ABOUT =
   --------------------- */
 
 namespace CTRPluginFramework {
-  void InitHooks();
-
   void PatchProcess(FwkSettings &settings) {
     // force drop
     *(u32*)0x59E5DC = 0xEA000004;
@@ -64,9 +62,6 @@ namespace CTRPluginFramework {
 
     menu.SynchronizeWithFrame(true);
     menu.ShowWelcomeMessage(false);
-
-    // Initialize hooks
-    InitHooks();
 
     // Create Menu
     InitMenu(menu);
