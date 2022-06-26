@@ -4,53 +4,41 @@
 
 #define  calc_branch_offset(From, To)  (((((To) - (From)) >> 2) - 2) & 0xFFFFFF)
 
-extern "C" {
-  void _ZN18CTRPluginFramework12KeyboardImpl3RunEv(void*);
-  void _ZN18CTRPluginFramework12KeyboardImpl10_RenderTopEv(void*);
-  void _ZN18CTRPluginFramework12KeyboardImpl13_RenderBottomEv(void*);
-  void _ZN18CTRPluginFramework12KeyboardImpl10_CheckKeysEv(void*);
-
-  void _hookHelperFn_KbdImpl_RenderBottom();
-};
-
 namespace CTRPluginFramework {
   static std::vector<std::pair<u32*, u32>> _hook_bak;
 
   void TextEditorImpl::_KbdImpl_RenderTop_hook(void*) {
-    asm volatile ("push {r4-r7}");
-
     auto& te = *TextEditor::get_instance()->impl;
     auto const& screen = OSD::GetTopScreen();
     
     te.draw(screen);
-
-    asm volatile ("pop {r4-r7}");
   }
 
   void TextEditorImpl::_KbdImpl_RenderBottom_hook(void*) {
-    asm volatile ("push {r4-r7}");
-    
     auto& te = *TextEditor::get_instance()->impl;
     auto const& screen = OSD::GetBottomScreen();
 
     te.draw_bottom(screen);
-
-    asm volatile ("pop {r4-r7}");
   }
 
   void TextEditorImpl::_hook_init() {
 
-    constexpr u32 asmjmp = 0xE51FF004; // ldr pc, [pc, #-4]
+    constexpr u32 asmjmp = 0xE51FF004;
+    constexpr u32 asmNop = 0xE1A00000;
+
+    constexpr u32 asmLoadAddr = 0xE59FC000; // ldr ip, [pc]
+    constexpr u32 asmJumpIP   = 0xE12FFF1C; // bx ip
 
     std::pair<u32*, u32> const hookMap[] {
       // Don't return with KEY_ENTER
       { (u32*)_ZN18CTRPluginFramework12KeyboardImpl3RunEv + 117, 0xEA00000B },
 
       // Space key
-      { (u32*)_ZN18CTRPluginFramework12KeyboardImpl10_CheckKeysEv + 203,
-          (0xEA << 24) | calc_branch_offset((u32)_ZN18CTRPluginFramework12KeyboardImpl10_CheckKeysEv + 0x32C,
-            (u32)_ZN18CTRPluginFramework12KeyboardImpl10_CheckKeysEv + 0x380) },
+      { (u32*)_ZN18CTRPluginFramework12KeyboardImpl10_CheckKeysEv + 203, asmNop },
       
+      // Enter
+      { (u32*)_ZN18CTRPluginFramework12KeyboardImpl10_CheckKeysEv + 199, 0xE28FF008 },
+
       // Backspace
       { (u32*)_ZN18CTRPluginFramework12KeyboardImpl10_CheckKeysEv + 339, 0xE3550001 },
 

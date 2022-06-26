@@ -129,7 +129,7 @@ namespace CTRPluginFramework {
       }
 
     _return:
-      _hook_init();
+      //_hook_init();
       return;
     }
 

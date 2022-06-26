@@ -3,6 +3,15 @@
 #include <CTRPluginFramework.hpp>
 #include "TextEditor.h"
 
+extern "C" {
+  void _ZN18CTRPluginFramework12KeyboardImpl3RunEv(void*);
+  void _ZN18CTRPluginFramework12KeyboardImpl10_RenderTopEv(void*);
+  void _ZN18CTRPluginFramework12KeyboardImpl13_RenderBottomEv(void*);
+  void _ZN18CTRPluginFramework12KeyboardImpl10_CheckKeysEv(void*);
+
+  void _hookHelperFn_KbdImpl_RenderBottom();
+};
+
 namespace CTRPluginFramework {
   class TextEditor;
   class TextEditorImpl {
