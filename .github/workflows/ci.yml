@@ -1,0 +1,17 @@
+name: CI
+
+on: pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: pablomk7/libctrpf:0.7.3
+
+    steps:
+      - uses: actions/checkout@v3
+      - run: make
+      - uses: actions/upload-artifact@v3
+        with:
+          name: AnimalBytes
+          path: AnimalBytes.3gx
