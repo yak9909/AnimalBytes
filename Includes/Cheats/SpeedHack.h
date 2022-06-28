@@ -1,11 +1,11 @@
 #pragma once
 
 namespace CTRPluginFramework::Cheats::SpeedHacks {
-  MenuFolder* make_folder();
+MenuFolder* make_folder();
 
-  void initialize();
+void initialize();
 
-  void speedhackmenu(MenuEntry* entry);
-  
-  void gamespeed_boost(MenuEntry* entry);
-}
+void speedhackmenu(MenuEntry* entry);
+
+void gamespeed_boost(MenuEntry* entry);
+}  // namespace CTRPluginFramework::Cheats::SpeedHacks

@@ -3,19 +3,21 @@
 #include <string>
 
 namespace CTRPluginFramework::ACNL {
-  class Chat {
-    Chat() :text("") { }
+class Chat {
+  Chat()
+    : text("")
+  {
+  }
 
-  public:
-    std::string text;
+ public:
+  std::string text;
 
-    static Chat clone_object();
+  static Chat clone_object();
 
-    static bool is_opened();
-    static u8 get_length();
+  static bool is_opened();
+  static u8 get_length();
 
-    static std::string read_text();
-    static void write_text(std::string const& text);
-
-  };
-}
+  static std::string read_text();
+  static void write_text(std::string const& text);
+};
+}  // namespace CTRPluginFramework::ACNL

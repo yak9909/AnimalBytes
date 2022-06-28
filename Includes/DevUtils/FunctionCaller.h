@@ -3,14 +3,12 @@
 #include "types.h"
 
 namespace CTRPluginFramework::DevUtils {
-  class FunctionCaller {
+class FunctionCaller {
+  u32 addr;
+  std::vector<u32> args;
 
-    u32 addr;
-    std::vector<u32> args;
-
-  public:  
-    static void game_func(MenuEntry* entry);
-    static void menu_func(MenuEntry* entry);
-
-  };
-}
+ public:
+  static void game_func(MenuEntry* entry);
+  static void menu_func(MenuEntry* entry);
+};
+}  // namespace CTRPluginFramework::DevUtils

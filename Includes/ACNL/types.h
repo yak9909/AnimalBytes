@@ -3,7 +3,6 @@
 #include <string>
 
 namespace CTRPluginFramework::ACNL {
-  using ItemInfo = std::pair<std::string, std::string>;
-
+using ItemInfo = std::pair<std::string, std::string>;
 
 }

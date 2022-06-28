@@ -1,58 +1,58 @@
 #ifndef CTRPLUGINFRAMEWORK_PLUGINMENUACTIONREPLAY_HPP
 #define CTRPLUGINFRAMEWORK_PLUGINMENUACTIONREPLAY_HPP
 
-#include "types.h"
-#include "CTRPluginFrameworkImpl/Menu/Menu.hpp"
 #include "CTRPluginFrameworkImpl/ActionReplay/ARCodeEditor.hpp"
+#include "CTRPluginFrameworkImpl/Menu/Menu.hpp"
+#include "types.h"
 
-namespace CTRPluginFramework
-{
-    class PluginMenuActionReplay
-    {
-        using EventList = std::vector<Event>;
-    public:
-        PluginMenuActionReplay();
-        ~PluginMenuActionReplay();
+namespace CTRPluginFramework {
+class PluginMenuActionReplay {
+  using EventList = std::vector<Event>;
 
-        // Initialize and load cheats
-        void    Initialize(void);
+ public:
+  PluginMenuActionReplay();
+  ~PluginMenuActionReplay();
 
-        // Display menu
-        // Return true if menu must close
-        bool    operator()(EventList &eventList, const Time &delta);
+  // Initialize and load cheats
+  void Initialize(void);
 
-        static void     SaveCodes(void);
-        static void     NewARCode(u8 type, u32 address, u32 value);
-    private:
-        ARCodeEditor    _editor;
-        Menu            _topMenu;
+  // Display menu
+  // Return true if menu must close
+  bool operator()(EventList &eventList, const Time &delta);
 
-        //using ToggleBtn = ToggleButton<PluginMenuActionReplay, void>;
-        //using IconBtn = IconButton<PluginMenuActionReplay, void>;
+  static void SaveCodes(void);
+  static void NewARCode(u8 type, u32 address, u32 value);
 
-        Button          _noteBtn;
-        Button          _editorBtn;
-        Button          _newBtn;
-        Button          _cutBtn;
-        Button          _pasteBtn;
-        Button          _duplicateBtn;
-        Button          _trashBtn;
-        Button          _openFileBtn;
+ private:
+  ARCodeEditor _editor;
+  Menu _topMenu;
 
-        MenuItem        *_clipboard;
-        u8              _path[40];
+  // using ToggleBtn = ToggleButton<PluginMenuActionReplay, void>;
+  // using IconBtn = IconButton<PluginMenuActionReplay, void>;
 
-        void    _DrawBottom(void);
-        void    _ProcessEvent(EventList &eventList);
-        void    _Update(const Time &delta);
-        void    _EditorBtn_OnClick(void);
-        void    _NewBtn_OnClick(void);
-        void    _CutBtn_OnClick(void);
-        void    _PasteBtn_OnClick(void);
-        void    _DuplicateBtn_OnClick(void);
-        void    _TrashBtn_OnClick(void);
-        void    _OpenFileBtn_OnClick(void);
-    };
-}
+  Button _noteBtn;
+  Button _editorBtn;
+  Button _newBtn;
+  Button _cutBtn;
+  Button _pasteBtn;
+  Button _duplicateBtn;
+  Button _trashBtn;
+  Button _openFileBtn;
+
+  MenuItem *_clipboard;
+  u8 _path[40];
+
+  void _DrawBottom(void);
+  void _ProcessEvent(EventList &eventList);
+  void _Update(const Time &delta);
+  void _EditorBtn_OnClick(void);
+  void _NewBtn_OnClick(void);
+  void _CutBtn_OnClick(void);
+  void _PasteBtn_OnClick(void);
+  void _DuplicateBtn_OnClick(void);
+  void _TrashBtn_OnClick(void);
+  void _OpenFileBtn_OnClick(void);
+};
+}  // namespace CTRPluginFramework
 
 #endif

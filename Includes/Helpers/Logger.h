@@ -1,43 +1,45 @@
 #pragma once
 
-#include <memory>
 #include <CTRPluginFramework.hpp>
+#include <memory>
 
-#define Alert Logger::alert(__FILE__,__LINE__)
+#define Alert Logger::alert(__FILE__, __LINE__)
 
-#define OSDAlert { \
-  OSD::Notify(Utils::Format("%s:%d",__FILE__,__LINE__)); \
-  Sleep(Milliseconds(100)); \
-}
+#define OSDAlert                                             \
+  {                                                          \
+    OSD::Notify(Utils::Format("%s:%d", __FILE__, __LINE__)); \
+    Sleep(Milliseconds(100));                                \
+  }
 
 namespace CTRPluginFramework {
-  class Logger {
-    static inline Logger* instance;
+class Logger {
+  static inline Logger* instance;
 
-    File file;
-    std::unique_ptr<LineWriter> writer;
+  File file;
+  std::unique_ptr<LineWriter> writer;
 
-  public:
-    Logger(std::string const& path) {
-      File::Open(file, path, File::RWC | File::TRUNCATE);
+ public:
+  Logger(std::string const& path)
+  {
+    File::Open(file, path, File::RWC | File::TRUNCATE);
 
-      writer.reset(new LineWriter(file));
+    writer.reset(new LineWriter(file));
 
-      instance = this;
-    }
+    instance = this;
+  }
 
-    template <class ... Args>
-    static void write(char const* fmt, Args const& ... args) {
-      (*instance->writer) << Utils::Format(fmt, args...) << "\n";
-      flush();
-    }
+  template <class... Args>
+  static void write(char const* fmt, Args const&... args)
+  {
+    (*instance->writer) << Utils::Format(fmt, args...) << "\n";
+    flush();
+  }
 
-    static void alert(char const* file, int line) {
-      write("\tAlert %s:%d\n", file, line);
-    }
+  static void alert(char const* file, int line)
+  {
+    write("\tAlert %s:%d\n", file, line);
+  }
 
-    static void flush() {
-      instance->file.Flush();
-    }
-  };
-}
+  static void flush() { instance->file.Flush(); }
+};
+}  // namespace CTRPluginFramework

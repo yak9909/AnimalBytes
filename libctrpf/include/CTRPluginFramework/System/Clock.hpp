@@ -3,20 +3,19 @@
 
 #include "CTRPluginFramework/System/Time.hpp"
 
-namespace CTRPluginFramework
-{
-    class Clock
-    {
-    public:
-        Clock(void);
-        Clock(Time time);
+namespace CTRPluginFramework {
+class Clock {
+ public:
+  Clock(void);
+  Clock(Time time);
 
-        Time    GetElapsedTime(void) const;
-        bool    HasTimePassed(Time time) const;
-        Time    Restart(void);
-    private:
-        Time    _startTime;
-    };
-}
+  Time GetElapsedTime(void) const;
+  bool HasTimePassed(Time time) const;
+  Time Restart(void);
+
+ private:
+  Time _startTime;
+};
+}  // namespace CTRPluginFramework
 
 #endif

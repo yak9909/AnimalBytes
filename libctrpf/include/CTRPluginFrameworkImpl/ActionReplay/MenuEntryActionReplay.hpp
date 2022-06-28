@@ -1,22 +1,21 @@
 #ifndef CTRPLUGINFRAMEWORKIMPL_MENUENTRYACTIONREPLAY_HPP
 #define CTRPLUGINFRAMEWORKIMPL_MENUENTRYACTIONREPLAY_HPP
 
-#include "CTRPluginFrameworkImpl/Menu/MenuEntryImpl.hpp"
 #include "CTRPluginFrameworkImpl/ActionReplay/ARCode.hpp"
+#include "CTRPluginFrameworkImpl/Menu/MenuEntryImpl.hpp"
 
-namespace CTRPluginFramework
-{
-    class MenuEntryActionReplay : public MenuEntryImpl
-    {
-        friend class Menu;
-    public:
-        MenuEntryActionReplay(const std::string &name, const std::string &note = "");
-        ~MenuEntryActionReplay();
+namespace CTRPluginFramework {
+class MenuEntryActionReplay : public MenuEntryImpl {
+  friend class Menu;
 
-        MenuEntryActionReplay*    Update(void);
+ public:
+  MenuEntryActionReplay(const std::string &name, const std::string &note = "");
+  ~MenuEntryActionReplay();
 
-        ARCodeContext   context;
-    };
-}
+  MenuEntryActionReplay *Update(void);
+
+  ARCodeContext context;
+};
+}  // namespace CTRPluginFramework
 
 #endif

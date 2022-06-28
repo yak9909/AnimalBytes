@@ -1,10 +1,10 @@
 #include "CTRPluginFramework/Graphics/Render.hpp"
+
 #include "CTRPluginFrameworkImpl/Graphics/Renderer.hpp"
 
-namespace CTRPluginFramework
+namespace CTRPluginFramework {
+float Render::GetTextWidth(const std::string& text)
 {
-    float Render::GetTextWidth(const std::string& text)
-    {
-        return Renderer::GetTextSize(text.c_str());
-    }
- }
+  return Renderer::GetTextSize(text.c_str());
+}
+}  // namespace CTRPluginFramework

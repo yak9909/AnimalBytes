@@ -4,6 +4,6 @@
 
 namespace CTRPluginFramework::Converter {
 
-  std::vector<int> hexnumbers_to_dec(std::vector<int> hex);
+std::vector<int> hexnumbers_to_dec(std::vector<int> hex);
 
 }

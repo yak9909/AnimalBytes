@@ -4,17 +4,17 @@
 #include <vector>
 
 namespace CTRPluginFramework::Cheats::TextToCheats {
-  using Args = std::vector<std::string>;
+using Args = std::vector<std::string>;
 
-  void initialize(PluginMenu const& menu);
+void initialize(PluginMenu const& menu);
 
-  // get item from id
-  bool text_to_item(std::string const& text);
+// get item from id
+bool text_to_item(std::string const& text);
 
-  // find item with name
-  // warn: must append to commands when last
-  bool find_item(std::string const& text);
+// find item with name
+// warn: must append to commands when last
+bool find_item(std::string const& text);
 
-  // toggle name [true / false]
-  void toggle_cheat(Args const& args);
-}
+// toggle name [true / false]
+void toggle_cheat(Args const& args);
+}  // namespace CTRPluginFramework::Cheats::TextToCheats

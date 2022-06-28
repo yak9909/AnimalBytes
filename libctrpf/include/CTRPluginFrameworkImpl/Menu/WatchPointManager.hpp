@@ -1,74 +1,63 @@
 #pragma once
 
-#include "types.h"
 #include <3ds.h>
-#include "CTRPluginFramework/System/Mutex.hpp"
+
 #include <vector>
 
-namespace CTRPluginFramework
-{
-    struct WatchPointHit
-    {
-        u32     _wfar;
-        u32     _count;
-        u32     _flags;
+#include "CTRPluginFramework/System/Mutex.hpp"
+#include "types.h"
 
-        enum
-        {
-            Skip = 1
-        };
+namespace CTRPluginFramework {
+struct WatchPointHit {
+  u32 _wfar;
+  u32 _count;
+  u32 _flags;
 
-        WatchPointHit(u32 address)
-        {
-            _wfar = address;
-            _count = _flags = 0;
-        }
-    };
+  enum { Skip = 1 };
 
-    struct WatchPoint
-    {
-        enum
-        {
-            Disabled = 0,
-            Read,
-            Write,
-            ReadWrite
-        };
+  WatchPointHit(u32 address)
+  {
+    _wfar = address;
+    _count = _flags = 0;
+  }
+};
 
-        u32     _address{0};
-        u32     _size{4};
-        u32     _kind{Disabled};
-        u32     _totalHit{0};
+struct WatchPoint {
+  enum { Disabled = 0, Read, Write, ReadWrite };
 
-        std::vector<WatchPointHit>  _hits{};
+  u32 _address{0};
+  u32 _size{4};
+  u32 _kind{Disabled};
+  u32 _totalHit{0};
 
-        WatchPointHit&  GetHitData(u32 wfar);
+  std::vector<WatchPointHit> _hits{};
 
-        void    RenderTop(void);
-        void    RenderBottom(void);
-    };
+  WatchPointHit& GetHitData(u32 wfar);
 
-    class   WatchPointManager
-    {
-    public:
-        void            Initialize(void);
+  void RenderTop(void);
+  void RenderBottom(void);
+};
 
-        static void     SetWatchPoint(u32 address, u32 size, u32 kind);
-        static void     DisableWatchPoint(u32 address);
+class WatchPointManager {
+ public:
+  void Initialize(void);
 
-        static void     Open(void);
+  static void SetWatchPoint(u32 address, u32 size, u32 kind);
+  static void DisableWatchPoint(u32 address);
 
+  static void Open(void);
 
-        static void     HandleException(ERRF_ExceptionInfo* excep, CpuRegisters* regs);
-    private:
-        WatchPointManager(void) = default;
+  static void HandleException(ERRF_ExceptionInfo* excep, CpuRegisters* regs);
 
-        Mutex           _mutex{};
-        bool            _isInitialized{false};
-        u32             _contextId{0};
-        u32             _total{0};
-        WatchPoint      _watchPoints[2]{};
+ private:
+  WatchPointManager(void) = default;
 
-        static WatchPointManager    _singleton;
-    };
-}
+  Mutex _mutex{};
+  bool _isInitialized{false};
+  u32 _contextId{0};
+  u32 _total{0};
+  WatchPoint _watchPoints[2]{};
+
+  static WatchPointManager _singleton;
+};
+}  // namespace CTRPluginFramework

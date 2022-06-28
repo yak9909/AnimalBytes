@@ -1,7 +1,7 @@
 #pragma once
 
 namespace CTRPluginFramework::Cheats::Items {
-  MenuFolder* make_folder();
+MenuFolder* make_folder();
 
-  void pocket_item(MenuEntry* entry);
-}
+void pocket_item(MenuEntry* entry);
+}  // namespace CTRPluginFramework::Cheats::Items

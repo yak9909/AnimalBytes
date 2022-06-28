@@ -2,12 +2,12 @@
 
 void hidExitFake();
 
-void    __appExit(void)
+void __appExit(void)
 {
-	// Exit services
-    cfguExit();
-    fsExit();
-    amExit();
-    acExit();
-    srvExit();
+  // Exit services
+  cfguExit();
+  fsExit();
+  amExit();
+  acExit();
+  srvExit();
 }

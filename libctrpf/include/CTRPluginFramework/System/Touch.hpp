@@ -3,14 +3,12 @@
 
 #include "Vector.hpp"
 
-namespace CTRPluginFramework
-{
-    class Touch
-    {
-    public:
-        static bool         IsDown(void);
-        static UIntVector   GetPosition(void);
-    };
-}
+namespace CTRPluginFramework {
+class Touch {
+ public:
+  static bool IsDown(void);
+  static UIntVector GetPosition(void);
+};
+}  // namespace CTRPluginFramework
 
 #endif

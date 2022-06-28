@@ -1,12 +1,12 @@
 #include <3ds.h>
-#include "csvc.h"
+
 #include <CTRPluginFramework.hpp>
 #include <vector>
 
 #include "Cheats.h"
 #include "Helpers.h"
-
 #include "TextEditor.h"
+#include "csvc.h"
 
 static char const* ABOUT =
   "Animal Bytes: ACNL Plugin\n"
@@ -27,47 +27,46 @@ static char const* ABOUT =
   --------------------- */
 
 namespace CTRPluginFramework {
-  void PatchProcess(FwkSettings &settings) {
-    // force drop
-    *(u32*)0x59E5DC = 0xEA000004;
-
-
-  }
-
-  void OnProcessExit(void) {
-  }
-
-  void InitMenu(PluginMenu& menu) {
-    
-    Cheats::TextToCheats::initialize(menu);
-    Cheats::SpeedHacks::initialize();
-
-    Cheats::CodeContext::get_instance()->init();
-
-    menu += new MenuEntry("TextEditor", nullptr, [] (MenuEntry* e) {
-      static TextEditor editor;
-
-      editor.open();
-    });
-
-    menu += Cheats::Movements::make_folder();
-    menu += Cheats::SpeedHacks::make_folder();
-    menu += Cheats::Items::make_folder();
-    menu += Cheats::ItemDrops::make_folder();
-  }
-
-  int main() {
-    PluginMenu menu{ "AnimalBytes", 1, 0, 0, ABOUT };
-    Logger logger{ "plugin.log" };
-
-    menu.SynchronizeWithFrame(true);
-    menu.ShowWelcomeMessage(false);
-
-    // Create Menu
-    InitMenu(menu);
-
-    OSD::Notify(Color::DodgerBlue << "AnimalBytes Ready!!");
-
-    return menu.Run();
-  }
+void PatchProcess(FwkSettings& settings)
+{
+  // force drop
+  *(u32*)0x59E5DC = 0xEA000004;
 }
+
+void OnProcessExit(void) {}
+
+void InitMenu(PluginMenu& menu)
+{
+  Cheats::TextToCheats::initialize(menu);
+  Cheats::SpeedHacks::initialize();
+
+  Cheats::CodeContext::get_instance()->init();
+
+  menu += new MenuEntry("TextEditor", nullptr, [](MenuEntry* e) {
+    static TextEditor editor;
+
+    editor.open();
+  });
+
+  menu += Cheats::Movements::make_folder();
+  menu += Cheats::SpeedHacks::make_folder();
+  menu += Cheats::Items::make_folder();
+  menu += Cheats::ItemDrops::make_folder();
+}
+
+int main()
+{
+  PluginMenu menu{"AnimalBytes", 1, 0, 0, ABOUT};
+  Logger logger{"plugin.log"};
+
+  menu.SynchronizeWithFrame(true);
+  menu.ShowWelcomeMessage(false);
+
+  // Create Menu
+  InitMenu(menu);
+
+  OSD::Notify(Color::DodgerBlue << "AnimalBytes Ready!!");
+
+  return menu.Run();
+}
+}  // namespace CTRPluginFramework

@@ -1,39 +1,39 @@
 #ifndef CTRPLUGINFRAMEWORK_SOUND_SOUNDENGINE_IMPL_HPP
 #define CTRPLUGINFRAMEWORK_SOUND_SOUNDENGINE_IMPL_HPP
 
-#include "CTRPluginFramework/Sound.hpp"
-#include "cwav.h"
 #include <vector>
 
-namespace CTRPluginFramework
-{
-    class SoundEngineImpl
-    {
-    public:
-        static void Initializelibcwav();
+#include "CTRPluginFramework/Sound.hpp"
+#include "cwav.h"
 
-        static void NotifyAptEvent(APT_HookType event);
+namespace CTRPluginFramework {
+class SoundEngineImpl {
+ public:
+  static void Initializelibcwav();
 
-        static void SetVaToPaConvFunction(vaToPaCallback_t function);
+  static void NotifyAptEvent(APT_HookType event);
 
-        static bool RegisterMenuSoundEvent(SoundEngine::Event eventType, Sound& sound);
+  static void SetVaToPaConvFunction(vaToPaCallback_t function);
 
-        static Sound& GetMenuSoundEvent(SoundEngine::Event eventType);
+  static bool RegisterMenuSoundEvent(SoundEngine::Event eventType,
+                                     Sound& sound);
 
-        static Sound::CWAVStatus PlayMenuSound(SoundEngine::Event eventType);
+  static Sound& GetMenuSoundEvent(SoundEngine::Event eventType);
 
-        static void StopMenuSound(SoundEngine::Event eventType);
+  static Sound::CWAVStatus PlayMenuSound(SoundEngine::Event eventType);
 
-        static void DeRegisterMenuSoundEvent(SoundEngine::Event eventType);
+  static void StopMenuSound(SoundEngine::Event eventType);
 
-        static void InitializeMenuSounds();
+  static void DeRegisterMenuSoundEvent(SoundEngine::Event eventType);
 
-        static void ClearMenuSounds();
+  static void InitializeMenuSounds();
 
-    private:
-        static std::vector<Sound> menuSounds;
-        static Sound fallbackSound;
-    };
-}
+  static void ClearMenuSounds();
+
+ private:
+  static std::vector<Sound> menuSounds;
+  static Sound fallbackSound;
+};
+}  // namespace CTRPluginFramework
 
 #endif

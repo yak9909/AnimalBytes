@@ -8,6 +8,6 @@
 #include "Helpers/MenuEntryHelpers.h"
 #include "Helpers/OSDManager.h"
 #include "Helpers/QuickMenu.h"
-#include "Helpers/Strings.h"
 #include "Helpers/StringType.h"
+#include "Helpers/Strings.h"
 #include "Helpers/Wrappers.h"

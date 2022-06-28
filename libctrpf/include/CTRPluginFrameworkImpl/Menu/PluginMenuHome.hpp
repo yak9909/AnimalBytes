@@ -1,96 +1,94 @@
 #ifndef CTRPLUGINFRAMEWORKIMPL_PLUGINMENUHOME_HPP
 #define CTRPLUGINFRAMEWORKIMPL_PLUGINMENUHOME_HPP
 
-#include "CTRPluginFrameworkImpl/Graphics.hpp"
-#include "CTRPluginFrameworkImpl/System.hpp"
-#include "CTRPluginFrameworkImpl/Menu/MenuFolderImpl.hpp"
-#include "CTRPluginFrameworkImpl/Menu/MenuEntryImpl.hpp"
-#include "CTRPluginFrameworkImpl/Menu/MenuItem.hpp"
-#include "CTRPluginFramework/Menu/PluginMenu.hpp"
-
 #include <vector>
 
-namespace CTRPluginFramework
-{
-    class PluginMenuHome
-    {
-        using EventList = std::vector<Event>;
-    public:
-        PluginMenuHome(std::string &name, bool ShowNoteBottom);
-        ~PluginMenuHome(){}
+#include "CTRPluginFramework/Menu/PluginMenu.hpp"
+#include "CTRPluginFrameworkImpl/Graphics.hpp"
+#include "CTRPluginFrameworkImpl/Menu/MenuEntryImpl.hpp"
+#include "CTRPluginFrameworkImpl/Menu/MenuFolderImpl.hpp"
+#include "CTRPluginFrameworkImpl/Menu/MenuItem.hpp"
+#include "CTRPluginFrameworkImpl/System.hpp"
 
-        // Return true if the Close Button is pressed, else false
-        bool    operator()(EventList &eventList, int &mode, Time &delta);
-        void    Append(MenuItem *item) const;
-        void    Refresh(void);
-        void    UnStar(MenuItem* item);
-        void    Init(void);
+namespace CTRPluginFramework {
+class PluginMenuHome {
+  using EventList = std::vector<Event>;
 
-        void    AddPluginVersion(u32 version);
-        void    Close(MenuFolderImpl *folder);
+ public:
+  PluginMenuHome(std::string &name, bool ShowNoteBottom);
+  ~PluginMenuHome() {}
 
-        void    UpdateNote(void);
+  // Return true if the Close Button is pressed, else false
+  bool operator()(EventList &eventList, int &mode, Time &delta);
+  void Append(MenuItem *item) const;
+  void Refresh(void);
+  void UnStar(MenuItem *item);
+  void Init(void);
 
-        bool    ShowNoteBottom;
+  void AddPluginVersion(u32 version);
+  void Close(MenuFolderImpl *folder);
 
-    private:
-        friend class PluginMenuImpl;
-        friend std::string &PluginMenu::Title(void);
+  void UpdateNote(void);
 
-        void    _ProcessEvent(Event &event);
-        void    _RenderTop(void);
-        void    _RenderBottom(void);
-        void    _Update(Time delta);
+  bool ShowNoteBottom;
 
-        void    _StarItem(void);
-        void    _TriggerEntry(void);
+ private:
+  friend class PluginMenuImpl;
+  friend std::string &PluginMenu::Title(void);
 
+  void _ProcessEvent(Event &event);
+  void _RenderTop(void);
+  void _RenderBottom(void);
+  void _Update(Time delta);
 
-        void    _showStarredBtn_OnClick(void);
-        void    _controllerBtn_OnClick(void);
-        void    _keyboardBtn_OnClick(void);
+  void _StarItem(void);
+  void _TriggerEntry(void);
 
-        void    _actionReplayBtn_OnClick(void); // 4
-        void    _gameGuideBtn_OnClick(void); // 2
-        void    _searchBtn_OnClick(void); // 3
-        void    _toolsBtn_OnClick(void);  // 5
-        void    _InfoBtn_OnClick(void); // note
+  void _showStarredBtn_OnClick(void);
+  void _controllerBtn_OnClick(void);
+  void _keyboardBtn_OnClick(void);
 
-        // Members
-        MenuFolderImpl    * _root;
-        MenuFolderImpl    * _folder;
-        MenuFolderImpl    * _starred;
-        MenuFolderImpl    * _starredConst;
+  void _actionReplayBtn_OnClick(void);  // 4
+  void _gameGuideBtn_OnClick(void);     // 2
+  void _searchBtn_OnClick(void);        // 3
+  void _toolsBtn_OnClick(void);         // 5
+  void _InfoBtn_OnClick(void);          // note
 
-        int                 _mode;
-        bool                _starMode;
-        int                 _selector;
-        int                 _selectedTextSize;
-        float               _maxScrollOffset;
-        float               _scrollOffset;
-        Clock               _scrollClock;
-        bool                _reverseFlow;
-        bool                _showVersion;
-        int                 _versionPosX;
-        std::string         _versionStr;
+  // Members
+  MenuFolderImpl *_root;
+  MenuFolderImpl *_folder;
+  MenuFolderImpl *_starred;
+  MenuFolderImpl *_starredConst;
 
-        TextBox             _noteTB;
+  int _mode;
+  bool _starMode;
+  int _selector;
+  int _selectedTextSize;
+  float _maxScrollOffset;
+  float _scrollOffset;
+  Clock _scrollClock;
+  bool _reverseFlow;
+  bool _showVersion;
+  int _versionPosX;
+  std::string _versionStr;
 
-        // Mode buttons
-        Button              _showStarredBtn;
-        Button              _hidMapperBtn;
-        Button              _gameGuideBtn;
-        Button              _searchBtn;
-        Button              _arBtn;
-        Button              _toolsBtn;
+  TextBox _noteTB;
 
-        Button              _keyboardBtn;
-        Button              _controllerBtn;
+  // Mode buttons
+  Button _showStarredBtn;
+  Button _hidMapperBtn;
+  Button _gameGuideBtn;
+  Button _searchBtn;
+  Button _arBtn;
+  Button _toolsBtn;
 
-        // Entry button
-        Button              _AddFavoriteBtn;
-        Button              _InfoBtn;
-    };
-}
+  Button _keyboardBtn;
+  Button _controllerBtn;
+
+  // Entry button
+  Button _AddFavoriteBtn;
+  Button _InfoBtn;
+};
+}  // namespace CTRPluginFramework
 
 #endif

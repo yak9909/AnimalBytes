@@ -1,81 +1,80 @@
 #ifndef CTRPLUGINFRAMEWORKIMPL_PLUGINMENUSEARCH_HPP
 #define CTRPLUGINFRAMEWORKIMPL_PLUGINMENUSEARCH_HPP
 
-#include "CTRPluginFrameworkImpl/Graphics.hpp"
-#include "CTRPluginFrameworkImpl/Menu/Menu.hpp"
-#include "CTRPluginFrameworkImpl/Search/Search32.hpp"
-#include "CTRPluginFrameworkImpl/Menu/PluginMenu_SearchMenu.hpp"
-
-#include <vector>
 #include <list>
+#include <vector>
+
+#include "CTRPluginFrameworkImpl/Graphics.hpp"
 #include "CTRPluginFrameworkImpl/Graphics/UIContainer.hpp"
+#include "CTRPluginFrameworkImpl/Menu/Menu.hpp"
+#include "CTRPluginFrameworkImpl/Menu/PluginMenu_SearchMenu.hpp"
+#include "CTRPluginFrameworkImpl/Search/Search32.hpp"
 
-namespace CTRPluginFramework
-{
-    class PluginMenuSearch
-    {
-        using EventList = std::vector<Event>;
-    public:
-        PluginMenuSearch(HexEditor &hexEditor);
-        ~PluginMenuSearch(){}
+namespace CTRPluginFramework {
+class PluginMenuSearch {
+  using EventList = std::vector<Event>;
 
-        // Return true if the Close Button is pressed, else false
-        bool    operator()(EventList &eventList, Time &delta);
-        void    GetRegionsList(std::vector<Region> &list);
-        void    RestoreSearchState(void);
-    private:
+ public:
+  PluginMenuSearch(HexEditor &hexEditor);
+  ~PluginMenuSearch() {}
 
-        void    _ProcessEvent(Event &event);
-        void    _RenderTop(void);
-        void    _RenderBottom(void);
-        void    _Update(Time delta);
+  // Return true if the Close Button is pressed, else false
+  bool operator()(EventList &eventList, Time &delta);
+  void GetRegionsList(std::vector<Region> &list);
+  void RestoreSearchState(void);
 
-        void    _ListRegion(void);
-        void    _PopulateSearchType(bool isFirstSearch);
+ private:
+  void _ProcessEvent(Event &event);
+  void _RenderTop(void);
+  void _RenderBottom(void);
+  void _Update(Time delta);
 
-        void    _searchBtn_OnClick(void);
-        void    _resetBtn_OnClick(void);
-        void    _undoBtn_OnClick(void);
-        void    _cancelBtn_OnClick(void);
+  void _ListRegion(void);
+  void _PopulateSearchType(bool isFirstSearch);
 
-        static s32     _ShowProgressWindow(void *arg);
+  void _searchBtn_OnClick(void);
+  void _resetBtn_OnClick(void);
+  void _undoBtn_OnClick(void);
+  void _cancelBtn_OnClick(void);
 
-        // Members
-        std::vector<Region>                 _regionsList{};
-        std::list<Search *>                 _searchHistory{};
-        Search                              *_currentSearch;
-        HexEditor                           &_hexEditor;
-        Task                    _progressTask{_ShowProgressWindow, nullptr, Task::AppCores};
+  static s32 _ShowProgressWindow(void *arg);
 
-        bool                                _inSearch;
-        bool                                _inEditor;
-        bool                                _firstRegionInit;
-		bool								_hexInput;
-        int                                 _step;
+  // Members
+  std::vector<Region> _regionsList{};
+  std::list<Search *> _searchHistory{};
+  Search *_currentSearch;
+  HexEditor &_hexEditor;
+  Task _progressTask{_ShowProgressWindow, nullptr, Task::AppCores};
 
-        // UIComponent
-        SearchMenu                          _searchMenu;
-        ComboBox                            _memoryRegions;
-        ComboBox                            _searchSize; // Variable type
-        ComboBox                            _searchType; // Unknown / Exact
-        ComboBox                            _compareType; // Compare
+  bool _inSearch;
+  bool _inEditor;
+  bool _firstRegionInit;
+  bool _hexInput;
+  int _step;
 
-        NumericTextBox                      _startRangeTextBox;
-        NumericTextBox                      _endRangeTextBox;
-        NumericTextBox                      _valueTextBox;
+  // UIComponent
+  SearchMenu _searchMenu;
+  ComboBox _memoryRegions;
+  ComboBox _searchSize;   // Variable type
+  ComboBox _searchType;   // Unknown / Exact
+  ComboBox _compareType;  // Compare
 
-        // Buttons
-        //IconButton<PluginMenuSearch, void>          _closeBtn;
+  NumericTextBox _startRangeTextBox;
+  NumericTextBox _endRangeTextBox;
+  NumericTextBox _valueTextBox;
 
-        Button          _searchBtn;
-        Button          _cancelBtn;
-        Button          _undoBtn;
-        Button          _resetBtn;
+  // Buttons
+  // IconButton<PluginMenuSearch, void>          _closeBtn;
 
-        Button          _hexBtn;
+  Button _searchBtn;
+  Button _cancelBtn;
+  Button _undoBtn;
+  Button _resetBtn;
 
-        UIContainer                         _uiContainer;
-    };
-}
+  Button _hexBtn;
+
+  UIContainer _uiContainer;
+};
+}  // namespace CTRPluginFramework
 
 #endif
