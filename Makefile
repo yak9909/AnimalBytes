@@ -70,9 +70,12 @@ export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L $(dir)/lib)
 #---------------------------------------------------------------------------------
 all: $(BUILD)
 
-$(BUILD):
+$(BUILD): $(CTRPFLIB)/lib/libctrpf.a
 	@[ -d $@ ] || mkdir -p $@
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
+
+$(CTRPFLIB)/lib/libctrpf.a:
+	@$(MAKE) -j -C $(CTRPFLIB)  --no-print-directory
 
 #---------------------------------------------------------------------------------
 clean:
