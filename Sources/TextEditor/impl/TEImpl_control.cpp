@@ -44,6 +44,8 @@ namespace CTRPluginFramework {
     }
 
     if( type == KeyboardEvent::EventType::KeyPressed || (clock.HasTimePassed(Milliseconds(keyRepeatWait)) && clock2.HasTimePassed(Milliseconds(waitRepeatMilli))) ) {
+      auto cursor_bak = cursor;
+      
       if( key & Hotkeys::CursorUp ) {
         if( --cursor.y < 0 ) cursor.y = 0;
         adjustX;
@@ -70,13 +72,29 @@ namespace CTRPluginFramework {
         }
       }
 
+      if( key & Hotkeys::Enter ) {
+        newline();
+      }
+
+      if( key & Hotkeys::Backspace ) {
+        delete_char();
+      }
+
+      if( cursor.y != cursor_bak.y ) {
+        if( cursor.y < scroll_pos.y ) {
+          scroll_pos.y = cursor.y;
+        }
+        else if( cursor.y >= scroll_pos.y + 24 ) {
+          scroll_pos.y = cursor.y - 23;
+        }
+      }
+
       if( key & Hotkeys::ScreenUp ) {
         if( --scroll_pos.y < 0 )
           scroll_pos.y = 0;
       }
 
       if( key & Hotkeys::ScreenDown ) {
-        //auto maxval = data.size() <= 24 ? std::min<int>((int)data.size(), 14) : (int)data.size() - 10;
         auto maxval = std::max<int>((int)data.size() - 10, 0);
 
         if( ++scroll_pos.y > maxval ) {
@@ -92,14 +110,6 @@ namespace CTRPluginFramework {
         // todo
       }
 
-      if( key & Hotkeys::Enter ) {
-        newline();
-      }
-
-      if( key & Hotkeys::Backspace ) {
-        delete_char();
-      }
-      
       if( type == KeyboardEvent::KeyPressed ) {
         clock.Restart();
       }
