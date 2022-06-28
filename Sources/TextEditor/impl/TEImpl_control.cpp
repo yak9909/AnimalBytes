@@ -70,6 +70,28 @@ namespace CTRPluginFramework {
         }
       }
 
+      if( key & Hotkeys::ScreenUp ) {
+        if( --scroll_pos.y < 0 )
+          scroll_pos.y = 0;
+      }
+
+      if( key & Hotkeys::ScreenDown ) {
+        //auto maxval = data.size() <= 24 ? std::min<int>((int)data.size(), 14) : (int)data.size() - 10;
+        auto maxval = std::max<int>((int)data.size() - 10, 0);
+
+        if( ++scroll_pos.y > maxval ) {
+          scroll_pos.y = maxval;
+        }
+      }
+
+      if( key & Hotkeys::ScreenLeft ) {
+        // todo
+      }
+
+      if( key & Hotkeys::ScreenRight ) {
+        // todo
+      }
+
       if( key & Hotkeys::Enter ) {
         newline();
       }
