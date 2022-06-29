@@ -9,6 +9,12 @@ namespace CTRPluginFramework::ScriptEngine {
     Token* run();
 
   private:
-    
+    bool check();
+    char peek();
+    bool match(std::string_view s);
+    void pass_space();
+
+    std::string const& source;
+    size_t position;
   };
 }
