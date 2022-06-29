@@ -24,6 +24,8 @@ namespace CTRPluginFramework::ScriptEngine {
   };
 
   class LexError : CompileErrorBase {
+    std::string msg;
+
   public:
     explicit LexError(size_t errpos, std::string const& msg)
       : msg(msg)
@@ -34,8 +36,21 @@ namespace CTRPluginFramework::ScriptEngine {
     char const* what() const noexcept override {
       return (Utils::Format("position=%zu: ", errpos) + msg).c_str();
     }
+  };
 
+  class ParseError : CompileErrorBase {
     std::string msg;
+
+  public:
+    explicit ParseError(size_t pos, std::string const& msg)
+      : msg(msg)
+    {
+      this->errpos = pos;
+    }
+
+    ParseError(Node* node, std::string const& msg);
+    
+    char const* what() const noexcept override;
   };
 
 }

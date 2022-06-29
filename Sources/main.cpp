@@ -7,6 +7,7 @@
 #include "Helpers.h"
 
 #include "TextEditor.h"
+#include "ScriptEngine/ScriptManager.h"
 
 static char const* ABOUT =
   "Animal Bytes: ACNL Plugin\n"
@@ -45,6 +46,8 @@ namespace CTRPluginFramework {
     Cheats::SpeedHacks::initialize();
 
     Cheats::CodeContext::get_instance()->init();
+
+    menu += ScriptEngine::ScriptManager::create_folder();
 
     menu += Cheats::Movements::make_folder();
     menu += Cheats::SpeedHacks::make_folder();

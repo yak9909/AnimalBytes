@@ -1,5 +1,10 @@
 #pragma once
 
+namespace CTRPluginFramework {
+  class MenuEntry;
+  class MenuFolder;
+}
+
 namespace CTRPluginFramework::ScriptEngine {
 
   struct Token;
@@ -7,17 +12,17 @@ namespace CTRPluginFramework::ScriptEngine {
   struct ILOperator;
 
   struct ScriptData {
+    bool built_in;
     std::string path;
     std::string source;
     Token* tokens;
     Node* node;
     std::vector<ILOperator> oplist;
 
+    Object* execute();
     static void destroy(ScriptData* data);
   };
 
-  class MenuEntry;
-  class MenuFolder;
   class ScriptManager {
   public:
 

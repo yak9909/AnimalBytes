@@ -10,9 +10,9 @@
 #include "ScriptEngine/Types/IL.h"
 
 #include "ScriptEngine/Lexer.h"
-#include "ScriptEngine/ScriptManager.h"
-
+#include "ScriptEngine/Parser.h"
 #include "ScriptEngine/Exceptions.h"
+#include "ScriptEngine/ScriptManager.h"
 
 namespace CTRPluginFramework::ScriptEngine {
   std::vector<ScriptData> ScriptManager::data_list;
@@ -45,7 +45,13 @@ namespace CTRPluginFramework::ScriptEngine {
   }
 
   void ScriptManager::run_active_scripts(MenuEntry *e) {
+    for( auto&& data : data_list ) {
+      if( data.built_in ) {
+        continue;
+      }
 
+
+    }
   }
   
   void ScriptManager::load_script_file(MenuEntry* e) {
@@ -83,9 +89,11 @@ namespace CTRPluginFramework::ScriptEngine {
     Lexer lexer{ src };
     auto tokens = lexer.run();
     
-    
+    Parser parser{ tokens };
+    auto node = parser.parse();
     
     return &data_list.emplace_back(ScriptData{
+      .built_in = false,
       .path = path,
       .source = src,
       .tokens = tokens,
