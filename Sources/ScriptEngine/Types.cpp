@@ -2,6 +2,7 @@
 
 #include "ScriptEngine/Types/Token.h"
 #include "ScriptEngine/Types/Variable.h"
+#include "ScriptEngine/Types/TypeInfo.h"
 #include "ScriptEngine/Types/Object.h"
 #include "ScriptEngine/Types/Node.h"
 #include "ScriptEngine/Types/IL.h"

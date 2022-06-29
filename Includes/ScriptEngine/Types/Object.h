@@ -6,13 +6,13 @@ namespace CTRPluginFramework::ScriptEngine {
     u32 ref_count;
 
     union {
-      int v_int;
+      int v_int = 0;
       float v_float;
       char v_char;
       bool v_bool;
 
     };
 
-    
+
   };
 }
