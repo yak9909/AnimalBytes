@@ -37,18 +37,14 @@ namespace CTRPluginFramework {
   void OnProcessExit(void) {
   }
 
+  extern "C" int getMemFree(void);
+
   void InitMenu(PluginMenu& menu) {
     
     Cheats::TextToCheats::initialize(menu);
     Cheats::SpeedHacks::initialize();
 
     Cheats::CodeContext::get_instance()->init();
-
-    menu += new MenuEntry("TextEditor", nullptr, [] (MenuEntry* e) {
-      static TextEditor editor;
-
-      editor.open();
-    });
 
     menu += Cheats::Movements::make_folder();
     menu += Cheats::SpeedHacks::make_folder();

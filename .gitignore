@@ -3,6 +3,7 @@
 /.vscode
 
 sendpost.txt
+memo.*
 
 *.3gx
 *.elf
