@@ -26,6 +26,5 @@ namespace CTRPluginFramework::ScriptEngine {
 
     explicit Node(NodeKind kind);
     Node(NodeKind kind, Node* lhs, Node* rhs, Token* token);
-    ~Node();
   };
 }

@@ -12,10 +12,51 @@
 #include "ScriptEngine/Lexer.h"
 #include "ScriptEngine/ScriptManager.h"
 
+#include "ScriptEngine/Exceptions.h"
+
 namespace CTRPluginFramework::ScriptEngine {
   std::vector<ScriptData> ScriptManager::data_list;
 
-  ScriptData const* ScriptManager::compile(std::string const& path) {
+  static void node_deleter(Node* node) {
+    if( node->lhs ) node_deleter(node->lhs);
+    if( node->rhs ) node_deleter(node->rhs);
+
+    for( auto&& i : node->list ) {
+      if( i ) node_deleter(i);
+    }
+
+    delete node;
+  }
+
+  void ScriptData::destroy(ScriptData* data) {
+    do {
+      auto tmp = data->tokens->next;
+      delete data->tokens;
+      data->tokens = tmp;
+    } while( data->tokens );
+
+    node_deleter(data->node);
+
+    delete data;
+  }
+
+  void ScriptManager::initialize() {
+
+  }
+
+  void ScriptManager::run_active_scripts(MenuEntry *e) {
+
+  }
+  
+  void ScriptManager::load_script_file(MenuEntry* e) {
+
+  }
+
+  MenuFolder* ScriptManager::create_folder() {
+
+  }
+
+  ScriptData* ScriptManager::compile(std::string const& path) {
     for( auto&& data : data_list ) {
       if( data.path == path ) {
         return &data;
@@ -25,7 +66,7 @@ namespace CTRPluginFramework::ScriptEngine {
     File file{ path, File::READ };
 
     if( !file.IsOpen() ) {
-      return nullptr;
+      throw new CannotOpenFileError;
     }
 
     LineReader reader{ file };
@@ -35,8 +76,13 @@ namespace CTRPluginFramework::ScriptEngine {
       src += line + '\n';
     }
 
+    if( [&](){for(auto&&c:src){if(c>' ')return 0;}return 1;}() ) {
+      return nullptr;
+    }
+
     Lexer lexer{ src };
     auto tokens = lexer.run();
+    
     
     
     return &data_list.emplace_back(ScriptData{

@@ -31,4 +31,20 @@ namespace CTRPluginFramework::ScriptEngine {
   {
   }
 
+  Node::Node(NodeKind kind)
+    : kind(kind),
+      token(nullptr),
+      lhs(nullptr),
+      rhs(nullptr)
+  {
+  }
+
+  Node::Node(NodeKind kind, Node* lhs, Node* rhs, Token* token)
+    : kind(kind),
+      token(token),
+      lhs(lhs),
+      rhs(rhs)
+  {
+  }
+
 }

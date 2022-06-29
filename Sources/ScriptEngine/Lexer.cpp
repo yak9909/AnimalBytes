@@ -1,8 +1,11 @@
 #include <string>
 #include <CTRPluginFramework.hpp>
 #include "types.h"
+
 #include "ScriptEngine/Types/Token.h"
+
 #include "ScriptEngine/Lexer.h"
+#include "ScriptEngine/Exceptions.h"
 
 static char const* punctuaters[] = {
   "("
@@ -43,17 +46,24 @@ namespace CTRPluginFramework::ScriptEngine {
         }
       }
       else {
-        for( auto&& pu : punctuaters ) {
+        for( std::string_view&& pu : punctuaters ) {
           if( match(pu) ) {
-
+            position += pu.length();
+            cur->kind = TOK_PUNCTUATER;
+            goto found;
           }
         }
+
+        throw new LexError(pos, "unknown token");
+
+      found:;
       }
 
       cur->str = { str + pos, position - pos };
       pass_space();
     }
 
+    cur = new Token(TOK_END, cur, position);
     return top.next;
   }
 
