@@ -12,6 +12,7 @@ namespace CTRPluginFramework::ScriptEngine {
   };
 
   struct Token;
+  struct Variable;
   struct PACKED Node {
     NodeKind  kind;
     Token*    token;
@@ -19,7 +20,12 @@ namespace CTRPluginFramework::ScriptEngine {
     Node*     rhs;
     
     std::vector<Node*> list;
+    std::vector<Variable> variables;
 
     static auto _f_() {sizeof(Node);}
+
+    explicit Node(NodeKind kind);
+    Node(NodeKind kind, Node* lhs, Node* rhs, Token* token);
+    ~Node();
   };
 }
