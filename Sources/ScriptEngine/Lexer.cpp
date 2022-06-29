@@ -34,6 +34,7 @@ namespace CTRPluginFramework::ScriptEngine {
       char const* str = source.data() + pos;
 
       cur = new Token(TOK_INT, cur, pos);
+      cur->pos = pos;
 
       if( isdigit(ch) ) {
         while( check() && isdigit(peek()) ) {

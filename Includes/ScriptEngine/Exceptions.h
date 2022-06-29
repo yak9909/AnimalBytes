@@ -38,16 +38,14 @@ namespace CTRPluginFramework::ScriptEngine {
     }
   };
 
+  struct Token;
+  struct Node;
   class ParseError : CompileErrorBase {
     std::string msg;
 
   public:
-    explicit ParseError(size_t pos, std::string const& msg)
-      : msg(msg)
-    {
-      this->errpos = pos;
-    }
-
+    ParseError(size_t pos, std::string const& msg);
+    ParseError(Token* token, std::string const& msg);
     ParseError(Node* node, std::string const& msg);
     
     char const* what() const noexcept override;

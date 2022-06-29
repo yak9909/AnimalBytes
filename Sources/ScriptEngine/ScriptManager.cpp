@@ -11,6 +11,7 @@
 
 #include "ScriptEngine/Lexer.h"
 #include "ScriptEngine/Parser.h"
+#include "ScriptEngine/Evaluater.h"
 #include "ScriptEngine/Exceptions.h"
 #include "ScriptEngine/ScriptManager.h"
 
@@ -50,7 +51,9 @@ namespace CTRPluginFramework::ScriptEngine {
         continue;
       }
 
+      if( data.activated ) {
 
+      }
     }
   }
   
@@ -59,7 +62,42 @@ namespace CTRPluginFramework::ScriptEngine {
   }
 
   MenuFolder* ScriptManager::create_folder() {
+    auto folder = new MenuFolder("Scripts");
 
+    folder->Append(new MenuEntry("run active scripts", run_active_scripts));
+
+    folder->Append(new MenuEntry("test", nullptr, [](MenuEntry*e){
+        
+      File file{ "test.txt", File::READ };
+
+      if( !file.IsOpen() ) {
+        return;
+      }
+
+      LineReader reader{ file };
+      std::string src;
+
+      for( std::string line; reader(line); ) {
+        src += line + '\n';
+      }
+
+      if( [&](){for(auto&&c:src){if(c>' ')return 0;}return 1;}() ) {
+        return;
+      }
+
+      Lexer lexer{ src };
+      auto tokens = lexer.run();
+
+      std::vector<std::string> X;
+      for(auto p=tokens;p->kind!=TOK_END;p=p->next){
+        X.emplace_back(p->str);
+      }
+
+      (Keyboard(X)).Open();
+      
+    }));
+
+    return folder;
   }
 
   ScriptData* ScriptManager::compile(std::string const& path) {
@@ -91,14 +129,18 @@ namespace CTRPluginFramework::ScriptEngine {
     
     Parser parser{ tokens };
     auto node = parser.parse();
+
+
     
     return &data_list.emplace_back(ScriptData{
       .built_in = false,
+      .activated = false,
       .path = path,
       .source = src,
       .tokens = tokens,
       .node = node,
-      .oplist = oplist
+      .oplist = { }
+      //.oplist = oplist
     });
   }
 }

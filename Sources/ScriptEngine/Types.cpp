@@ -7,10 +7,11 @@
 #include "ScriptEngine/Types/Node.h"
 #include "ScriptEngine/Types/IL.h"
 
+#include "ScriptEngine/Exceptions.h"
+
 namespace CTRPluginFramework::ScriptEngine {
   Token::Token(TokenKind kind)
     : kind(kind),
-      str({}),
       next(nullptr),
       pos(0)
   {
@@ -18,7 +19,6 @@ namespace CTRPluginFramework::ScriptEngine {
   
   Token::Token(TokenKind kind, Token* prev, size_t pos)
     : kind(kind),
-      str({}),
       next(nullptr),
       pos(pos)
   {
@@ -47,4 +47,27 @@ namespace CTRPluginFramework::ScriptEngine {
   {
   }
 
+  ParseError::ParseError(size_t pos, std::string const& msg)
+    : msg(msg)
+  {
+    this->errpos = pos;
+    
+  }
+
+  ParseError::ParseError(Token* token, std::string const& msg)
+    : msg(msg)
+  {
+    this->errpos = token->pos;
+    
+  }
+
+  ParseError::ParseError(Node* node, std::string const& msg)
+    : msg(msg)
+  {
+    this->errpos = node->token->pos;
+  }
+      
+  char const* ParseError::what() const noexcept {
+    return (Utils::Format("pos=%zu: ", errpos) + msg).c_str();
+  }
 }

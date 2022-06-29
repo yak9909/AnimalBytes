@@ -9,10 +9,12 @@ namespace CTRPluginFramework::ScriptEngine {
 
   struct Token;
   struct Node;
+  struct Object;
   struct ILOperator;
 
   struct ScriptData {
     bool built_in;
+    bool activated;
     std::string path;
     std::string source;
     Token* tokens;

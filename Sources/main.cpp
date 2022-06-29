@@ -47,6 +47,12 @@ namespace CTRPluginFramework {
 
     Cheats::CodeContext::get_instance()->init();
 
+    menu += new MenuEntry("txt editor", nullptr, [](MenuEntry*e){
+      static TextEditor te;
+
+      te.open();
+    });
+
     menu += ScriptEngine::ScriptManager::create_folder();
 
     menu += Cheats::Movements::make_folder();

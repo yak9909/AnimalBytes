@@ -33,7 +33,8 @@ namespace CTRPluginFramework::ScriptEngine {
 
     auto& machine = machinemap[this];
 
-    
+
+    return nullptr;
   }
 
 }

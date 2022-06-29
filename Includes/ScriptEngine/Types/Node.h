@@ -13,7 +13,7 @@ namespace CTRPluginFramework::ScriptEngine {
 
   struct Token;
   struct Variable;
-  struct PACKED Node {
+  struct Node {
     NodeKind  kind;
     Token*    token;
     Node*     lhs;
