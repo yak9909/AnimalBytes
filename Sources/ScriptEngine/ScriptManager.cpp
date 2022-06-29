@@ -94,6 +94,12 @@ namespace CTRPluginFramework::ScriptEngine {
       }
 
       (Keyboard(X)).Open();
+
+      do {
+        auto tmp = tokens->next;
+        delete tokens;
+        tokens = tmp;
+      } while( tokens );
       
     }));
 
@@ -107,40 +113,47 @@ namespace CTRPluginFramework::ScriptEngine {
       }
     }
 
-    File file{ path, File::READ };
+    try {
+      File file{ path, File::READ };
 
-    if( !file.IsOpen() ) {
-      throw new CannotOpenFileError;
+      if( !file.IsOpen() ) {
+        throw CannotOpenFileError();
+      }
+
+      LineReader reader{ file };
+      std::string src;
+
+      for( std::string line; reader(line); ) {
+        src += line + '\n';
+      }
+
+      if( [&](){for(auto&&c:src){if(c>' ')return 0;}return 1;}() ) {
+        return nullptr;
+      }
+
+      Lexer lexer{ src };
+      auto tokens = lexer.run();
+      
+      Parser parser{ tokens };
+      auto node = parser.parse();
+
+
+      
+      return &data_list.emplace_back(ScriptData{
+        .built_in = false,
+        .activated = false,
+        .path = path,
+        .source = src,
+        .tokens = tokens,
+        .node = node,
+        .oplist = { }
+        //.oplist = oplist
+      });
+    }
+    catch( CannotOpenFileError const& e ) {
+      
     }
 
-    LineReader reader{ file };
-    std::string src;
-
-    for( std::string line; reader(line); ) {
-      src += line + '\n';
-    }
-
-    if( [&](){for(auto&&c:src){if(c>' ')return 0;}return 1;}() ) {
-      return nullptr;
-    }
-
-    Lexer lexer{ src };
-    auto tokens = lexer.run();
-    
-    Parser parser{ tokens };
-    auto node = parser.parse();
-
-
-    
-    return &data_list.emplace_back(ScriptData{
-      .built_in = false,
-      .activated = false,
-      .path = path,
-      .source = src,
-      .tokens = tokens,
-      .node = node,
-      .oplist = { }
-      //.oplist = oplist
-    });
+    return nullptr;
   }
 }

@@ -37,11 +37,13 @@ namespace CTRPluginFramework::ScriptEngine {
       cur->pos = pos;
 
       if( isdigit(ch) ) {
+        cur->kind = TOK_INT;
         while( check() && isdigit(peek()) ) {
           position++;
         }
       }
       else if( isalpha(ch) || ch == '_' ) {
+        cur->kind = TOK_IDENT;
         while( check() && (isalnum(ch = peek()) || ch == '_') ) {
           position++;
         }
@@ -55,7 +57,7 @@ namespace CTRPluginFramework::ScriptEngine {
           }
         }
 
-        throw new LexError(pos, "unknown token");
+        throw LexError(pos, "unknown token");
 
       found:;
       }

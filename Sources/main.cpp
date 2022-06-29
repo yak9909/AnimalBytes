@@ -41,6 +41,15 @@ namespace CTRPluginFramework {
   extern "C" int getMemFree(void);
 
   void InitMenu(PluginMenu& menu) {
+
+    OSD::Run([] (Screen const& screen) -> bool {
+      if( !screen.IsTop ) {
+        screen.Draw(Utils::Format("%08X", getMemFree()), 10, 10);
+        return 1;
+      }
+
+      return 0;
+    });
     
     Cheats::TextToCheats::initialize(menu);
     Cheats::SpeedHacks::initialize();

@@ -11,6 +11,11 @@ namespace CTRPluginFramework::ScriptEngine {
   public:
     explicit Parser(Token* token);
 
+    Node* factor();
+    Node* mul();
+    Node* add();
+    Node* expr();
+
     Node* parse();
 
   private:
@@ -18,7 +23,9 @@ namespace CTRPluginFramework::ScriptEngine {
     void next();
     bool eat(std::string_view s);
     void expect(std::string_view s);
-    
+
+    Token* token;
+    Token* ate;
   };
 
 }
