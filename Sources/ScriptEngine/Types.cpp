@@ -8,6 +8,7 @@
 #include "ScriptEngine/Types/IL.h"
 
 #include "ScriptEngine/Exceptions.h"
+#include "ScriptEngine/Parser.h"
 
 namespace CTRPluginFramework::ScriptEngine {
   Token::Token(TokenKind kind)
@@ -25,6 +26,11 @@ namespace CTRPluginFramework::ScriptEngine {
     if( prev ) prev->next = this;
   }
 
+  TypeInfo::TypeInfo(TypeKind kind)
+    : kind(kind)
+  {
+  }
+
   Variable::Variable(std::string_view const& name)
     : name(name),
       value(nullptr)
@@ -35,16 +41,32 @@ namespace CTRPluginFramework::ScriptEngine {
     : kind(kind),
       token(nullptr),
       lhs(nullptr),
-      rhs(nullptr)
+      rhs(nullptr),
+      obj(nullptr)
   {
+    auto parser = Parser::get_instance();
+    
+    if( !parser ) {
+      throw FailedToConstructNode(this);
+    }
+
+    parser->_allocated_nodes.emplace_back(this);
   }
 
   Node::Node(NodeKind kind, Node* lhs, Node* rhs, Token* token)
     : kind(kind),
       token(token),
       lhs(lhs),
-      rhs(rhs)
+      rhs(rhs),
+      obj(nullptr)
   {
+    auto parser = Parser::get_instance();
+    
+    if( !parser ) {
+      throw FailedToConstructNode(this);
+    }
+
+    parser->_allocated_nodes.emplace_back(this);
   }
 
   ParseError::ParseError(size_t pos, std::string const& msg)

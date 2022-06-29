@@ -21,6 +21,21 @@ namespace CTRPluginFramework::ScriptEngine {
 
   public:
     size_t errpos;
+
+    virtual char const* what() const noexcept = 0;
+  };
+
+  class ConstructionFailureBase : std::exception {
+  protected:
+    explicit ConstructionFailureBase(char const* name)
+      : typename(name)
+    {
+    }
+
+  public:
+    char const* typename;
+
+    virtual char const* what() const noexcept = 0;
   };
 
   class LexError : CompileErrorBase {
@@ -49,6 +64,20 @@ namespace CTRPluginFramework::ScriptEngine {
     ParseError(Node* node, std::string const& msg);
     
     char const* what() const noexcept override;
+  };
+
+  class FailedToConstructNode : ConstructionFailureBase {
+  public:
+    explicit FailedToConstructNode(Node* node)
+      : node(node)
+    {
+    }
+
+    char const* what() const noexcept override {
+      return Utils::Format("failed to construct node: %p", node).c_str();
+    }
+
+    Node* node;
   };
 
 }

@@ -153,6 +153,11 @@ namespace CTRPluginFramework::ScriptEngine {
     catch( CannotOpenFileError const& e ) {
       
     }
+    catch( std::exception const& e ) {
+      OSD::SwapBuffers();
+      (MessageBox(std::string("unhandled exception has been occurred, please tell developer: \n") + e.what()))();
+      OSD::SwapBuffers();
+    }
 
     return nullptr;
   }

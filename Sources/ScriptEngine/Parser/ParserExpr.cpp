@@ -15,14 +15,46 @@ namespace CTRPluginFramework::ScriptEngine {
 
   Node* Parser::factor() {
 
+    
+
+    auto node = new Node(ND_VALUE);
+    node->token = token;
+
+    switch( token->kind ) {
+      case TOK_INT: {
+        node->obj = new Object;
+        node->obj->type = TYPE_INT;
+
+        next();
+        return node;
+      }
+    }
+
+    throw ParseError(token, "syntax error");
   }
 
   Node* Parser::mul() {
+    auto x = factor();
+    
+    while( check() ) {
+      if( eat("*") ) x = new Node(ND_MUL, x, factor(), ate);
+      else if( eat("/") ) x = new Node(ND_DIV, x, factor(), ate);
+      else break;
+    }
 
+    return x;
   }
 
   Node* Parser::add() {
+    auto x = mul();
+    
+    while( check() ) {
+      if( eat("+") ) x = new Node(ND_ADD, x, mul(), ate);
+      else if( eat("-") ) x = new Node(ND_SUB, x, mul(), ate);
+      else break;
+    }
 
+    return x;
   }
 
   Node* Parser::expr() {

@@ -10,6 +10,7 @@ namespace CTRPluginFramework::ScriptEngine {
   class Parser {
   public:
     explicit Parser(Token* token);
+    ~Parser();
 
     Node* factor();
     Node* mul();
@@ -17,6 +18,8 @@ namespace CTRPluginFramework::ScriptEngine {
     Node* expr();
 
     Node* parse();
+
+    static Parser* get_instance();
 
   private:
     bool check();
@@ -28,6 +31,9 @@ namespace CTRPluginFramework::ScriptEngine {
 
     Token* token;
     Token* ate;
+    std::vector<Node*> _allocated_nodes;
+
+    friend Node;
   };
 
 }

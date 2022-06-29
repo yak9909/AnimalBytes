@@ -33,7 +33,7 @@ namespace CTRPluginFramework::ScriptEngine {
 
   void Parser::expect(std::string_view s) {
     if( !eat(s) ) {
-      throw ParseError(token, "expected `" + std::string(s) + "`");
+      throw ParseError(token, "expected '" + std::string(s) + "'");
     }
   }
 

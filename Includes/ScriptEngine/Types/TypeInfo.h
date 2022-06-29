@@ -10,5 +10,6 @@ namespace CTRPluginFramework::ScriptEngine {
     TypeKind  kind;
     std::string_view name;
     
+    TypeInfo(TypeKind kind = TYPE_NONE);
   };
 }

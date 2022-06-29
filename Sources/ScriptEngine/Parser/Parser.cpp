@@ -13,14 +13,25 @@
 
 namespace CTRPluginFramework::ScriptEngine {
   
+  static std::vector<Parser*> _g_parser_instances;
+
   Parser::Parser(Token* token)
     : token(token),
       ate(nullptr)
   {
+    _g_parser_instances.emplace_back(this);
+  }
+
+  Parser::~Parser() {
+    _g_parser_instances.pop_back();
   }
 
   Node* Parser::parse() {
     return expr();
+  }
+
+  Parser* Parser::get_instance() {
+    return *_g_parser_instances.rbegin();
   }
 
 }

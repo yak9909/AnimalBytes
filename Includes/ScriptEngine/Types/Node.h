@@ -4,11 +4,16 @@
 #include <vector>
 
 namespace CTRPluginFramework::ScriptEngine {
-  enum NodeKind {
+  enum NodeKind : u16 {
     ND_VALUE,
+    ND_VARIABLE,
     ND_CALLFUNC,
 
     ND_ADD,
+    ND_SUB,
+    ND_MUL,
+    ND_DIV,
+    ND_MOD,
   };
 
   struct Token;
@@ -18,6 +23,7 @@ namespace CTRPluginFramework::ScriptEngine {
     Token*    token;
     Node*     lhs;
     Node*     rhs;
+    Object*   obj;
     
     std::vector<Node*> list;
     std::vector<Variable> variables;
