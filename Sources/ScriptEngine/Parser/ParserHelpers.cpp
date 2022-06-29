@@ -14,19 +14,40 @@
 namespace CTRPluginFramework::ScriptEngine {
   
   bool Parser::check() {
-
+    return token->kind != TOK_END;
   }
 
   void Parser::next() {
-
+    token = token->next;
   }
 
   bool Parser::eat(std::string_view s) {
+    if( token->str == s ) {
+      ate = token;
+      next();
+      return true;
+    }
 
+    return false;
   }
 
   void Parser::expect(std::string_view s) {
+    if( !eat(s) ) {
+      throw ParseError(token, "expected `" + std::string(s) + "`");
+    }
+  }
 
+  void Parser::expect_ident() {
+    if( token->kind != TOK_IDENT ) {
+      throw ParseError(token, "expected identifier");
+    }
+  }
+
+  Node* Parser::expect_typename() {
+
+    // todo
+
+    return nullptr;
   }
 
 }

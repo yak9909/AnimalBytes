@@ -23,6 +23,8 @@ namespace CTRPluginFramework::ScriptEngine {
     void next();
     bool eat(std::string_view s);
     void expect(std::string_view s);
+    void expect_ident();
+    Node* expect_typename();
 
     Token* token;
     Token* ate;

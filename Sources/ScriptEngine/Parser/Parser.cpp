@@ -19,24 +19,8 @@ namespace CTRPluginFramework::ScriptEngine {
   {
   }
 
-  Node* Parser::factor() {
-
-  }
-
-  Node* Parser::mul() {
-
-  }
-
-  Node* Parser::add() {
-
-  }
-
-  Node* Parser::expr() {
-
-  }
-
   Node* Parser::parse() {
-
+    return expr();
   }
 
 }
