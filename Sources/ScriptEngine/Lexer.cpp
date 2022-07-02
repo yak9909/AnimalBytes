@@ -8,12 +8,12 @@
 #include "ScriptEngine/Exceptions.h"
 
 static char const* punctuaters[] = {
-  "("
-  ")"
-  "+"
-  "-"
-  "*"
-  "/"
+  "(",
+  ")",
+  "+",
+  "-",
+  "*",
+  "/",
 };
 
 namespace CTRPluginFramework::ScriptEngine {
@@ -62,7 +62,7 @@ namespace CTRPluginFramework::ScriptEngine {
       found:;
       }
 
-      cur->str = { str + pos, position - pos };
+      cur->str = { str, position - pos };
       pass_space();
     }
 
