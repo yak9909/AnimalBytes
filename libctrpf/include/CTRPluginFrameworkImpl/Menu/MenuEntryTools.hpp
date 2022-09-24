@@ -1,34 +1,36 @@
-#ifndef CTRPLUGINFRAMEWORKIMPL_MENUENTRYTOOLS_HPP
-#define CTRPLUGINFRAMEWORKIMPL_MENUENTRYTOOLS_HPP
+#pragma once
 
-#include "MenuEntryImpl.hpp"
 #include <string>
 
+#include "MenuEntryImpl.hpp"
 
-namespace CTRPluginFramework
-{
-    class MenuEntryTools : public MenuEntryImpl
-    {
-        using IconCallback = int(*)(int, int);
-        using FuncPointer = void(*)(void);
-        using FuncPointerA = void(*)(MenuEntryTools *);
-    public:
-        explicit MenuEntryTools(const std::string &text, FuncPointer func, IconCallback icon, void *arg = nullptr);
-        explicit MenuEntryTools(const std::string &text, FuncPointer func, IconCallback icon, const std::string &note);
-        explicit MenuEntryTools(const std::string &text, FuncPointer func, bool useCheckBox, bool isEnabled = false, const std::string &note = "");
-        explicit MenuEntryTools(const std::string &text, FuncPointerA func, bool useCheckBox, bool isEnabled = false, const std::string &note = "");
+namespace CTRPluginFramework {
+class MenuEntryTools : public MenuEntryImpl {
+  using IconCallback = int (*)(int, int);
+  using FuncPointer = void (*)(void);
+  using FuncPointerA = void (*)(MenuEntryTools *);
 
-        ~MenuEntryTools() {}
+ public:
+  explicit MenuEntryTools(const std::string &text, FuncPointer func,
+                          IconCallback icon, void *arg = nullptr);
+  explicit MenuEntryTools(const std::string &text, FuncPointer func,
+                          IconCallback icon, const std::string &note);
+  explicit MenuEntryTools(const std::string &text, FuncPointer func,
+                          bool useCheckBox, bool isEnabled = false,
+                          const std::string &note = "");
+  explicit MenuEntryTools(const std::string &text, FuncPointerA func,
+                          bool useCheckBox, bool isEnabled = false,
+                          const std::string &note = "");
 
-        void    Enable(void) override;
-        void    Disable(void) override;
-        void    TriggerState(void);
+  ~MenuEntryTools() {}
 
-        IconCallback    Icon;
-        FuncPointer     Func;
-        FuncPointerA    FuncArg;
-        bool            UseCheckBox;
-    };
-}
+  void Enable(void) override;
+  void Disable(void) override;
+  void TriggerState(void);
 
-#endif
+  IconCallback Icon;
+  FuncPointer Func;
+  FuncPointerA FuncArg;
+  bool UseCheckBox;
+};
+}  // namespace CTRPluginFramework
