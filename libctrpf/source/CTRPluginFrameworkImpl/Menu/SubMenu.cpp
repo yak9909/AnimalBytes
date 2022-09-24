@@ -3,10 +3,12 @@
 #include "CTRPluginFrameworkImpl/Preferences.hpp"
 #include "CTRPluginFrameworkImpl/System/Events.hpp"
 
-namespace CTRPluginFramework
-{
-  SubMenu::SubMenu(const StringVector &options) :
-    _options(options), _selector{ 0 }, _isOpen{ false }, _action{ false }
+namespace CTRPluginFramework {
+  SubMenu::SubMenu(const StringVector &options)
+    : _options(options),
+      _selector{ 0 },
+      _isOpen{ false },
+      _action{ false }
   {
   }
 
@@ -51,26 +53,26 @@ namespace CTRPluginFramework
 
     const IntRect selRect = IntRect(241, 45 + _selector * 12, 110, 12);
 
-    for (u32 i = 0; i < _options.size(); i++)
-    {
-      const char *str = _options[i].c_str();
+    for( u32 i = 0; i < _options.size(); i++ ) {
+      // const char *str = _options[i].c_str();
+      auto str = _options[i].c_str();
 
-      if (i == _selector)
-      {
-        // If an action is selected, create a little effect (yeah, very little)
-        if (!_fadeClock.HasTimePassed(Seconds(0.2f)))
-        {
+      // If an action is selected, create a little effect (yeah, very little)
+      if( i == _selector ) {
+        if( !_fadeClock.HasTimePassed(Seconds(0.2f)) ) {
           // Draw action rectangle
           Renderer::DrawRect(selRect, gainsboro);
+
           // Draw selector
           Renderer::DrawRect(selRect, darkgrey, false);
+
           // Draw text
           Renderer::DrawString(str, 245, posY, black);
+
           posY += 2;
           continue;
         }
-        else
-        {
+        else {
           // Draw selector
           Renderer::DrawRect(selRect, darkgrey, false);
         }
