@@ -1,137 +1,107 @@
-#ifndef CTRPLUGINFRAMEWORKIMPL_MENUITEMIMPL_HPP
-#define CTRPLUGINFRAMEWORKIMPL_MENUITEMIMPL_HPP
+#pragma once
 
-#include "types.h"
 #include <string>
 
-namespace CTRPluginFramework
-{
-    enum MenuType
-    {
-        Folder,
-        Entry,
-        EntryTools,
-        ActionReplay,
-        FreeCheat
-    };
+#include "types.h"
 
-    struct ItemFlags
-    {
-        bool    useSeparatorBefore : 1;
-        bool    useSeparatorAfter : 1;
-        bool    useStippledLineForBefore : 1;
-        bool    useStippledLineForAfter : 1;
-        bool    isVisible : 1;
-        bool    isStarred : 1;
-        bool    noteChanged : 1;
-    };
+namespace CTRPluginFramework {
 
-    class MenuEntryImpl;
-    class MenuEntryTools;
-    class MenuFolderImpl;
-    class MenuItem
-    {
-    public:
-        virtual ~MenuItem() = default;
+class MenuEntryImpl;
+class MenuEntryTools;
+class MenuFolderImpl;
 
-        MenuItem(MenuType type) :
-        Uid(++_uidCounter),
-        _type(type), _container(nullptr), _index(0)
-        {
-            Flags.useSeparatorBefore = false;
-            Flags.useSeparatorAfter = false;
-            Flags.useStippledLineForBefore = false;
-            Flags.useStippledLineForAfter = false;
-            Flags.isVisible = true;
-            Flags.isStarred = false;
-            Flags.noteChanged = false;
-        }
+enum MenuType {
+  Folder,
+  Entry,
+  EntryTools,
+  ActionReplay,
+  FreeCheat
+};
 
-        std::string     name;
-        std::string     firstName;
-        std::string     note;
+struct ItemFlags {
+  bool useSeparatorBefore : 1;
+  bool useSeparatorAfter : 1;
+  bool useStippledLineForBefore : 1;
+  bool useStippledLineForAfter : 1;
+  bool isVisible : 1;
+  bool isStarred : 1;
+  bool noteChanged : 1;
+};
 
-        void    Hide(void);
-        void    Show(void);
-        bool    IsVisible(void) const
-        {
-            return (Flags.isVisible);
-        }
+class MenuItem {
+ public:
+  virtual ~MenuItem() = default;
 
-        bool    IsEntry(void) const
-        {
-            return (_type == Entry);
-        }
+  MenuItem(MenuType type)
+      : Uid(++_uidCounter), _type(type), _container(nullptr), _index(0) {
+    Flags.useSeparatorBefore = false;
+    Flags.useSeparatorAfter = false;
+    Flags.useStippledLineForBefore = false;
+    Flags.useStippledLineForAfter = false;
+    Flags.isVisible = true;
+    Flags.isStarred = false;
+    Flags.noteChanged = false;
+  }
 
-        bool    IsFolder(void) const
-        {
-            return (_type == Folder);
-        }
+  std::string name;
+  std::string firstName;
+  std::string note;
 
-        bool    IsEntryTools(void) const
-        {
-            return (_type == EntryTools);
-        }
+  void Hide(void);
+  void Show(void);
 
-        bool    IsFreeCheat(void) const
-        {
-            return (_type == FreeCheat);
-        }
+  bool IsVisible(void) const { return Flags.isVisible; }
 
-        MenuEntryImpl &AsMenuEntryImpl(void)
-        {
-            return (*reinterpret_cast<MenuEntryImpl *>(this));
-        }
+  bool IsEntry(void) const { return _type == Entry; }
 
-        MenuEntryTools &AsMenuEntryTools(void)
-        {
-            return (*reinterpret_cast<MenuEntryTools *>(this));
-        }
+  bool IsFolder(void) const { return _type == Folder; }
 
-        MenuFolderImpl &AsMenuFolderImpl(void)
-        {
-            return (*reinterpret_cast<MenuFolderImpl *>(this));
-        }
+  bool IsEntryTools(void) const { return (_type == EntryTools); }
 
-        virtual std::string &GetNote(void)
-        {
-            return (note);
-        }
+  bool IsFreeCheat(void) const { return (_type == FreeCheat); }
 
-        void    NoteChanged(void);
-        bool    HasNoteChanged(void) const;
-        void    HandledNoteChanges(void);
+  MenuEntryImpl &AsMenuEntryImpl(void) {
+    return (*reinterpret_cast<MenuEntryImpl *>(this));
+  }
 
-        const u32   Uid;
+  MenuEntryTools &AsMenuEntryTools(void) {
+    return (*reinterpret_cast<MenuEntryTools *>(this));
+  }
 
-        ItemFlags   Flags;
-    protected:
-        friend class MenuFolderImpl;
-        friend class PluginMenuImpl;
-        friend class PluginMenuHome;
-        friend class Menu;
+  MenuFolderImpl &AsMenuFolderImpl(void) {
+    return (*reinterpret_cast<MenuFolderImpl *>(this));
+  }
 
-        static void     _DisableFolder(MenuFolderImpl *folder);
-        static void     _EnableFolder(MenuFolderImpl* folder);
+  virtual std::string &GetNote(void) { return (note); }
 
-        bool        _IsStarred(void) const
-        {
-            return (Flags.isStarred);
-        }
+  void NoteChanged(void);
+  bool HasNoteChanged(void) const;
+  void HandledNoteChanges(void);
 
-        bool        _TriggerStar(void)
-        {
-            Flags.isStarred = !Flags.isStarred;
-            return (Flags.isStarred);
-        }
+  const u32 Uid;
 
-        MenuType    _type;
-        MenuItem    *_container; /* MenuFolderImpl */
-        int         _index;
+  ItemFlags Flags;
 
+ protected:
+  friend class MenuFolderImpl;
+  friend class PluginMenuImpl;
+  friend class PluginMenuHome;
+  friend class Menu;
 
-        static u32  _uidCounter;
-    };
-}
+  static void _DisableFolder(MenuFolderImpl *folder);
+  static void _EnableFolder(MenuFolderImpl *folder);
 
-#endif
+  bool _IsStarred(void) const { return (Flags.isStarred); }
+
+  bool _TriggerStar(void) {
+    Flags.isStarred = !Flags.isStarred;
+    return (Flags.isStarred);
+  }
+
+  MenuType _type;
+  MenuItem *_container; /* MenuFolderImpl */
+  int _index;
+
+  static u32 _uidCounter;
+};
+}  // namespace CTRPluginFramework
